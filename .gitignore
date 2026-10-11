@@ -1,0 +1,35 @@
+# Vivado generated output and local state
+/.Xil/
+/ov5640_lcd.cache/
+/ov5640_lcd.gen/
+/ov5640_lcd.hw/
+/ov5640_lcd.ip_user_files/
+/ov5640_lcd.runs/
+/ov5640_lcd.sim/
+*.jou
+*.log
+*.str
+*.zip
+*.dcp
+*.bit
+*.elf
+*.o
+*.d
+*.a
+*.pb
+*.rpx
+# Vitis generated platforms, builds and workspace state
+/vitis/.metadata/
+/vitis/.analytics
+/vitis/RemoteSystemsTempFiles/
+/vitis/.Xil/
+/vitis/system_wrapper/
+/vitis/IDE.log
+/vitis/ov5640_lcd/Debug/
+/vitis/ov5640_lcd/Release/
+/vitis/ov5640_lcd/_ide/
+/vitis/ov5640_lcd_system/_ide/
+/ov5640_lcd.srcs/sources_1/bd/system/ui/
+*.bda
+__pycache__/
+*.pyc

@@ -1,0 +1,2 @@
+# Keep original source bytes and manifest hashes stable across OS checkouts.
+* -text
