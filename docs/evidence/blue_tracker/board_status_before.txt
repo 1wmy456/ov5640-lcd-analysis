@@ -1,0 +1,42 @@
+attempting to launch hw_server
+
+****** Xilinx hw_server v2020.2
+  **** Build date : Nov 18 2020 at 10:01:48
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+INFO: hw_server application started
+INFO: Use Ctrl-C to exit hw_server application
+
+
+
+****** Xilinx hw_server v2020.2
+
+  **** Build date : Nov 18 2020 at 10:01:48
+
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+
+
+INFO: hw_server application started
+
+INFO: Use Ctrl-C to exit hw_server application
+
+
+
+
+INFO: To connect to this hw_server instance use url: TCP:127.0.0.1:3121
+
+
+
+BOARD_STATUS:   1  APU
+     2  ARM Cortex-A9 MPCore #0 (Running)
+     3  ARM Cortex-A9 MPCore #1 (Running)
+  4  xc7z020
+BOARD_STATUS: SLCR_IDCODE
+F8000530:   23727093
+
+BOARD_STATUS: VDMA_MM2S_CONTROL_STATUS READ_FAILED Memory read error at 0x43000000. AHB AP transaction error, DAP status 0xF0000021
+BOARD_STATUS: VDMA_MM2S_FRAME_SIZES READ_FAILED Memory read error at 0x43000050. AHB AP transaction error, DAP status 0xF0000021
+BOARD_STATUS: VDMA_S2MM_CONTROL_STATUS READ_FAILED Memory read error at 0x43000030. AHB AP transaction error, DAP status 0xF0000021
+BOARD_STATUS: VDMA_S2MM_FRAME_SIZES READ_FAILED Memory read error at 0x430000A0. AHB AP transaction error, DAP status 0xF0000021
+BOARD_STATUS: LCD_GPIO_DATA_TRI READ_FAILED Memory read error at 0x41200000. AHB AP transaction error, DAP status 0xF0000021

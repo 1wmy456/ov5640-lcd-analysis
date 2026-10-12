@@ -1,0 +1,15 @@
+{
+  "mode": 2,
+  "pixels": 384000,
+  "black": 0,
+  "white": 0,
+  "green": 2702,
+  "blue_threshold_pixels": 120,
+  "green_extent": [
+    77,
+    799,
+    3,
+    433
+  ],
+  "non_atomic_snapshot": true
+}

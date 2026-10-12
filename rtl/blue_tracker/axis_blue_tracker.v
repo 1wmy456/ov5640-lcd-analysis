@@ -3,6 +3,7 @@ module axis_blue_tracker #(
     parameter integer MODE = 2,
     parameter integer R_BYTE = 2, G_BYTE = 1, B_BYTE = 0,
     parameter integer BLUE_MIN = 80, BR_DELTA = 35, BG_DELTA = 20,
+    parameter integer MIN_B_R_RATIO = 0, MIN_BLUE_RUN = 1,
     parameter integer MIN_PIXELS = 24, MIN_WIDTH = 3, MIN_HEIGHT = 3,
     parameter integer BORDER_WIDTH = 2, CENTER_CROSS = 0
 )(
@@ -31,9 +32,10 @@ module axis_blue_tracker #(
     wire blue, pixel_valid, prior_usable;
     wire [15:0] x, y;
     blue_pixel_detect #(.R_BYTE(R_BYTE),.G_BYTE(G_BYTE),.B_BYTE(B_BYTE),
-        .BLUE_MIN(BLUE_MIN),.BR_DELTA(BR_DELTA),.BG_DELTA(BG_DELTA)) detect(s_axis_tdata,blue);
+        .BLUE_MIN(BLUE_MIN),.BR_DELTA(BR_DELTA),.BG_DELTA(BG_DELTA),
+        .MIN_B_R_RATIO(MIN_B_R_RATIO)) detect(s_axis_tdata,blue);
     blue_bbox_stats #(.IMAGE_WIDTH(IMAGE_WIDTH),.IMAGE_HEIGHT(IMAGE_HEIGHT),
-        .MIN_PIXELS(MIN_PIXELS),.MIN_WIDTH(MIN_WIDTH),.MIN_HEIGHT(MIN_HEIGHT)) stats(
+        .MIN_PIXELS(MIN_PIXELS),.MIN_WIDTH(MIN_WIDTH),.MIN_HEIGHT(MIN_HEIGHT),.MIN_BLUE_RUN(MIN_BLUE_RUN)) stats(
         .clk(aclk),.resetn(aresetn),.accept(accept),.sof(s_axis_tuser[0]),
         .eol(s_axis_tlast),.is_blue(blue),.pixel_x(x),.pixel_y(y),
         .pixel_valid(pixel_valid),.prior_usable(prior_usable),.bbox_valid(bbox_valid),

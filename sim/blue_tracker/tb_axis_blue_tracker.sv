@@ -1,6 +1,7 @@
 `timescale 1ns/1ps
 module tb_axis_blue_tracker;
     parameter MIN_PIXELS=4, MIN_WIDTH=2, MIN_HEIGHT=2, CENTER_CROSS=0;
+    parameter MIN_BLUE_RUN=1, MIN_B_R_RATIO=0, BR_DELTA=35, BG_DELTA=20;
     localparam W=12,H=8,N=20000;
     reg clk=0; always #5 clk=~clk;
     reg rst=0,sv=0,su=0,sl=0,ready=0;
@@ -13,6 +14,7 @@ module tb_axis_blue_tracker;
     generate for(m=0;m<3;m=m+1) begin:duts
         axis_blue_tracker #(.IMAGE_WIDTH(W),.IMAGE_HEIGHT(H),.MODE(m),
             .MIN_PIXELS(MIN_PIXELS),.MIN_WIDTH(MIN_WIDTH),.MIN_HEIGHT(MIN_HEIGHT),
+            .MIN_BLUE_RUN(MIN_BLUE_RUN),.MIN_B_R_RATIO(MIN_B_R_RATIO),.BR_DELTA(BR_DELTA),.BG_DELTA(BG_DELTA),
             .CENTER_CROSS(CENTER_CROSS)) dut(
             .aclk(clk),.aresetn(rst),.s_axis_tdata(sd),.s_axis_tvalid(sv),
             .s_axis_tready(sr[m]),.s_axis_tuser(su),.s_axis_tlast(sl),
@@ -31,6 +33,7 @@ module tb_axis_blue_tracker;
     reg [25:0] expected[0:2][0:N-1];
     reg stalled[0:2]; reg [25:0] held[0:2];
     integer x=0,y=0,cnt=0,lx=W,hx=0,ly=H,hy=0;
+    integer run=0,qcnt=0,left;
     integer rx0=0,rx1=0,ry0=0,ry1=0,rc=0;
     integer dx0=0,dx1=0,dy0=0,dy1=0;
     reg active=0,rv=0,dv=0,blue,good,paint,exp_pulse,exp_error;
@@ -72,11 +75,12 @@ module tb_axis_blue_tracker;
             exp_pulse=0; exp_error=0;
             if(sv&&sr[0]) begin
                 inputs=inputs+1;
-                blue=(sd[7:0]>=80 && int'(sd[7:0])>int'(sd[23:16])+35 &&
-                      int'(sd[7:0])>int'(sd[15:8])+20);
+                blue=(sd[7:0]>=80 && int'(sd[7:0])>int'(sd[23:16])+BR_DELTA &&
+                      int'(sd[7:0])>int'(sd[15:8])+BG_DELTA &&
+                      (MIN_B_R_RATIO==0 || int'(sd[7:0])>int'(sd[23:16])*MIN_B_R_RATIO));
                 if(su) begin
                     dv=rv&&!active;dx0=rx0;dx1=rx1;dy0=ry0;dy1=ry1;
-                    exp_error=active; x=0;y=0;cnt=0;lx=W;hx=0;ly=H;hy=0;
+                    exp_error=active; x=0;y=0;cnt=0;run=0;qcnt=0;lx=W;hx=0;ly=H;hy=0;
                 end
                 good=(su||active) && x<W && y<H && (sl==(x==W-1));
                 paint=dv&&good&&x>=dx0&&x<=dx1&&y>=dy0&&y<=dy1 &&
@@ -92,16 +96,20 @@ module tb_axis_blue_tracker;
                     active=0;rv=0;rc=0;rx0=0;rx1=0;ry0=0;ry1=0;exp_error=1;
                 end else begin
                     if(exp_error) begin rv=0;rc=0; end
-                    if(blue) begin
-                        cnt=cnt+1;if(x<lx)lx=x;if(x>hx)hx=x;if(y<ly)ly=y;if(y>hy)hy=y;
+                    if(blue) begin cnt=cnt+1;run=run+1; end else run=0;
+                    if(blue&&run>=MIN_BLUE_RUN) begin
+                        left=x;
+                        if(run==MIN_BLUE_RUN) begin left=x-MIN_BLUE_RUN+1;qcnt=qcnt+MIN_BLUE_RUN;end
+                        else qcnt=qcnt+1;
+                        if(left<lx)lx=left;if(x>hx)hx=x;if(y<ly)ly=y;if(y>hy)hy=y;
                     end
                     active=1;
                     if(sl && y==H-1) begin
                         active=0;exp_pulse=1;frames=frames+1;rc=cnt;
-                        rv=cnt>0&&cnt>=MIN_PIXELS&&hx-lx+1>=MIN_WIDTH&&hy-ly+1>=MIN_HEIGHT;
-                        rx0=cnt ? lx:0;rx1=cnt ? hx:0;ry0=cnt ? ly:0;ry1=cnt ? hy:0;
+                        rv=qcnt>0&&qcnt>=MIN_PIXELS&&hx-lx+1>=MIN_WIDTH&&hy-ly+1>=MIN_HEIGHT;
+                        rx0=qcnt ? lx:0;rx1=qcnt ? hx:0;ry0=qcnt ? ly:0;ry1=qcnt ? hy:0;
                     end
-                    if(sl) begin x=0;y=y+1;end else x=x+1;
+                    if(sl) begin x=0;y=y+1;run=0;end else x=x+1;
                 end
                 if(exp_error)errors_seen=errors_seen+1;
             end
@@ -145,8 +153,13 @@ module tb_axis_blue_tracker;
               14:b=xx==6;
               15:b=(xx<=2&&yy<=2)||(xx>=9&&yy>=5);
               16:b=(xx>=3&&xx<=8&&yy>=2&&yy<=5)||(xx==W-1&&yy==H-1);
+              17:b=xx>=W-3&&yy==H-1;
+              18:b=(xx>=W-2&&yy==2)||(xx==0&&yy==3);
+              19:begin image=24'h8000e0;end // B>R+60 but B<=2R: reject when ratio enabled.
+              20:b=(xx>=3&&xx<=8&&yy>=2&&yy<=5)||
+                   (xx==0&&yy==0)||(xx==W-1&&yy==H-1);
             endcase
-            if(kind!=11) image=b?24'h1020c8:24'h302010;
+            if(kind!=11&&kind!=19) image=b?24'h1020c8:24'h302010;
             if(kind==0)image=0;
         end
     endfunction
@@ -171,6 +184,7 @@ module tb_axis_blue_tracker;
         frame(0);frame(1);frame(1);frame(2);frame(3);frame(4);frame(5);
         frame(6);frame(7);frame(8);frame(0);frame(0);frame(9);frame(10);frame(11);
         frame(13);frame(14);frame(15);frame(16);frame(0);
+        frame(17);frame(18);frame(19);frame(20);frame(0);
         // Early EOL, missing EOL, early SOF, excess height, missing initial SOF.
         beat(24'h0000ff,1,0,0);beat(24'h0000ff,0,1,0);frame(1);
         for(j=0;j<W;j=j+1)beat(24'h0000ff,j==0,0,0);frame(1);
@@ -184,7 +198,9 @@ module tb_axis_blue_tracker;
             @(posedge clk);@(negedge clk);
         end
         sv=0;random_ready=1;frame(0);
-        @(negedge clk);#1;random_ready=0;ready=0;
+        @(negedge clk);#1;random_ready=0;ready=1;
+        repeat(3)@(negedge clk);
+        #1;ready=0;
         beat(24'h0000ff,1,0,0);repeat(15)@(negedge clk);
         // Reset cancels the single pending output beat and clears first-frame result.
         rst=0;sv=0;repeat(3)@(negedge clk);rst=1;ready=1;
@@ -197,6 +213,9 @@ module tb_axis_blue_tracker;
         $finish;
     end
     initial begin #2000000;$fatal(1,"watchdog timeout");end
+endmodule
+module tb_calibrated;
+    tb_axis_blue_tracker #(.MIN_BLUE_RUN(3),.MIN_B_R_RATIO(2),.BR_DELTA(60),.BG_DELTA(35)) test();
 endmodule
 module tb_single_pixel;
     tb_axis_blue_tracker #(.MIN_PIXELS(1),.MIN_WIDTH(1),.MIN_HEIGHT(1)) test();

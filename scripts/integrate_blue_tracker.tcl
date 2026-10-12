@@ -2,7 +2,7 @@
 # Example: vivado -mode batch -source scripts/integrate_blue_tracker.tcl \
 #   -tclargs -apply -width 800 -height 480 -mode 2 -out build/blue_tracker_vivado
 set root [file normalize [file join [file dirname [info script]] ..]]
-array set opt {-apply 0 -width 0 -height 0 -mode 2 -out build/blue_tracker_vivado}
+array set opt {-apply 0 -width 0 -height 0 -mode 2 -out build/blue_tracker_vivado -blue_min 80 -br_delta 35 -bg_delta 20 -min_pixels 24 -min_run 1 -red_ratio 0}
 for {set i 0} {$i < [llength $argv]} {incr i} {
     set key [lindex $argv $i]
     if {$key eq "-apply"} {set opt($key) 1; continue}
@@ -18,6 +18,11 @@ foreach k {-width -height} {
 }
 if {$opt(-width)*$opt(-height) > 4294967295} {error "Pixel counter overflow"}
 if {$opt(-mode) ni {0 1 2}} {error "MODE must be 0, 1, or 2"}
+foreach k {-blue_min -br_delta -bg_delta -red_ratio} {
+    if {![string is integer -strict $opt($k)] || $opt($k)<0 || $opt($k)>255} {error "Invalid $k"}
+}
+if {![string is integer -strict $opt(-min_run)] || $opt(-min_run)<1 || $opt(-min_run)>$opt(-width)} {error "Invalid minimum run"}
+if {![string is integer -strict $opt(-min_pixels)] || $opt(-min_pixels)<1 || $opt(-min_pixels)>$opt(-width)*$opt(-height)} {error "Invalid minimum pixels"}
 set out [file normalize [file join $root $opt(-out)]]
 # Existing directory is never overwritten, even after a failed previous attempt.
 if {[file exists $out]} {error "Output already exists: $out. Use a new -out directory to rerun safely."}
@@ -51,7 +56,9 @@ if {$clocknet ne [get_bd_nets -of_objects [get_bd_pins v_vid_in_axi4s_0/aclk]]} 
 if {[get_property CONFIG.FREQ_HZ [get_bd_pins v_vid_in_axi4s_0/aclk]] != 100000000} {error "Expected 100MHz video AXI clock"}
 set resetnet [get_bd_nets -of_objects [get_bd_pins axi_vdma_0/axi_resetn]]
 create_bd_cell -type module -reference axis_blue_tracker axis_blue_tracker_0
-set_property -dict [list CONFIG.IMAGE_WIDTH $opt(-width) CONFIG.IMAGE_HEIGHT $opt(-height) CONFIG.MODE $opt(-mode)] [get_bd_cells axis_blue_tracker_0]
+set_property -dict [list CONFIG.IMAGE_WIDTH $opt(-width) CONFIG.IMAGE_HEIGHT $opt(-height) CONFIG.MODE $opt(-mode) \
+    CONFIG.BLUE_MIN $opt(-blue_min) CONFIG.BR_DELTA $opt(-br_delta) CONFIG.BG_DELTA $opt(-bg_delta) \
+    CONFIG.MIN_PIXELS $opt(-min_pixels) CONFIG.MIN_BLUE_RUN $opt(-min_run) CONFIG.MIN_B_R_RATIO $opt(-red_ratio)] [get_bd_cells axis_blue_tracker_0]
 connect_bd_net [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk] [get_bd_pins axis_blue_tracker_0/aclk]
 connect_bd_net [get_bd_pins axi_vdma_0/axi_resetn] [get_bd_pins axis_blue_tracker_0/aresetn]
 disconnect_bd_intf_net $oldnet $dst
@@ -62,6 +69,7 @@ save_bd_design
 write_bd_tcl [file join $out system_with_blue_tracker.tcl]
 set fp [open [file join $out integration_summary.txt] w]
 puts $fp "Validate Design passed; resolution=$opt(-width)x$opt(-height) MODE=$opt(-mode)"
+puts $fp "thresholds: B>=$opt(-blue_min), BR>$opt(-br_delta), BG>$opt(-bg_delta), red_ratio=$opt(-red_ratio), min_run=$opt(-min_run), min_pixels=$opt(-min_pixels)"
 puts $fp "Original files untouched; copied project: [file join $out ov5640_lcd.xpr]"
 close $fp
 close_project

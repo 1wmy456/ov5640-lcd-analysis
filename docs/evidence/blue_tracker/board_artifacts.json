@@ -1,0 +1,38 @@
+{
+  "artifacts": [
+    {
+      "project": "build\\tracker_board_mode0",
+      "bit_sha256": "9ca1b4ecf29bc56e89c373bca62ddc2fe09700941b7bc6989fab02354c36e423",
+      "xsa_sha256": "d46a8576615fb930812619f170d0609dd28cf110fc73d21f2cba7c7b820892f2",
+      "rtl_sha256": {
+        "axis_blue_tracker.v": "f4e6c08f3fa63acbf92684d608986b2f83ad70f0089246cd787465230216b441",
+        "blue_bbox_stats.v": "43994d90f4d2e792185623473dba45c9670c43b5d5a6426ace43eb146147b779",
+        "blue_pixel_detect.v": "f834488da72616a08e61cdf768512868dfcc967700787c390c8367e22e01f0e8",
+        "video_box_overlay.v": "131c7e91e20f5e96428ba493b888b05d172ec8d0c85c534bbd6495bb925ad684"
+      }
+    },
+    {
+      "project": "build\\tracker_cal_mode1",
+      "bit_sha256": "c541d6a24d7743be09876f1be25d31b37514276fdbd6f9197eaf3e77159a50fc",
+      "xsa_sha256": "d15f10482775b9797b923c5408c7b281c3a67cda09de870185b8828430897786",
+      "rtl_sha256": {
+        "axis_blue_tracker.v": "8ef29b8e9d6b86f3c29c85f2eb55e9b2436772cf9d9e6784b3ee6d3c5a8d0f03",
+        "blue_bbox_stats.v": "732833788c2387b8730a45d34f6204f713c4d31a299d666d579895ede280807e",
+        "blue_pixel_detect.v": "2c7a30bfae8164af1670e314386bba3d42d7337d4b79cd8befc2d7872e1ce9a9",
+        "video_box_overlay.v": "131c7e91e20f5e96428ba493b888b05d172ec8d0c85c534bbd6495bb925ad684"
+      }
+    },
+    {
+      "project": "build\\tracker_cal_mode2_final",
+      "bit_sha256": "9f5fea8911b7e88b99e5e8513f71b3171422fbe78ad013b99761f877fc8ad88a",
+      "xsa_sha256": "837724c32941f59067bc6513fb6926cc1ee60b3dba96ab8328623e5af8446eaf",
+      "rtl_sha256": {
+        "axis_blue_tracker.v": "8ef29b8e9d6b86f3c29c85f2eb55e9b2436772cf9d9e6784b3ee6d3c5a8d0f03",
+        "blue_bbox_stats.v": "ae555f7308a4a34b48841b113b6169f379e3e79d20e0b12335653c45a928df99",
+        "blue_pixel_detect.v": "2c7a30bfae8164af1670e314386bba3d42d7337d4b79cd8befc2d7872e1ce9a9",
+        "video_box_overlay.v": "131c7e91e20f5e96428ba493b888b05d172ec8d0c85c534bbd6495bb925ad684"
+      }
+    }
+  ],
+  "elf_sha256": "dc6a0ceda3f619bd2e100b04538d1f07e18b5fc4d0dc00e5744984adb5f0737a"
+}

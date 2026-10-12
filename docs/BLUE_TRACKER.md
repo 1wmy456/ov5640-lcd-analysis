@@ -1,6 +1,7 @@
 # 蓝色瓶盖检测与 LCD 画框交付说明
 
 开发分支：`codex/blue-tracker`。基线提交：`4bccc73e8e610499f55f5d60a9b490f8221645d5`。
+本轮上板进展、现场校准与下载/回退命令见 [上板记录](evidence/blue_tracker/BOARD_VALIDATION.md)。初版离线结果与上板结果分开记录。
 原 `ov5640_lcd.xpr`、`system.bd`、摄像头采集/初始化、VDMA 驱动、LCD 模式、Clock Wizard、VTC、GPIO、DDR 缓冲、XDC 均未编辑。新增工程生成到 `build/`；切回 `main` 并打开原 XPR 可回退。
 
 ## 文件与接口
@@ -38,6 +39,8 @@
 
 检测条件：`B>=BLUE_MIN && B>R+BR_DELTA && B>G+BG_DELTA`，32 位无符号扩展参与加法。阈值须取 0..255；字节索引须是 0/1/2 的排列。分辨率支持 1..65535 每维，像素总数须可由 32 位计数器表示；宽高与上板实际摄像头输出一致。最小宽高按 `xmax-xmin+1` / `ymax-ymin+1` 判断。中心十字半径默认 4，限制在边界框内。
 
+现场校准新增默认关闭的 `MIN_B_R_RATIO=0`：非零时还要求 `B > R*MIN_B_R_RATIO`，乘法使用扩展位宽。新增 `MIN_BLUE_RUN=1` 默认保留所有蓝像素；设为3时，一行内至少连续3个蓝像素才参与框统计。第3点到达时回补前两点及数量，随后每点增加1；每行/新SOF重新计数，包含在帧尾才达标的蓝段。`blue_pixel_count` 仍是原始颜色候选总数；最小像素数门槛与边界框使用通过连续蓝段筛选的像素。MODE1 展示颜色候选掩码，MODE2 框使用过滤后的统计；这不是连通域或准确多目标算法。
+
 MODE0 逐像素原样输出；MODE1 蓝像素为白、其余黑；MODE2 保留原图，上一完整帧目标边框变为 RGB(0,255,0)。支持 RGB/BGR 交换 R/B 参数；当前绿色常量要求 G_BYTE=1。边框画在框的内侧、受图像范围约束，无目标不画。颜色检测始终使用未绘制的输入像素。
 
 第一帧没有上一帧结果，不画框。完整空帧清除 valid，下一帧不画框。目标刚消失的第一帧仍会出现上一帧的框，这是明确的一帧延迟。多个独立蓝物体会合并成整体 bounding box，尚不支持准确多目标检测。
@@ -72,7 +75,7 @@ PowerShell（工具路径可传 `-VivadoBin`）：
 
 默认模式只打印计划；应用前检查原直连、位宽、SOF 位宽、100MHz 和 CDC。只允许新建 `build/` 子目录，目录已存在则拒绝覆盖。重复执行可选新的 `-out`，避免不透明覆盖或重复插入。副本保留原 XDC，并用仓库自带 wrapper 替换 XPR 的缺失生成 wrapper 引用。生成 `system_with_blue_tracker.tcl` 供连接审查。
 
-打开生成的副本 XPR 后，检查参数、Validate Design、Generate Output Products；必要时重新生成 managed wrapper，再运行原 synth/impl 流程，检查整个系统 timing/CDC/DRC，导出带 bitstream 的新 XSA 给现有裸机工程。当前未构建完整系统 bitstream，未替换原 XSA、ELF、摄像头驱动。
+打开生成的副本 XPR 后，检查参数、Validate Design、Generate Output Products；必要时重新生成 managed wrapper，再运行原 synth/impl 流程，检查整个系统 timing/CDC/DRC，导出带 bitstream 的新 XSA 给现有裸机工程。首次RTL交付未构建完整系统；后续实际完整构建与JTAG启动情况见上板记录。原 XSA、应用源码和摄像头驱动始终保留。
 
 ## 上板验收
 

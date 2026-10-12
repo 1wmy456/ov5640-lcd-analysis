@@ -1,0 +1,3 @@
+Validate Design passed; resolution=800x480 MODE=1
+thresholds: B>=80, BR>60, BG>35, red_ratio=2, min_run=3, min_pixels=256
+Original files untouched; copied project: D:/2026.test/ov5640_lcd/build/tracker_cal_mode1/ov5640_lcd.xpr

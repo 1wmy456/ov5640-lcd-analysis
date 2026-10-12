@@ -1,0 +1,17 @@
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_ip_color/xsim_script.tcl
+# xsim {tracker_ip_color} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. tb_video_in_color_order.video_in.COUPLER_INST.\generate_async_fifo.FIFO_INST .XPM_FIFO_ASYNC_INST.\gnuram_async_fifo.xpm_fifo_base_inst .\gen_sdpram.xpm_memory_base_inst .config_drc
+Time: 1 ps  Iteration: 0  Process: /tb_video_in_color_order/video_in/COUPLER_INST/generate_async_fifo.FIFO_INST/XPM_FIFO_ASYNC_INST/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/Initial294_42  Scope: tb_video_in_color_order.video_in.COUPLER_INST.\generate_async_fifo.FIFO_INST .XPM_FIFO_ASYNC_INST.\gnuram_async_fifo.xpm_fifo_base_inst .\gen_sdpram.xpm_memory_base_inst .config_drc  File: /wrk/ci/prod/2020.2/sw/continuous/733/packages/customer/vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 488
+PASS IP_COLOR checks=2449 frames=3 pixels=288 RGB byte order R=2 G=1 B=0 async CDC preserved
+$finish called at time : 10472 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_video_in_color_order.sv" Line 70
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 12 11:01:52 2026...

@@ -1,0 +1,49 @@
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_single_pixel/xsim_script.tcl
+# xsim {tracker_single_pixel} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=2
+CASE kind=3
+CASE kind=4
+CASE kind=5
+CASE kind=6
+CASE kind=7
+CASE kind=8
+CASE kind=0
+CASE kind=0
+CASE kind=9
+CASE kind=10
+CASE kind=11
+CASE kind=13
+CASE kind=14
+CASE kind=15
+CASE kind=16
+CASE kind=0
+CASE kind=17
+CASE kind=18
+CASE kind=19
+CASE kind=20
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=3
+CASE kind=0
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=0
+CASE kind=0
+PASS checks=115886 failures=0 complete_frames=36 errors_seen=4 accepted=3474 output=3473 stalls=1375 bubbles=9835 MIN=1/1/1 CROSS=0
+$finish called at time : 134910 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" Line 213
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 12 11:01:34 2026...

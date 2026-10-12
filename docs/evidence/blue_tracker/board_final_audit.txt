@@ -1,0 +1,3 @@
+PASS audit: 52 original files byte-identical to baseline
+PASS audit: all existing BD cell properties retained; all native nets retained
+PASS audit: only tracker cell, stream insertion, AXI clock/reset fanout added
