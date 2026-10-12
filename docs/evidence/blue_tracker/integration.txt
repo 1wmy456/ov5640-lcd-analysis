@@ -1,0 +1,152 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Mon Oct 12 10:20:22 2026
+# Process ID: 2540
+# Current directory: D:/2026.test/ov5640_lcd
+# Command line: vivado.exe -mode batch -source scripts/integrate_blue_tracker.tcl -log build/integration_final.log -journal build/integration_final.jou -tclargs -apply -width 800 -height 480 -mode 2 -out build/blue_tracker_final
+# Log file: D:/2026.test/ov5640_lcd/build/integration_final.log
+# Journal file: D:/2026.test/ov5640_lcd\build/integration_final.jou
+#-----------------------------------------------------------
+source scripts/integrate_blue_tracker.tcl
+# set root [file normalize [file join [file dirname [info script]] ..]]
+# array set opt {-apply 0 -width 0 -height 0 -mode 2 -out build/blue_tracker_vivado}
+# for {set i 0} {$i < [llength $argv]} {incr i} {
+#     set key [lindex $argv $i]
+#     if {$key eq "-apply"} {set opt($key) 1; continue}
+#     if {![info exists opt($key)] || $i+1 >= [llength $argv]} {error "Unknown or missing argument: $key"}
+#     incr i; set opt($key) [lindex $argv $i]
+# }
+# puts "PLAN: copy original project, add RTL module reference, insert Video In -> tracker -> S2MM."
+PLAN: copy original project, add RTL module reference, insert Video In -> tracker -> S2MM.
+# puts "PLAN: reuse original 100MHz stream clock and VDMA active-low reset; preserve native CDC, LCD, GPIO, DDR, XDC."
+PLAN: reuse original 100MHz stream clock and VDMA active-low reset; preserve native CDC, LCD, GPIO, DDR, XDC.
+# puts "PLAN: width=$opt(-width) height=$opt(-height) MODE=$opt(-mode); no original BD overwrite."
+PLAN: width=800 height=480 MODE=2; no original BD overwrite.
+# if {!$opt(-apply)} {puts "REVIEW ONLY: use -apply with the active camera resolution to create the copy."; return}
+# foreach k {-width -height} {
+#     if {![string is integer -strict $opt($k)] || $opt($k) < 1 || $opt($k) > 65535} {error "Explicit $k in 1..65535 required"}
+# }
+# if {$opt(-width)*$opt(-height) > 4294967295} {error "Pixel counter overflow"}
+# if {$opt(-mode) ni {0 1 2}} {error "MODE must be 0, 1, or 2"}
+# set out [file normalize [file join $root $opt(-out)]]
+# if {[file exists $out]} {error "Output already exists: $out. Use a new -out directory to rerun safely."}
+# if {[string first "${root}/build/" "${out}/"] != 0} {error "Output must be a new directory under repository build/"}
+# file mkdir $out
+# foreach name {ov5640_lcd.xpr ov5640_lcd.srcs ip_repo} {file copy [file join $root $name] $out}
+# file copy [file join $root rtl] $out
+# cd $out
+# open_project [file join $out ov5640_lcd.xpr]
+INFO: [Project 1-313] Project file moved from 'D:/2026.test/ov5640_lcd' since last save.
+INFO: [filemgmt 56-1] Default IP Output Path : Directory not found as 'D:/2026.test/ov5640_lcd/build/blue_tracker_final/ov5640_lcd.gen/sources_1'; using path 'D:/2026.test/ov5640_lcd/ov5640_lcd.gen/sources_1' instead.
+INFO: [filemgmt 56-1] IPUserFilesDir: Directory not found as 'D:/2026.test/ov5640_lcd/build/blue_tracker_final/ov5640_lcd.ip_user_files'; using path 'D:/2026.test/ov5640_lcd/ov5640_lcd.ip_user_files' instead.
+INFO: [BD 41-2613] The output directory d:/2026.test/ov5640_lcd/build/blue_tracker_final/ov5640_lcd.gen/sources_1/bd/system for system cannot be found.
+WARNING: [Project 1-312] File not found as 'D:/2026.test/ov5640_lcd/build/blue_tracker_final/ov5640_lcd.gen/sources_1/bd/system/hdl/system_wrapper.v'; using path 'D:/2026.test/ov5640_lcd/ov5640_lcd.gen/sources_1/bd/system/hdl/system_wrapper.v' instead.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_processing_system7_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_axi_vdma_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_v_tc_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_v_axi4s_vid_out_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_rgb2lcd_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_clk_wiz_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_axi_gpio_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_xbar_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_rst_ps7_0_100M_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_xbar_1_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_v_vid_in_axi4s_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'system_ov5640_capture_data_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'impl_1' not found
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/2026.test/ov5640_lcd/build/blue_tracker_final/ip_repo/rgb2lcd'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/2026.test/ov5640_lcd/build/blue_tracker_final/ip_repo/ov5640_capture_data'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinxx/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1103.254 ; gain = 0.000
+# foreach f [get_files -quiet *system_wrapper.v] {remove_files $f}
+# add_files -norecurse [file join $out ov5640_lcd.srcs sources_1 imports system_wrapper.v]
+# set_property ip_repo_paths [list [file join $out ip_repo rgb2lcd] [file join $out ip_repo ov5640_capture_data]] [current_project]
+# update_ip_catalog
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+# add_files -norecurse [glob [file join $out rtl blue_tracker *.v]]
+# update_compile_order -fileset sources_1
+# open_bd_design [file join $out ov5640_lcd.srcs sources_1 bd system system.bd]
+Reading block design file <D:/2026.test/ov5640_lcd/build/blue_tracker_final/ov5640_lcd.srcs/sources_1/bd/system/system.bd>...
+Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0
+Adding component instance block -- xilinx.com:ip:axi_vdma:6.3 - axi_vdma_0
+Adding component instance block -- xilinx.com:ip:v_tc:6.2 - v_tc_0
+Adding component instance block -- xilinx.com:ip:v_axi4s_vid_out:4.0 - v_axi4s_vid_out_0
+Adding component instance block -- www.alientek.com:user:rgb2lcd:1.0 - rgb2lcd_0
+Adding component instance block -- xilinx.com:ip:clk_wiz:6.0 - clk_wiz_0
+Adding component instance block -- xilinx.com:ip:axi_gpio:2.0 - axi_gpio_0
+Adding component instance block -- xilinx.com:ip:axi_interconnect:2.1 - ps7_0_axi_periph
+Adding component instance block -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding component instance block -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M
+Adding component instance block -- xilinx.com:ip:axi_interconnect:2.1 - axi_mem_intercon
+Adding component instance block -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding component instance block -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Adding component instance block -- xilinx.com:ip:v_vid_in_axi4s:4.0 - v_vid_in_axi4s_0
+Adding component instance block -- xilinx.com:user:ov5640_capture_data:1.0 - ov5640_capture_data_0
+Successfully read diagram <system> from block design file <D:/2026.test/ov5640_lcd/build/blue_tracker_final/ov5640_lcd.srcs/sources_1/bd/system/system.bd>
+# set src [get_bd_intf_pins v_vid_in_axi4s_0/video_out]
+# set dst [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM]
+# set oldnet [get_bd_intf_nets -of_objects $src]
+# if {[llength $oldnet]!=1 || $oldnet ne [get_bd_intf_nets -of_objects $dst] ||
+#     [llength [get_bd_intf_pins -of_objects $oldnet]]!=2} {error "Original direct stream connection was changed; refuse to rewire"}
+# foreach pin [list $src $dst] {
+#     if {[get_property CONFIG.TDATA_NUM_BYTES $pin] != 3 || [get_property CONFIG.TUSER_WIDTH $pin] != 1} {
+#         error "Unexpected video interface width at $pin"
+#     }
+# }
+# if {[get_property CONFIG.C_HAS_ASYNC_CLK [get_bd_cells v_vid_in_axi4s_0]] != 1} {error "Native video CDC must remain enabled"}
+# set clocknet [get_bd_nets -of_objects [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk]]
+# if {$clocknet ne [get_bd_nets -of_objects [get_bd_pins v_vid_in_axi4s_0/aclk]]} {error "Stream clocks differ"}
+# if {[get_property CONFIG.FREQ_HZ [get_bd_pins v_vid_in_axi4s_0/aclk]] != 100000000} {error "Expected 100MHz video AXI clock"}
+# set resetnet [get_bd_nets -of_objects [get_bd_pins axi_vdma_0/axi_resetn]]
+# create_bd_cell -type module -reference axis_blue_tracker axis_blue_tracker_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'aclk' of definition 'xilinx.com:signal:clock:1.0' (from X_INTERFACE_INFO parameter from HDL file).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'aclk' of definition 'xilinx.com:signal:clock:1.0' (from 'X_INTERFACE_INFO' attribute).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'aresetn' of definition 'xilinx.com:signal:reset:1.0' (from X_INTERFACE_INFO parameter from HDL file).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'aresetn' of definition 'xilinx.com:signal:reset:1.0' (from 'X_INTERFACE_INFO' attribute).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'S_AXIS' of definition 'xilinx.com:interface:axis:1.0' (from X_INTERFACE_INFO parameter from HDL file).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'S_AXIS' of definition 'xilinx.com:interface:axis:1.0' (from 'X_INTERFACE_INFO' attribute).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'M_AXIS' of definition 'xilinx.com:interface:axis:1.0' (from X_INTERFACE_INFO parameter from HDL file).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'M_AXIS' of definition 'xilinx.com:interface:axis:1.0' (from 'X_INTERFACE_INFO' attribute).
+INFO: [IP_Flow 19-4728] Bus Interface 'aclk': Added interface parameter 'ASSOCIATED_BUSIF' with value 'S_AXIS'.
+INFO: [IP_Flow 19-4728] Bus Interface 'aclk': Added interface parameter 'ASSOCIATED_RESET' with value 'aresetn'.
+INFO: [IP_Flow 19-4728] Bus Interface 'aclk': Added interface parameter 'FREQ_HZ' with value '100000000'.
+INFO: [IP_Flow 19-4728] Bus Interface 'aresetn': Added interface parameter 'POLARITY' with value 'ACTIVE_LOW'.
+INFO: [IP_Flow 19-7067] Note that bus interface 'aclk' has a fixed FREQ_HZ of '100000000'. This value will be respected whenever this IP is instantiated in IP Integrator.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/2026.test/ov5640_lcd/build/blue_tracker_final/ip_repo/rgb2lcd'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/2026.test/ov5640_lcd/build/blue_tracker_final/ip_repo/ov5640_capture_data'.
+# set_property -dict [list CONFIG.IMAGE_WIDTH $opt(-width) CONFIG.IMAGE_HEIGHT $opt(-height) CONFIG.MODE $opt(-mode)] [get_bd_cells axis_blue_tracker_0]
+# connect_bd_net [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk] [get_bd_pins axis_blue_tracker_0/aclk]
+# connect_bd_net [get_bd_pins axi_vdma_0/axi_resetn] [get_bd_pins axis_blue_tracker_0/aresetn]
+# disconnect_bd_intf_net $oldnet $dst
+# connect_bd_intf_net $src [get_bd_intf_pins axis_blue_tracker_0/S_AXIS]
+# connect_bd_intf_net [get_bd_intf_pins axis_blue_tracker_0/M_AXIS] $dst
+# validate_bd_design
+INFO: [xilinx.com:ip:clk_wiz:6.0-1] /clk_wiz_0 clk_wiz propagate
+WARNING: [BD 41-926] Following properties on interface pin /axis_blue_tracker_0/S_AXIS have been updated from connected ip, but BD cell '/axis_blue_tracker_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	LAYERED_METADATA = xilinx.com:interface:datatypes:1.0 {TDATA {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value xilinx.com:video:G_B_R_444:1.0} bitwidth {attribs {resolve_type automatic dependency {} format long minimum {} maximum {}} value 24} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} array_type {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value rows} size {attribs {resolve_type generated dependency active_rows format long minimum {} maximum {}} value 1} stride {attribs {resolve_type generated dependency active_rows_stride format long minimum {} maximum {}} value 24} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type automatic dependency {} format long minimum {} maximum {}} value 24} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} array_type {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value cols} size {attribs {resolve_type generated dependency active_cols format long minimum {} maximum {}} value 1} stride {attribs {resolve_type generated dependency active_cols_stride format long minimum {} maximum {}} value 24} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type automatic dependency {} format long minimum {} maximum {}} value 24} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} struct {field_G {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value G} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type generated dependency video_data_width format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true}}}} field_B {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value B} enabled {attribs {resolve_type generated dependency video_comp1_enabled format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type generated dependency video_data_width format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type generated dependency video_comp1_offset format long minimum {} maximum {}} value 8} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true}}}} field_R {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value R} enabled {attribs {resolve_type generated dependency video_comp2_enabled format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type generated dependency video_data_width format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type generated dependency video_comp2_offset format long minimum {} maximum {}} value 16} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true}}}}}}}}}}} TDATA_WIDTH 24}
+
+Please resolve any mismatches by directly setting properties on BD cell </axis_blue_tracker_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /rgb2lcd_0/pixel_clk have been updated from connected ip, but BD cell '/rgb2lcd_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	PHASE = 0.0 
+Please resolve any mismatches by directly setting properties on BD cell </rgb2lcd_0> to completely resolve these warnings.
+# save_bd_design
+Wrote  : <D:\2026.test\ov5640_lcd\build\blue_tracker_final\ov5640_lcd.srcs\sources_1\bd\system\system.bd> 
+# write_bd_tcl [file join $out system_with_blue_tracker.tcl]
+INFO: [BD 5-148] Tcl file written out <D:/2026.test/ov5640_lcd/build/blue_tracker_final/system_with_blue_tracker.tcl>.
+
+# set fp [open [file join $out integration_summary.txt] w]
+# puts $fp "Validate Design passed; resolution=$opt(-width)x$opt(-height) MODE=$opt(-mode)"
+# puts $fp "Original files untouched; copied project: [file join $out ov5640_lcd.xpr]"
+# close $fp
+# close_project
+# puts "PASS: isolated BD integration and validation: $out"
+PASS: isolated BD integration and validation: D:/2026.test/ov5640_lcd/build/blue_tracker_final
+INFO: [Common 17-206] Exiting Vivado at Mon Oct 12 10:20:44 2026...

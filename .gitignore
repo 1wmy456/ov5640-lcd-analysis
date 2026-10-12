@@ -33,3 +33,4 @@
 *.bda
 __pycache__/
 *.pyc
+/build/

@@ -11,6 +11,7 @@
 3. [复现与验证说明](docs/REPRODUCTION.md)
 4. [文件、编码与来源清单](docs/source_manifest.json)
 5. [已有实现报告](docs/evidence/)
+6. [蓝色瓶盖检测、三模式画框与安全集成](docs/BLUE_TRACKER.md)
 
 ```mermaid
 flowchart LR
