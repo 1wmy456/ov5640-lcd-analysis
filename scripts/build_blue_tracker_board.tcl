@@ -29,6 +29,20 @@ report_timing_summary -report_unconstrained -file board_reports/timing_summary.r
 report_utilization -file board_reports/utilization.rpt
 report_drc -file board_reports/drc.rpt
 report_cdc -file board_reports/cdc.rpt
+report_io -file board_reports/io.rpt
+report_bus_skew -file board_reports/bus_skew.rpt
+if {[llength [get_ports -quiet servo_yaw_pwm]]} {
+    set pins [dict create servo_yaw_pwm U5 servo_pitch_pwm T5]
+    set fp [open board_reports/servo_pins.txt w]
+    dict for {name package} $pins {
+        set port [get_ports $name]
+        if {[get_property PACKAGE_PIN $port] ne $package || [get_property IOSTANDARD $port] ne "LVCMOS33"} {error "Servo pin/IO standard mismatch $name"}
+        set occupied [get_ports -filter "PACKAGE_PIN == $package"]
+        if {[llength $occupied]!=1} {error "Pin conflict $package"}
+        puts $fp "$name PACKAGE_PIN=$package IOSTANDARD=LVCMOS33 bank=[get_property BANK [get_package_pins $package]]"
+    }
+    close $fp
+}
 set failing [get_timing_paths -quiet -delay_type max -slack_lesser_than 0 -max_paths 1]
 if {[llength $failing]} {error "Setup timing failed; inspect board_reports before programming"}
 set failing [get_timing_paths -quiet -delay_type min -slack_lesser_than 0 -max_paths 1]

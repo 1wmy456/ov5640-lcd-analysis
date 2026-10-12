@@ -1,0 +1,36 @@
+{
+  "baseline": "15e98ec",
+  "branch": "codex/pan-tilt-tracking",
+  "project": "build/pan_tilt_tracking_release",
+  "workspace": "build/pan_tilt_sw_release",
+  "calibration": "MODE2 800x480 BLUE_MIN=80 BR_DELTA=60 BG_DELTA=35 MIN_B_R_RATIO=2 MIN_BLUE_RUN=3 MIN_PIXELS=256 BORDER_WIDTH=2 CENTER_CROSS=0\nAXI-Lite address: 0x43C20000; clock100MHz; reset disabled PWM\nJ4-3 U5 yaw; J4-4 T5 pitch; actual package/bank check during full implementation\n",
+  "compiled_sources": [
+    "clk_wiz/clk_wiz.c",
+    "display_ctrl/display_ctrl.c",
+    "emio_sccb_cfg/emio_sccb_cfg.c",
+    "main.c",
+    "ov5640/ov5640_init.c",
+    "pan_tilt/pan_tilt_app.c",
+    "pan_tilt/pan_tilt_driver.c",
+    "pan_tilt/tracking_control.c",
+    "vdma_api/vdma_api.c"
+  ],
+  "program_end": "0x1236f0",
+  "framebuffer_start": "0x01100000",
+  "bsp_base_macro": "#define XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR 0x43C20000",
+  "artifact_sha256": {
+    "build/pan_tilt_tracking_release/ov5640_lcd.runs/impl_1/system_wrapper.bit": "b1856331295f7d23fa9cfc7e10ea88075856a3dde83b2811ada94ebb2248b098",
+    "build/pan_tilt_tracking_release/system_wrapper.xsa": "be770232bffd7534543c21875b2799f1a84fbfd67cf7c97f267b6f0ea25f5c44",
+    "build/pan_tilt_sw_release/app_compiled/ov5640_lcd.elf": "781e83445f0da2ea10198467bff6b6d88bacf87a90bfef8ea85ccad62a57a0d2",
+    "build/pan_tilt_sw_release/board_platform/ps7_cortexa9_0/standalone_domain/bsp/ps7_cortexa9_0/include/xparameters.h": "5393d18cd6e6871f480ab640bb9962ca2806a4ad0daadba3aa6a99e557984d2b"
+  },
+  "report_sha256": {
+    "bus_skew.rpt": "12bb44d8fe9d8406e5f13b02d82a94f164119a5ff51a642f5cc19807a1b753e7",
+    "cdc.rpt": "930ac1f44685a3aecb58560e0adba0690e640186dff71c23646d05ea8865f2f1",
+    "drc.rpt": "6820217dd5bbd94c81fa42f007403b657280532748a4cfb863436ca591ace739",
+    "servo_io_excerpt.txt": "8290b9a1d1eaafe664c4d043835429799c22034e713e7b297226127b8f722cdd",
+    "servo_pins.txt": "619968d9fefa42ce495135fee3845ee5d091d82460cade97367fc3cb9f3d614d",
+    "timing_summary.rpt": "2c22556a6becef0ae0290300571802a6200859402c8c31ad3fc27981e863e208",
+    "utilization.rpt": "815e1d767db5b419648f72467837273b697bcecc9de887d27f7631796b3da791"
+  }
+}

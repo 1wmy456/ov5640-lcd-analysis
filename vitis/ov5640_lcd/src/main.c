@@ -12,6 +12,7 @@
 #include "clk_wiz/clk_wiz.h"
 #include "emio_sccb_cfg/emio_sccb_cfg.h"
 #include "ov5640/ov5640_init.h"
+#include "pan_tilt/pan_tilt_app.h"
 
 //宏定义
 #define BYTES_PIXEL        3                           //像素字节数，RGB888占3个字节
@@ -110,7 +111,7 @@ int main(void)
 	}
 	xil_printf("Display width  : %d\r\n", vd_mode.width);
 	xil_printf("Display height : %d\r\n", vd_mode.height);
-	xil_printf("Pixel clock    : %d\r\n", vd_mode.freq);
+	xil_printf("Pixel clock kHz: %d\r\n", (int)(vd_mode.freq*1000.0));
 	//配置VDMA
 	run_vdma_frame_buffer(&vdma, VDMA_ID, vd_mode.width, vd_mode.height,
 							frame_buffer_addr,0,0,BOTH);
@@ -122,6 +123,7 @@ int main(void)
 	DisplaySetMode(&dispCtrl, &vd_mode);
 	DisplayStart(&dispCtrl);
 
+    pan_tilt_run(vd_mode.width, vd_mode.height, status == 0);
     return 0;
 }
 

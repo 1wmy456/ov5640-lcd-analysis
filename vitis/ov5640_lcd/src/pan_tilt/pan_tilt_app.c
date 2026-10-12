@@ -1,0 +1,135 @@
+#include "pan_tilt_app.h"
+#include "pan_tilt_driver.h"
+#include "xparameters.h"
+#include "xtime_l.h"
+#include "xuartps.h"
+#include "xuartps_hw.h"
+#include "xil_io.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+#include <math.h>
+#ifndef XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR
+#error "Fresh BSP with pan_tilt_ctrl driver/address macros is required"
+#endif
+static const UINTPTR pt_base=XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR;
+static PtControl control;
+static PtTarget target;
+static int command_result;
+static char tx[4096],line[128];static unsigned tx_head,tx_tail,line_used,dropped;static int line_overflow;
+static void log_text(const char *fmt,...){
+    char text[256];int i,n;va_list ap;va_start(ap,fmt);n=vsnprintf(text,sizeof(text),fmt,ap);va_end(ap);
+    if(n<0)return;
+    if(n>255)n=255;
+    for(i=0;i<n;i++){unsigned next=(tx_head+1)%sizeof(tx);if(next==tx_tail){dropped++;break;}tx[tx_head]=text[i];tx_head=next;}
+}
+static uint64_t now_us(void){XTime t;XTime_GetTime(&t);return (t/COUNTS_PER_SECOND)*1000000ull+(t%COUNTS_PER_SECOND)*1000000ull/COUNTS_PER_SECOND;}
+static int axis_of(const char *s){return !strcmp(s,"yaw")?0:(!strcmp(s,"pitch")?1:-1);}
+static int number(const char *s,double *v){char *end;*v=strtod(s,&end);return *s&&!*end&&isfinite(*v);}
+static void show_status(void){
+    log_text("mode=%s frame=%lu valid=%u err=%u age=%lu bbox=%u,%u,%u,%u ex=%d ey=%d yaw=%lu pitch=%lu en=%d hold=%d drop=%u\r\n",
+      control.automatic?"auto":"manual",(unsigned long)target.frame_id,target.flags&1,(target.flags>>1)&1,
+      (unsigned long)target.age_us,target.xmin,target.xmax,target.ymin,target.ymax,control.ex,control.ey,
+      (unsigned long)pt_reg_read(pt_base,PT_YAW_ACTIVE),(unsigned long)pt_reg_read(pt_base,PT_PITCH_ACTIVE),control.enabled,control.hold_reason,dropped);
+}
+static void command(char *s){
+    char *w[5],*p;int n=0,a;double v,lo,hi;command_result=0;
+    for(p=strtok(s," \t");p&&n<5;p=strtok(NULL," \t"))w[n++]=p;
+    if(!n)return;
+    if(n==1&&!strcmp(w[0],"pwm")){
+        log_text("PWM_NET clk=%lu flags=%lx yaw high=%lu period=%lu rises=%lu pitch high=%lu period=%lu rises=%lu ticks; connector voltage unmeasured\r\n",
+            (unsigned long)pt_reg_read(pt_base,PT_CLOCK_HZ),(unsigned long)pt_reg_read(pt_base,PT_WAVE_STATUS),
+            (unsigned long)pt_reg_read(pt_base,PT_YAW_HIGH_TICKS),(unsigned long)pt_reg_read(pt_base,PT_YAW_PERIOD_TICKS),
+            (unsigned long)pt_reg_read(pt_base,PT_YAW_RISES),(unsigned long)pt_reg_read(pt_base,PT_PITCH_HIGH_TICKS),
+            (unsigned long)pt_reg_read(pt_base,PT_PITCH_PERIOD_TICKS),(unsigned long)pt_reg_read(pt_base,PT_PITCH_RISES));return;
+    }
+    if(!strcmp(w[0],"status")){show_status();return;}
+    if(!strcmp(w[0],"manual")||!strcmp(w[0],"hold")){pt_control_manual(&control);log_text("manual/hold: PWM enable and position retained\r\n");return;}
+    if(!strcmp(w[0],"disable")){control.enabled=0;pt_control_manual(&control);pt_reg_write(pt_base,PT_ENABLE,0);log_text("PWM disabled; stored position retained\r\n");return;}
+    if(n==2&&!strcmp(w[0],"enable")){
+        int mask=!strcmp(w[1],"both")?3:(!strcmp(w[1],"yaw")?1:(!strcmp(w[1],"pitch")?2:0));
+        if(!mask)goto bad;
+        control.enabled|=mask;pt_reg_write(pt_base,PT_ENABLE,control.enabled);log_text("enable=%d; starts at next period boundary\r\n",control.enabled);return;
+    }
+    if(!strcmp(w[0],"auto")){
+        if(pt_reg_read(pt_base,PT_COMMIT)){command_result=2;log_text("auto refused: pending PWM commit; retry after 20ms\r\n");return;}
+        control.position[0]=pt_reg_read(pt_base,PT_YAW_ACTIVE);control.position[1]=pt_reg_read(pt_base,PT_PITCH_ACTIVE);
+        if(pt_control_auto(&control))log_text("auto on: K us/(pixel*s), rate us/s; first frame establishes baseline\r\n");
+        else {command_result=2;log_text("auto refused: dimensions/camera, both enables and verify yaw/pitch required\r\n");}return;
+    }
+    if(n==1&&!strcmp(w[0],"center")){
+        pt_control_manual(&control);control.position[0]=control.center[0];control.position[1]=control.center[1];pt_driver_commit(pt_base,&control);log_text("center pair committed; enables unchanged\r\n");return;
+    }
+    if(n==2&&!strcmp(w[0],"verify")&&(a=axis_of(w[1]))>=0){control.verified[a]=1;log_text("axis %s center/limits/direction marked verified by operator\r\n",w[1]);return;}
+    if(n==2&&(a=axis_of(w[0]))>=0&&number(w[1],&v)&&v>=500&&v<=2500&&v==(int)v){
+        if(!pt_control_set_position(&control,a,(int)v))goto bad;
+        pt_driver_commit(pt_base,&control);log_text("%s requested=%d us\r\n",w[0],(int)v);return;
+    }
+    if(n==3&&!strcmp(w[0],"step")&&(a=axis_of(w[1]))>=0&&number(w[2],&v)&&v>=-100&&v<=100&&v==(int)v){
+        int pos=(int)pt_control_pulse(&control,a)+(int)v;
+        if(!pt_control_set_position(&control,a,pos))goto bad;
+        pt_driver_commit(pt_base,&control);log_text("%s step=%d us requested=%d\r\n",w[1],(int)v,pos);return;
+    }
+    if(n==3&&(a=axis_of(w[1]))>=0&&number(w[2],&v)){
+        if(!strcmp(w[0],"dir")&&(v==1||v==-1)){control.direction[a]=(int)v;control.verified[a]=0;pt_control_manual(&control);log_text("%s direction=%d; verify again\r\n",w[1],(int)v);return;}
+        if(!strcmp(w[0],"gain")&&v>=0&&v<=2){control.gain[a]=v;log_text("%s gain=%d milli-us/(pixel*s)\r\n",w[1],(int)(v*1000));return;}
+        if(!strcmp(w[0],"rate")&&v>0&&v<=100){control.rate[a]=v;log_text("%s rate=%d milli-us/s\r\n",w[1],(int)(v*1000));return;}
+        if(!strcmp(w[0],"center")&&v>=control.minimum[a]&&v<=control.maximum[a]&&v==(int)v){
+            pt_control_manual(&control);control.center[a]=(int)v;control.verified[a]=0;pt_reg_write(pt_base,a?PT_PITCH_CENTER:PT_YAW_CENTER,(u32)v);log_text("%s center configured; use center to move\r\n",w[1]);return;}
+    }
+    if(n==4&&!strcmp(w[0],"limits")&&(a=axis_of(w[1]))>=0&&number(w[2],&lo)&&number(w[3],&hi)&&lo>=500&&hi<=2500&&lo<=hi&&lo==(int)lo&&hi==(int)hi){
+        if(!pt_control_limits(&control,a,(int)lo,(int)hi))goto bad;
+        pt_driver_limits(pt_base,a,(int)lo,(int)hi);pt_reg_write(pt_base,a?PT_PITCH_CENTER:PT_YAW_CENTER,control.center[a]);pt_driver_commit(pt_base,&control);
+        log_text("%s limits=%d..%d us; verify again\r\n",w[1],(int)lo,(int)hi);return;
+    }
+    if(n==2&&!strcmp(w[0],"deadband")&&number(w[1],&v)&&v>=0&&v<=100&&v==(int)v){control.deadband=(int)v;return;}
+bad:command_result=1;log_text("invalid command/value; examples: enable yaw | step yaw +5 | dir yaw -1 | limits yaw 1400 1600 | gain yaw 0.1 | center | verify yaw | auto | status\r\n");
+}
+static void app_state(void){
+    pt_reg_write(pt_base,PT_APP_STATUS,0x80000000u|control.automatic|(control.verified[0]<<1)|
+        (control.verified[1]<<2)|(control.hold_reason<<8)|(control.dimensions_ok<<16));
+}
+static void service_mailbox(void){
+    u32 request=pt_reg_read(pt_base,PT_COMMAND_REQUEST);unsigned i,j;char message[32];
+    if(request==pt_reg_read(pt_base,PT_COMMAND_ACK))return;
+    for(i=0;i<8;i++){u32 word=pt_reg_read(pt_base,PT_COMMAND_WORDS+i*4);for(j=0;j<4;j++)message[i*4+j]=(char)(word>>(j*8));}
+    message[31]=0;command(message);pt_reg_write(pt_base,PT_APP_COMMAND_RESULT,command_result);
+    app_state();pt_reg_write(pt_base,PT_COMMAND_ACK,request);
+}
+static void service_uart(void){
+    unsigned budget=32;
+    while(budget--&&XUartPs_IsReceiveData(STDIN_BASEADDRESS)){
+        char ch=(char)Xil_In32(STDIN_BASEADDRESS+XUARTPS_FIFO_OFFSET);
+        if(ch=='\r'||ch=='\n'){
+            if(!line_overflow&&line_used){line[line_used]=0;command(line);}
+            else if(line_overflow)log_text("command line too long\r\n");
+            line_used=0;line_overflow=0;
+        }else if(ch==8||ch==127){if(line_used)line_used--;}
+        else if(line_used<sizeof(line)-1)line[line_used++]=ch;else line_overflow=1;
+    }
+    budget=32;
+    while(budget--&&tx_tail!=tx_head&&!XUartPs_IsTransmitFull(STDOUT_BASEADDRESS)){
+        Xil_Out32(STDOUT_BASEADDRESS+XUARTPS_FIFO_OFFSET,(unsigned char)tx[tx_tail]);tx_tail=(tx_tail+1)%sizeof(tx);
+    }
+}
+void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
+    XUartPs uart;XUartPs_Config *cfg=XUartPs_LookupConfig(XPAR_XUARTPS_0_DEVICE_ID);
+    uint64_t last_tick,last_log,now;u32 dimensions=pt_reg_read(pt_base,PT_DIMENSIONS);
+    if(cfg){XUartPs_CfgInitialize(&uart,cfg,cfg->BaseAddress);XUartPs_SetBaudRate(&uart,115200);}
+    pt_reg_write(pt_base,PT_ENABLE,0);
+    pt_control_init(&control,camera_ok&&width==800&&height==480&&dimensions==((480u<<16)|800u));
+    if(pt_reg_read(pt_base,PT_ID)!=0x50544c54)control.dimensions_ok=0;
+    pt_driver_commit(pt_base,&control);
+    log_text("PAN_TILT ready manual PWM OFF 115200 8N1; range1400..1600 center1500; first step5us\r\n");
+    if(!control.dimensions_ok)log_text("AUTO DISABLED: camera/display/tracker mismatch display=%ux%u tracker=%ux%u camera_ok=%d\r\n",width,height,dimensions&65535,dimensions>>16,camera_ok);
+    last_tick=last_log=now_us();
+    app_state();
+    for(;;){
+        service_uart();service_mailbox();now=now_us();
+        if(now-last_tick>=20000){last_tick=now;pt_driver_snapshot(pt_base,&target);
+            if(pt_control_update(&control,&target,now))pt_driver_commit(pt_base,&control);
+            app_state();}
+        if(now-last_log>=500000){last_log=now;show_status();}
+    }
+}

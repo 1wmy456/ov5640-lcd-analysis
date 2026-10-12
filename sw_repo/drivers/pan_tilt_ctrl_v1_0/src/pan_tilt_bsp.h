@@ -1,0 +1,4 @@
+#ifndef PAN_TILT_BSP_H
+#define PAN_TILT_BSP_H
+#define PAN_TILT_BSP_VERSION 0x00010000
+#endif

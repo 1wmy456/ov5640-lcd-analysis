@@ -1,0 +1,40 @@
+SOURCE build/pan_uart_release_startup.txt
+LCD ID: 4384
+mode=manual frame=1207 valid=0 err=0 age=2817 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 drop=0
+mode=manual frame=1227 valid=0 err=0 age=2881 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 drop=0
+
+SOURCE build/pan_uart_pwm_monitor.txt
+PWM_NET clk=100000000 flags=0 yaw high=0 period=0 rises=0 pitch high=0 period=0 rises=0 ticks; connector voltage unmeasured
+enable=1; starts at next period boundary
+PWM_NET clk=100000000 flags=105 yaw high=150000 period=2000000 rises=76 pitch high=0 period=0 rises=0 ticks; connector voltage unmeasured
+mode=manual frame=2387 valid=0 err=0 age=6584 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=1 hold=1 drop=0
+mode=manual frame=2407 valid=0 err=0 age=6646 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=1 hold=1 drop=0
+
+SOURCE build/pan_uart_yaw_1550.txt
+yaw step=5 us requested=1505
+yaw step=5 us requested=1515
+yaw step=5 us requested=1520
+yaw step=5 us requested=1525
+yaw step=5 us requested=1530
+yaw step=5 us requested=1535
+yaw step=5 us requested=1540
+yaw step=5 us requested=1545
+yaw step=5 us requested=1550
+PWM_NET clk=100000000 flags=5 yaw high=155000 period=2000000 rises=2035 pitch high=0 period=0 rises=0 ticks; connector voltage unmeasured
+mode=manual frame=3907 valid=0 err=0 age=11400 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1550 pitch=1500 en=1 hold=1 drop=0
+mode=manual frame=3927 valid=0 err=0 age=11466 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1550 pitch=1500 en=1 hold=1 drop=0
+
+SOURCE build/pan_uart_pitch_test.txt
+PWM disabled; stored position retained
+enable=2; starts at next period boundary
+pitch step=5 us requested=1505
+pitch step=5 us requested=1510
+pitch step=5 us requested=1515
+PWM_NET clk=100000000 flags=f yaw high=155000 period=2000000 rises=16100 pitch high=152000 period=2000000 rises=293 ticks; connector voltage unmeasured
+mode=manual frame=15408 valid=1 err=0 age=23124 bbox=0,457,80,314 ex=-172 ey=-43 yaw=1550 pitch=1520 en=2 hold=1 drop=0
+mode=manual frame=15428 valid=0 err=0 age=23190 bbox=13,465,94,325 ex=-161 ey=-31 yaw=1550 pitch=1520 en=2 hold=1 drop=0
+
+SOURCE build/pan_uart_auto_guard.txt
+auto refused: dimensions/camera, both enables and verify yaw/pitch required
+mode=manual frame=18169 valid=1 err=0 age=6925 bbox=486,674,78,356 ex=180 ey=-23 yaw=1550 pitch=1520 en=2 hold=1 drop=0
+mode=manual frame=18189 valid=1 err=0 age=6987 bbox=518,674,85,356 ex=196 ey=-20 yaw=1550 pitch=1520 en=2 hold=1 drop=0

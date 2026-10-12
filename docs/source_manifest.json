@@ -1,6 +1,6 @@
 {
   "created": "2026-10-11",
-  "note": "Original bytes preserved; UTF-8 copies are for reading only. Custom IP copied from original external repository; RTL matches generated working-directory copies.",
+  "note": "Camera/LCD drivers and original hardware sources preserved; actual main.c extended for pan-tilt control. UTF-8 copies are read-only mirrors, not build inputs.",
   "files": [
     {
       "path": "ip_repo/ov5640_capture_data/src/ov5640_capture_data.v",
@@ -92,11 +92,12 @@
     },
     {
       "path": "vitis/ov5640_lcd/src/main.c",
-      "sha256": "3e266b88eb325fcf1fc8fc8f2f3d2efb4e2363036cc581f4f8f670429514a87d",
-      "size_bytes": 4113,
+      "sha256": "72afbf4dc921237679c918957154c6a31aadb256325801c5db43e07ab827b321",
+      "size_bytes": 4226,
       "encoding": "gb18030",
       "utf8_copy": "docs/source_utf8/vitis/ov5640_lcd/src/main.c",
-      "line_count": 127
+      "line_count": 129,
+      "baseline_sha256": "3e266b88eb325fcf1fc8fc8f2f3d2efb4e2363036cc581f4f8f670429514a87d"
     },
     {
       "path": "vitis/ov5640_lcd/src/ov5640/ov5640_init.c",

@@ -1,4 +1,4 @@
-"""Compile preserved bare-metal C with a generated Vitis BSP (no GUI app needed)."""
+"""Compile actual bare-metal C sources against a freshly generated Vitis BSP."""
 import argparse
 import hashlib
 import json
@@ -20,11 +20,13 @@ shutil.copytree(root / "vitis/ov5640_lcd/src", out / "src")
 gcc = str(args.tools / "arm-none-eabi-gcc.exe")
 flags = ["-mcpu=cortex-a9", "-mfpu=vfpv3", "-mfloat-abi=hard", "-O0", "-g3", "-Wall"]
 objects = []
+compiled_sources = []
 for source in sorted((out / "src").rglob("*.c")):
     obj = out / (source.relative_to(out / "src").as_posix().replace("/", "_") + ".o")
     subprocess.run([gcc, *flags, "-c", str(source), "-I" + str(bsp / "include"),
                     "-I" + str(out / "src"), "-o", str(obj)], check=True)
     objects.append(str(obj))
+    compiled_sources.append(source.relative_to(out / "src").as_posix())
 elf = out / "ov5640_lcd.elf"
 subprocess.run([gcc, *flags, "-T", str(out / "src/lscript.ld"),
                 "-specs=" + str(out / "src/Xilinx.spec"), "-L" + str(bsp / "lib"),
@@ -32,9 +34,19 @@ subprocess.run([gcc, *flags, "-T", str(out / "src/lscript.ld"),
                 "-Wl,--start-group", "-lxil", "-lgcc", "-lc", "-Wl,--end-group", "-o", str(elf)], check=True)
 symbols = subprocess.check_output([str(args.tools / "arm-none-eabi-nm.exe"), "-n", str(elf)]).decode()
 (out / "symbols.txt").write_text(symbols)
+end_address = int(next(line.split()[0] for line in symbols.splitlines()
+                       if len(line.split()) == 3 and line.split()[2] == "_end"), 16)
+if end_address >= 0x01100000:
+    raise RuntimeError("Linked program/heap/stacks invade the VDMA framebuffer")
+if (out / "src/pan_tilt/pan_tilt_app.c").exists():
+    required = {"pan_tilt/pan_tilt_app.c", "pan_tilt/pan_tilt_driver.c", "pan_tilt/tracking_control.c"}
+    if not required.issubset(compiled_sources):
+        raise RuntimeError("Missing pan-tilt source in actual compilation")
 subprocess.run([str(args.tools / "arm-none-eabi-size.exe"), str(elf)], check=True)
 manifest = {"bsp": str(bsp), "elf_sha256": hashlib.sha256(elf.read_bytes()).hexdigest(),
+            "compiled_sources": compiled_sources, "end_address": hex(end_address),
             "source_sha256": {p.relative_to(out / "src").as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                               for p in (out / "src").rglob("*") if p.is_file()}}
 (out / "build_manifest.json").write_text(json.dumps(manifest, indent=2))
-print("BOARD_APP: PASS original C and linker script compiled:", elf)
+print("BOARD_APP: PASS application and linker script compiled:", elf)
+print("BOARD_APP: compiled", len(compiled_sources), "C sources; _end=", hex(end_address), "below framebuffer 0x01100000")

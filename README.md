@@ -12,6 +12,8 @@
 4. [文件、编码与来源清单](docs/source_manifest.json)
 5. [已有实现报告](docs/evidence/)
 6. [蓝色瓶盖检测、三模式画框与安全集成](docs/BLUE_TRACKER.md)
+7. [双 MG90S 驱动、自动追踪与上板命令](docs/PAN_TILT_TRACKING.md)
+8. [云台外设寄存器表](docs/PAN_TILT_REGISTERS.md) / [实际构建报告](docs/evidence/pan_tilt/BUILD_REPORT.md) / [现场验证记录](docs/evidence/pan_tilt/BOARD_VALIDATION.md)
 
 ```mermaid
 flowchart LR
@@ -38,12 +40,12 @@ flowchart LR
 | `ov5640_lcd.xpr` | Vivado 工程；自定义 IP 路径已改为仓库内相对路径 |
 | `ov5640_lcd.srcs/` | Block Design、IP 配置、顶层 wrapper、引脚约束 |
 | `ip_repo/` | 两个自定义 IP 原始包及 LCD 接口定义 |
-| `vitis/ov5640_lcd/src/` | 原始裸机 C/H、链接脚本；保留原字节及中文编码 |
+| `vitis/ov5640_lcd/src/` | 实际裸机 C/H 构建输入；原驱动/链接脚本保留，main 接入 pan_tilt 控制循环 |
 | `vitis/system_wrapper.xsa` | 原工作区硬件交接文件，供重建 Vitis 平台；未重新生成 |
 | `docs/source_utf8/` | 中文源码 UTF-8 阅读副本；不是构建输入 |
 | `docs/evidence/` | 原工作区历史时序、DRC、资源、参数证据 |
 | `scripts/` | 打开工程辅助 Tcl 和轻量仓库自检脚本 |
 
-本次只整理仓库和分析资料，未修改 HDL/C 功能逻辑。缓存、完整 BSP、bitstream、ELF 和大部分构建产物未纳入 Git；必要的自定义 IP 已从工程原引用位置补齐，且其 RTL 与本地生成目录的 RTL 字节一致。
+初始仓库整理阶段只整理源码与分析资料；此分支随后增加已验收蓝色 tracker 和双舵机控制。缓存、完整 BSP、bitstream、ELF 和大部分构建产物未纳入 Git，实际产物留在独立 build 副本。双舵机版本已完成仿真、完整布局布线、新 XSA/BSP/ELF 与临时 JTAG 下载，现场机械验收状态以记录为准。
 
-现有报告通过的是当时已设置的时序约束，不能据此认定所有 LCD 模式和外部接口均已验证。本次没有重新综合、实现或上板测试。
+报告通过的是所列时钟约束；不能据此认定所有 LCD 模式、外部接口电压和舵机机械运动均已验证。
