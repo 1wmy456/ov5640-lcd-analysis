@@ -38,3 +38,27 @@ SOURCE build/pan_uart_auto_guard.txt
 auto refused: dimensions/camera, both enables and verify yaw/pitch required
 mode=manual frame=18169 valid=1 err=0 age=6925 bbox=486,674,78,356 ex=180 ey=-23 yaw=1550 pitch=1520 en=2 hold=1 drop=0
 mode=manual frame=18189 valid=1 err=0 age=6987 bbox=518,674,85,356 ex=196 ey=-20 yaw=1550 pitch=1520 en=2 hold=1 drop=0
+
+SOURCE build/pan_expanded_auto_follow.txt
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+mode=auto frame=63253 valid=1 err=0 age=11478 bbox=345,451,202,288 ex=-2 ey=5 yaw=1500 pitch=1520 en=3 hold=0 drop=0
+mode=auto frame=63434 valid=1 err=0 age=7061 bbox=337,447,200,287 ex=-8 ey=3 yaw=1500 pitch=1520 en=3 hold=0 drop=0
+mode=auto frame=63454 valid=1 err=0 age=7127 bbox=208,305,205,289 ex=-144 ey=7 yaw=1508 pitch=1520 en=3 hold=0 drop=0
+mode=auto frame=63474 valid=1 err=0 age=7190 bbox=230,317,203,287 ex=-127 ey=5 yaw=1520 pitch=1520 en=3 hold=0 drop=0
+mode=auto frame=63494 valid=1 err=0 age=7252 bbox=256,345,207,287 ex=-100 ey=7 yaw=1533 pitch=1520 en=3 hold=0 drop=0
+
+SOURCE build/pan_auto_removed_confirmed.txt
+mode=auto frame=78884 valid=0 err=0 age=6924 bbox=84,93,96,97 ex=-312 ey=-144 yaw=1550 pitch=1511 en=3 hold=3 drop=0
+mode=auto frame=78968 valid=0 err=0 age=7193 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1550 pitch=1511 en=3 hold=3 drop=0
+mode=auto frame=78988 valid=0 err=0 age=7253 bbox=154,157,135,135 ex=-245 ey=-105 yaw=1550 pitch=1511 en=3 hold=3 drop=0
+
+SOURCE build/pan_manual_auto_switch.txt
+manual/hold: PWM enable and position retained
+mode=manual frame=114304 valid=1 err=0 age=1039 bbox=24,412,164,346 ex=-182 ey=15 yaw=1550 pitch=1497 en=3 hold=1 drop=0
+mode=manual frame=114372 valid=1 err=0 age=1254 bbox=34,767,102,397 ex=0 ey=9 yaw=1550 pitch=1497 en=3 hold=1 drop=0
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+mode=auto frame=114409 valid=1 err=0 age=16371 bbox=40,783,101,395 ex=11 ey=8 yaw=1550 pitch=1497 en=3 hold=0 drop=0
+
+SOURCE build/pan_delivery_status.txt
+mode=auto frame=208385 valid=0 err=0 age=19545 bbox=98,237,125,187 ex=-233 ey=-84 yaw=1550 pitch=1480 en=3 hold=3 drop=0
+mode=auto frame=208462 valid=0 err=0 age=14798 bbox=226,235,125,130 ex=-170 ey=-113 yaw=1550 pitch=1480 en=3 hold=3 drop=0

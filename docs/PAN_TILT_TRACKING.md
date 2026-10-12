@@ -98,7 +98,21 @@ python scripts/pan_tilt_serial.py --port COM6 --command disable --listen 2
 
 单轴有正常运动后，在窄范围内逐步确认中心和限位，再设置 dir 与安全 limits，并 verify。之后 enable both、auto。验证左右/上下跟随、停止稳定、移走保持、短遮挡恢复、manual/auto 切换。未看到真实转动、卡住或方向不明时不要 verify/auto。操作员现场结果记录于 `docs/evidence/pan_tilt/BOARD_VALIDATION.md`。
 
-本轮暂定现场参数：yaw方向−1、限位1500..1520μs、中心1510μs；pitch方向+1、限位1500..1540μs、中心1520μs。范围很窄，大幅移动会触及限位。默认启动仍是手动/PWM关闭、1500μs/1400..1600μs；现场参数不写非易失存储，重新下载后需重新输入并验证。
+本轮最终现场参数：yaw方向−1、限位1450..1550μs、中心1500μs；pitch方向+1、限位1480..1560μs、中心1520μs。两轴增益0.3μs/(pixel·second)、变化率25μs/s、死区±15像素。用户通过每步5μs的手动测试确认上述全段机械动作正常，自动跟随方向正确；大幅移动仍容易触及限位。目标移走保持、短时遮挡恢复、manual→auto无跳转均已得到现场确认。尚未标定更大机械范围，不能宣称全行程追踪已验收。
+
+默认启动仍是手动/PWM关闭、两轴1500μs、初始1400..1600μs、增益0.1；现场参数不写非易失存储。以下恢复脚本适用于本次已验证且接线、安装不变的云台。它先关闭输出，再配置方向、限位、中心和增益；默认保留PWM关闭。加EnableAuto后，显式使能双轴、提交中心1500/1520μs、恢复已验证标记并启动自动。需要保持当前位置时直接使用manual，避免调用包含center命令的恢复脚本。
+
+```powershell
+# 重新下载后恢复现场参数，保留手动/PWM关闭
+./scripts/restore_pan_tilt_calibration.ps1 -Port COM6
+# 本次已验证安装上恢复参数并启动自动，返回配置中心
+./scripts/restore_pan_tilt_calibration.ps1 -Port COM6 -EnableAuto
+# 打包实际release产物、standalone BSP、报告及旧版回退文件
+# 已有包会拒绝覆盖，复建时使用新的Output
+./scripts/package_pan_tilt.ps1 -Output build/pan_tilt_release.zip
+```
+
+本轮曾出现一次视频冻结，VDMA记录行/帧尺寸错误，关闭PWM并重新JTAG下载后恢复；根因未定位。自动控制对停止更新或异常目标会保持最后安全位置。长时间视频稳定性仍需复测，详见现场记录。
 
 ## 寄存器
 

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-12",
+  "port": "COM6",
+  "baud": 115200,
+  "scope": "This tested mounting and wiring; runtime settings are volatile",
+  "image": {"width": 800, "height": 480, "mode": 2},
+  "yaw": {"pin": "U5", "header": "J4-3", "direction": -1, "min_us": 1450, "max_us": 1550, "center_us": 1500},
+  "pitch": {"pin": "T5", "header": "J4-4", "direction": 1, "min_us": 1480, "max_us": 1560, "center_us": 1520},
+  "gain_us_per_pixel_second": 0.3,
+  "max_rate_us_per_second": 25,
+  "deadband_pixels": 15,
+  "control_period_ms": 20,
+  "stale_timeout_ms": 250,
+  "verified_by_operator": ["manual range", "follow direction", "target loss holds", "occlusion recovery", "manual auto transition"],
+  "limitations": ["Larger excursions can reach the verified limits", "Video freeze recovered by JTAG reload; root cause unresolved", "Whole-frame bounding box can merge other blue objects"]
+}
