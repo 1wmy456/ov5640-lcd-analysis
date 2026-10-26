@@ -1,0 +1,33 @@
+mode=auto frame=87807 valid=0 err=0 age=22771 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1303 pitch=1576 en=3 hold=3 limit=0 det=lock_miss drop=0
+yaw gain=500 milli-us/(pixel*s)
+pitch gain=500 milli-us/(pixel*s)
+yaw rate=50000 milli-us/s
+mode=auto frame=87815 valid=0 err=0 age=23339 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1303 pitch=1576 en=3 hold=3 limit=0 det=no_blob drop=0
+pitch rate=50000 milli-us/s
+mode=auto frame=87818 valid=0 err=0 age=8349 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1303 pitch=1576 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=87835 valid=0 err=0 age=24483 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1303 pitch=1576 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=87855 valid=0 err=0 age=26056 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1303 pitch=1576 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=87875 valid=0 err=0 age=27479 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1304 pitch=1577 en=3 hold=3 limit=0 det=lock_miss drop=0
+mode=auto frame=87895 valid=1 err=0 age=28907 bbox=360,399,256,275 ex=-21 ey=25 yaw=1304 pitch=1578 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=87915 valid=1 err=0 age=30334 bbox=354,399,256,275 ex=-24 ey=25 yaw=1306 pitch=1580 en=3 hold=0 limit=0 det=lock_miss drop=0
+mode=auto frame=87935 valid=0 err=0 age=31757 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1307 pitch=1581 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=87956 valid=0 err=0 age=8067 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1309 pitch=1583 en=3 hold=3 limit=0 det=lock_miss drop=0
+mode=auto frame=87976 valid=0 err=0 age=9487 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1309 pitch=1583 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=90537 valid=1 err=0 age=18344 bbox=316,371,229,272 ex=-57 ey=10 yaw=1293 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+VISION mask_frame=90540 src_error=0 age=10218 errors=10061696 objects=1 candidates=1 locked=1 reason=ready process_us=7730 largest=127/14x11 cells
+mode=auto frame=90550 valid=1 err=0 age=14199 bbox=330,385,229,272 ex=-43 ey=10 yaw=1300 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90570 valid=1 err=0 age=15774 bbox=332,391,229,272 ex=-39 ey=10 yaw=1311 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90590 valid=1 err=0 age=17204 bbox=348,403,225,272 ex=-25 ey=8 yaw=1318 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90610 valid=1 err=0 age=18624 bbox=352,407,225,268 ex=-21 ey=6 yaw=1324 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90630 valid=1 err=0 age=20060 bbox=356,415,225,268 ex=-15 ey=6 yaw=1327 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90650 valid=1 err=0 age=21626 bbox=360,415,228,271 ex=-13 ey=9 yaw=1327 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90670 valid=1 err=0 age=23061 bbox=406,459,210,257 ex=32 ey=-7 yaw=1326 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90689 valid=1 err=0 age=29478 bbox=555,613,192,242 ex=184 ey=-23 yaw=1304 pitch=1474 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90709 valid=1 err=0 age=30905 bbox=510,568,200,251 ex=139 ey=-15 yaw=1279 pitch=1470 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90729 valid=1 err=0 age=32232 bbox=479,536,200,250 ex=107 ey=-15 yaw=1254 pitch=1466 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90750 valid=1 err=0 age=8636 bbox=446,501,203,251 ex=73 ey=-13 yaw=1230 pitch=1466 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90770 valid=1 err=0 age=9772 bbox=428,483,201,248 ex=55 ey=-16 yaw=1214 pitch=1465 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90790 valid=1 err=0 age=11066 bbox=406,460,204,255 ex=33 ey=-11 yaw=1203 pitch=1463 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90810 valid=1 err=0 age=12491 bbox=397,452,204,255 ex=24 ey=-11 yaw=1197 pitch=1463 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90830 valid=1 err=0 age=13917 bbox=358,413,164,211 ex=-15 ey=-53 yaw=1196 pitch=1457 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=90850 valid=1 err=0 age=15488 bbox=312,368,51,101 ex=-60 ey=-164 yaw=1207 pitch=1434 en=3 hold=0 limit=0 det=ready drop=0
