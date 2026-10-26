@@ -11,9 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
 parser.add_argument("--project", type=Path, required=True)
 parser.add_argument("--workspace", type=Path, required=True)
+parser.add_argument("--output", type=Path, default=ROOT / "docs/evidence/pan_tilt")
 args = parser.parse_args()
 project, workspace = args.project.resolve(), args.workspace.resolve()
-output = ROOT / "docs/evidence/pan_tilt"
+output = args.output.resolve()
 output.mkdir(parents=True, exist_ok=True)
 manifest = json.loads((workspace/"app_compiled/build_manifest.json").read_text())
 for relative, expected in manifest["source_sha256"].items():
@@ -27,6 +28,8 @@ info = {"baseline":"15e98ec","branch":subprocess.check_output(["git","branch","-
         "calibration":(project/"pan_tilt_summary.txt").read_text(),"compiled_sources":manifest["compiled_sources"],
         "program_end":manifest["end_address"],"framebuffer_start":"0x01100000","bsp_base_macro":match[0],
         "artifact_sha256":{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in artifacts}}
+info["rtl_sha256"]={p.relative_to(project).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in (project/"rtl").rglob("*.v")}
 report_dir = output/"tool_reports"
 report_dir.mkdir(exist_ok=True)
 for name in ["timing_summary.rpt","utilization.rpt","drc.rpt","cdc.rpt","servo_pins.txt","bus_skew.rpt"]:

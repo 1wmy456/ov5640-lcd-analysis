@@ -1,0 +1,1 @@
+PASS CAP_COMPONENTS checks=12348 frames=34 host_ms=6.00 circle/ellipse/multiple/background/lock/loss/recovery/edge/duplicate/wrap

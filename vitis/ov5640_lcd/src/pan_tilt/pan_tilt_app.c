@@ -1,5 +1,6 @@
 #include "pan_tilt_app.h"
 #include "pan_tilt_driver.h"
+#include "cap_runtime.h"
 #include "xparameters.h"
 #include "xtime_l.h"
 #include "xuartps.h"
@@ -28,15 +29,27 @@ static uint64_t now_us(void){XTime t;XTime_GetTime(&t);return (t/COUNTS_PER_SECO
 static int axis_of(const char *s){return !strcmp(s,"yaw")?0:(!strcmp(s,"pitch")?1:-1);}
 static int number(const char *s,double *v){char *end;*v=strtod(s,&end);return *s&&!*end&&isfinite(*v);}
 static void show_status(void){
-    log_text("mode=%s frame=%lu valid=%u err=%u age=%lu bbox=%u,%u,%u,%u ex=%d ey=%d yaw=%lu pitch=%lu en=%d hold=%d drop=%u\r\n",
+    unsigned yaw=pt_reg_read(pt_base,PT_YAW_ACTIVE),pitch=pt_reg_read(pt_base,PT_PITCH_ACTIVE);
+    unsigned limit=(yaw<=control.minimum[0]||yaw>=control.maximum[0]?1:0)|
+                   (pitch<=control.minimum[1]||pitch>=control.maximum[1]?2:0);
+    log_text("mode=%s frame=%lu valid=%u err=%u age=%lu bbox=%u,%u,%u,%u ex=%d ey=%d yaw=%lu pitch=%lu en=%d hold=%d limit=%u det=%s drop=%u\r\n",
       control.automatic?"auto":"manual",(unsigned long)target.frame_id,target.flags&1,(target.flags>>1)&1,
       (unsigned long)target.age_us,target.xmin,target.xmax,target.ymin,target.ymax,control.ex,control.ey,
-      (unsigned long)pt_reg_read(pt_base,PT_YAW_ACTIVE),(unsigned long)pt_reg_read(pt_base,PT_PITCH_ACTIVE),control.enabled,control.hold_reason,dropped);
+      (unsigned long)yaw,(unsigned long)pitch,control.enabled,control.hold_reason,limit,
+      cap_reason_name(cap_runtime_result()->reason),dropped);
 }
 static void command(char *s){
     char *w[5],*p;int n=0,a;double v,lo,hi;command_result=0;
     for(p=strtok(s," \t");p&&n<5;p=strtok(NULL," \t"))w[n++]=p;
     if(!n)return;
+    if(n==1&&!strcmp(w[0],"vision")){
+        const CapResult *r=cap_runtime_result();
+        log_text("VISION mask_frame=%lu src_error=%lu age=%lu errors=%lu objects=%u candidates=%u locked=%u reason=%s process_us=%lu largest=%u/%ux%u cells\r\n",
+            (unsigned long)pt_reg_read(pt_base,0xec),(unsigned long)pt_reg_read(pt_base,0xf0),
+            (unsigned long)pt_reg_read(pt_base,0xf4),(unsigned long)pt_reg_read(pt_base,0xf8),
+            r->components,r->candidates,r->locked,cap_reason_name(r->reason),(unsigned long)cap_runtime_processing_us(),
+            r->max_area,r->max_width,r->max_height);return;
+    }
     if(n==1&&!strcmp(w[0],"pwm")){
         log_text("PWM_NET clk=%lu flags=%lx yaw high=%lu period=%lu rises=%lu pitch high=%lu period=%lu rises=%lu ticks; connector voltage unmeasured\r\n",
             (unsigned long)pt_reg_read(pt_base,PT_CLOCK_HZ),(unsigned long)pt_reg_read(pt_base,PT_WAVE_STATUS),
@@ -119,15 +132,18 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
     if(cfg){XUartPs_CfgInitialize(&uart,cfg,cfg->BaseAddress);XUartPs_SetBaudRate(&uart,115200);}
     pt_reg_write(pt_base,PT_ENABLE,0);
     pt_control_init(&control,camera_ok&&width==800&&height==480&&dimensions==((480u<<16)|800u));
+    if(!cap_runtime_init(pt_base))control.dimensions_ok=0;
     if(pt_reg_read(pt_base,PT_ID)!=0x50544c54)control.dimensions_ok=0;
     pt_driver_commit(pt_base,&control);
     log_text("PAN_TILT ready manual PWM OFF 115200 8N1; range1400..1600 center1500; first step5us\r\n");
+    log_text("VISION component/ellipse/lock mask200x120 block4 acquisition2frames; command: vision\r\n");
     if(!control.dimensions_ok)log_text("AUTO DISABLED: camera/display/tracker mismatch display=%ux%u tracker=%ux%u camera_ok=%d\r\n",width,height,dimensions&65535,dimensions>>16,camera_ok);
     last_tick=last_log=now_us();
     app_state();
     for(;;){
         service_uart();service_mailbox();now=now_us();
-        if(now-last_tick>=20000){last_tick=now;pt_driver_snapshot(pt_base,&target);
+        cap_runtime_service(pt_base,now);
+        if(now-last_tick>=20000){last_tick=now;cap_runtime_target(pt_base,now,&target);
             if(pt_control_update(&control,&target,now))pt_driver_commit(pt_base,&control);
             app_state();}
         if(now-last_log>=500000){last_log=now;show_status();}

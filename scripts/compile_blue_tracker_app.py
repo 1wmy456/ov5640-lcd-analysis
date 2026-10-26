@@ -23,7 +23,8 @@ objects = []
 compiled_sources = []
 for source in sorted((out / "src").rglob("*.c")):
     obj = out / (source.relative_to(out / "src").as_posix().replace("/", "_") + ".o")
-    subprocess.run([gcc, *flags, "-c", str(source), "-I" + str(bsp / "include"),
+    source_flags = [*flags, "-O2"] if source.name in {"cap_components.c", "cap_runtime.c"} else flags
+    subprocess.run([gcc, *source_flags, "-c", str(source), "-I" + str(bsp / "include"),
                     "-I" + str(out / "src"), "-o", str(obj)], check=True)
     objects.append(str(obj))
     compiled_sources.append(source.relative_to(out / "src").as_posix())
@@ -31,7 +32,7 @@ elf = out / "ov5640_lcd.elf"
 subprocess.run([gcc, *flags, "-T", str(out / "src/lscript.ld"),
                 "-specs=" + str(out / "src/Xilinx.spec"), "-L" + str(bsp / "lib"),
                 "-Wl,-Map=" + str(out / "ov5640_lcd.map"), *objects,
-                "-Wl,--start-group", "-lxil", "-lgcc", "-lc", "-Wl,--end-group", "-o", str(elf)], check=True)
+                "-Wl,--start-group", "-lxil", "-lgcc", "-lc", "-lm", "-Wl,--end-group", "-o", str(elf)], check=True)
 symbols = subprocess.check_output([str(args.tools / "arm-none-eabi-nm.exe"), "-n", str(elf)]).decode()
 (out / "symbols.txt").write_text(symbols)
 end_address = int(next(line.split()[0] for line in symbols.splitlines()
@@ -39,7 +40,8 @@ end_address = int(next(line.split()[0] for line in symbols.splitlines()
 if end_address >= 0x01100000:
     raise RuntimeError("Linked program/heap/stacks invade the VDMA framebuffer")
 if (out / "src/pan_tilt/pan_tilt_app.c").exists():
-    required = {"pan_tilt/pan_tilt_app.c", "pan_tilt/pan_tilt_driver.c", "pan_tilt/tracking_control.c"}
+    required = {"pan_tilt/pan_tilt_app.c", "pan_tilt/pan_tilt_driver.c", "pan_tilt/tracking_control.c",
+                "pan_tilt/cap_components.c", "pan_tilt/cap_runtime.c"}
     if not required.issubset(compiled_sources):
         raise RuntimeError("Missing pan-tilt source in actual compilation")
 subprocess.run([str(args.tools / "arm-none-eabi-size.exe"), str(elf)], check=True)

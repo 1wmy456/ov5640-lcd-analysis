@@ -2,6 +2,7 @@
 module tb_axis_blue_tracker;
     parameter MIN_PIXELS=4, MIN_WIDTH=2, MIN_HEIGHT=2, CENTER_CROSS=0;
     parameter MIN_BLUE_RUN=1, MIN_B_R_RATIO=0, BR_DELTA=35, BG_DELTA=20;
+    parameter BBOX_FILTER_SHIFT=0;
     localparam W=12,H=8,N=20000;
     reg clk=0; always #5 clk=~clk;
     reg rst=0,sv=0,su=0,sl=0,ready=0;
@@ -15,7 +16,7 @@ module tb_axis_blue_tracker;
         axis_blue_tracker #(.IMAGE_WIDTH(W),.IMAGE_HEIGHT(H),.MODE(m),
             .MIN_PIXELS(MIN_PIXELS),.MIN_WIDTH(MIN_WIDTH),.MIN_HEIGHT(MIN_HEIGHT),
             .MIN_BLUE_RUN(MIN_BLUE_RUN),.MIN_B_R_RATIO(MIN_B_R_RATIO),.BR_DELTA(BR_DELTA),.BG_DELTA(BG_DELTA),
-            .CENTER_CROSS(CENTER_CROSS)) dut(
+            .CENTER_CROSS(CENTER_CROSS),.BBOX_FILTER_SHIFT(BBOX_FILTER_SHIFT)) dut(
             .aclk(clk),.aresetn(rst),.s_axis_tdata(sd),.s_axis_tvalid(sv),
             .s_axis_tready(sr[m]),.s_axis_tuser(su),.s_axis_tlast(sl),
             .m_axis_tdata(md[m]),.m_axis_tvalid(mv[m]),.m_axis_tready(ready),
@@ -35,8 +36,11 @@ module tb_axis_blue_tracker;
     integer x=0,y=0,cnt=0,lx=W,hx=0,ly=H,hy=0;
     integer run=0,qcnt=0,left;
     integer rx0=0,rx1=0,ry0=0,ry1=0,rc=0;
+    integer px0=0,px1=0,py0=0,py1=0,pc=0;
+    integer ox0=0,ox1=0,oy0=0,oy1=0;
     integer dx0=0,dx1=0,dy0=0,dy1=0;
-    reg active=0,rv=0,dv=0,blue,good,paint,exp_pulse,exp_error;
+    reg active=0,rv=0,dv=0,blue,good,paint,exp_pulse,exp_error,rawv;
+    reg model_pending=0,pv=0,ov=0;
     reg [23:0] ep;
     reg random_ready=1;
     integer seed=32'h12345678;
@@ -47,13 +51,29 @@ module tb_axis_blue_tracker;
             $display("FAIL t=%0t input=%0d output=%0d %s",$time,inputs,outputs,msg); $fatal(1);
         end end
     endtask
+    function automatic integer filtered(input integer previous_coord,current_coord);
+        integer delta,rounding;
+        begin
+            if(BBOX_FILTER_SHIFT==0) filtered=current_coord;
+            else begin
+                rounding=1<<(BBOX_FILTER_SHIFT-1);
+                if(current_coord>=previous_coord) begin
+                    delta=current_coord-previous_coord;
+                    filtered=previous_coord+((delta+rounding)>>BBOX_FILTER_SHIFT);
+                end else begin
+                    delta=previous_coord-current_coord;
+                    filtered=previous_coord-((delta+rounding)>>BBOX_FILTER_SHIFT);
+                end
+            end
+        end
+    endfunction
     always @(negedge clk) if(random_ready) begin
         ready_rng={ready_rng[30:0],ready_rng[31]^ready_rng[21]^ready_rng[1]^ready_rng[0]};
         ready = (ready_rng[1:0] != 0);
     end
     always @(posedge clk) begin
         if(!rst) begin
-            head=0; tail=0; active=0; rv=0;dv=0;x=0;y=0;rc=0;
+            head=0; tail=0; active=0; rv=0;dv=0;x=0;y=0;rc=0;model_pending=0;
             rx0=0;rx1=0;ry0=0;ry1=0;
             for(k=0;k<3;k=k+1) stalled[k]=0;
         end else begin
@@ -73,13 +93,23 @@ module tb_axis_blue_tracker;
                 head=head+1; outputs=outputs+1;
             end
             exp_pulse=0; exp_error=0;
+            ov=rv;ox0=rx0;ox1=rx1;oy0=ry0;oy1=ry1;
+            if(BBOX_FILTER_SHIFT!=0&&model_pending) begin
+                model_pending=0;exp_pulse=1;rc=pc;
+                if(!pv) begin rx0=0;rx1=0;ry0=0;ry1=0; end
+                else if(rv) begin
+                    rx0=filtered(rx0,px0);rx1=filtered(rx1,px1);
+                    ry0=filtered(ry0,py0);ry1=filtered(ry1,py1);
+                end else begin rx0=px0;rx1=px1;ry0=py0;ry1=py1; end
+                rv=pv;
+            end
             if(sv&&sr[0]) begin
                 inputs=inputs+1;
                 blue=(sd[7:0]>=80 && int'(sd[7:0])>int'(sd[23:16])+BR_DELTA &&
                       int'(sd[7:0])>int'(sd[15:8])+BG_DELTA &&
                       (MIN_B_R_RATIO==0 || int'(sd[7:0])>int'(sd[23:16])*MIN_B_R_RATIO));
                 if(su) begin
-                    dv=rv&&!active;dx0=rx0;dx1=rx1;dy0=ry0;dy1=ry1;
+                    dv=ov&&!active;dx0=ox0;dx1=ox1;dy0=oy0;dy1=oy1;
                     exp_error=active; x=0;y=0;cnt=0;run=0;qcnt=0;lx=W;hx=0;ly=H;hy=0;
                 end
                 good=(su||active) && x<W && y<H && (sl==(x==W-1));
@@ -105,9 +135,16 @@ module tb_axis_blue_tracker;
                     end
                     active=1;
                     if(sl && y==H-1) begin
-                        active=0;exp_pulse=1;frames=frames+1;rc=cnt;
-                        rv=qcnt>0&&qcnt>=MIN_PIXELS&&hx-lx+1>=MIN_WIDTH&&hy-ly+1>=MIN_HEIGHT;
-                        rx0=qcnt ? lx:0;rx1=qcnt ? hx:0;ry0=qcnt ? ly:0;ry1=qcnt ? hy:0;
+                        active=0;frames=frames+1;
+                        rawv=qcnt>0&&qcnt>=MIN_PIXELS&&hx-lx+1>=MIN_WIDTH&&hy-ly+1>=MIN_HEIGHT;
+                        if(BBOX_FILTER_SHIFT!=0) begin
+                            model_pending=1;pv=rawv;pc=cnt;
+                            px0=lx;px1=hx;py0=ly;py1=hy;
+                        end else begin
+                            exp_pulse=1;rc=cnt;rv=rawv;
+                            if(!rawv) begin rx0=0;rx1=0;ry0=0;ry1=0; end
+                            else begin rx0=lx;rx1=hx;ry0=ly;ry1=hy; end
+                        end
                     end
                     if(sl) begin x=0;y=y+1;run=0;end else x=x+1;
                 end
@@ -208,8 +245,8 @@ module tb_axis_blue_tracker;
         repeat(5)@(negedge clk);
         check(head==tail,"all accepted beats drained");
         check(stalls>0&&bubbles>0&&errors_seen>=4,"stress coverage");
-        $display("PASS checks=%0d failures=%0d complete_frames=%0d errors_seen=%0d accepted=%0d output=%0d stalls=%0d bubbles=%0d MIN=%0d/%0d/%0d CROSS=%0d",
-                 checks,failures,frames,errors_seen,inputs,outputs,stalls,bubbles,MIN_PIXELS,MIN_WIDTH,MIN_HEIGHT,CENTER_CROSS);
+        $display("PASS checks=%0d failures=%0d complete_frames=%0d errors_seen=%0d accepted=%0d output=%0d stalls=%0d bubbles=%0d MIN=%0d/%0d/%0d CROSS=%0d FILTER=%0d",
+                 checks,failures,frames,errors_seen,inputs,outputs,stalls,bubbles,MIN_PIXELS,MIN_WIDTH,MIN_HEIGHT,CENTER_CROSS,BBOX_FILTER_SHIFT);
         $finish;
     end
     initial begin #2000000;$fatal(1,"watchdog timeout");end
@@ -222,4 +259,7 @@ module tb_single_pixel;
 endmodule
 module tb_cross;
     tb_axis_blue_tracker #(.CENTER_CROSS(1)) test();
+endmodule
+module tb_filtered;
+    tb_axis_blue_tracker #(.BBOX_FILTER_SHIFT(2)) test();
 endmodule

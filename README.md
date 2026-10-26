@@ -14,6 +14,7 @@
 6. [蓝色瓶盖检测、三模式画框与安全集成](docs/BLUE_TRACKER.md)
 7. [双 MG90S 驱动、自动追踪与上板命令](docs/PAN_TILT_TRACKING.md)
 8. [云台外设寄存器表](docs/PAN_TILT_REGISTERS.md) / [实际构建报告](docs/evidence/pan_tilt/BUILD_REPORT.md) / [现场验证记录](docs/evidence/pan_tilt/BOARD_VALIDATION.md)
+9. [连通域分离、圆形/椭圆筛选和目标锁定](docs/COMPONENT_TRACKER.md) / [新版本构建与仿真](docs/evidence/component_tracker/BUILD_REPORT.md) / [新版本现场记录](docs/evidence/component_tracker/BOARD_VALIDATION.md)
 
 ```mermaid
 flowchart LR

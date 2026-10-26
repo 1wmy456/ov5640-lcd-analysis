@@ -1,0 +1,12 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=16036 valid=1 err=0 age=32516 bbox=382,460,212,275 ex=21 ey=3 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=145000 period=2000000 rises=5095 pitch high=148600 period=2000000 rises=5095 ticks; connector voltage unmeasured
+VISION mask_frame=16042 src_error=0 age=1917 errors=4053622 objects=1 candidates=1 locked=1 reason=ready process_us=7756 largest=229/20x15 cells
+mode=manual frame=16050 valid=1 err=0 age=23340 bbox=381,460,212,273 ex=20 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16070 valid=1 err=0 age=24767 bbox=381,460,212,272 ex=20 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16089 valid=1 err=0 age=31185 bbox=381,460,212,272 ex=20 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16109 valid=1 err=0 age=32513 bbox=381,460,212,272 ex=20 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16130 valid=1 err=0 age=8637 bbox=381,460,212,272 ex=20 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16150 valid=1 err=0 age=9771 bbox=381,460,212,274 ex=20 ey=3 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16170 valid=1 err=0 age=11061 bbox=381,460,212,272 ex=20 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=16190 valid=1 err=0 age=12490 bbox=381,458,212,272 ex=19 ey=2 yaw=1450 pitch=1486 en=3 hold=1 limit=1 det=ready drop=0

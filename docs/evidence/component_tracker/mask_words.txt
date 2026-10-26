@@ -1,0 +1,15 @@
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/mask_words/xsim_script.tcl
+# xsim {mask_words} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS MASK_WORDS checks=25 frames=4 multiple-words/partial-last/reset-cells/bubbles/final-pixel
+$finish called at time : 68470 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_mask_words.sv" Line 34
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 10:38:36 2026...

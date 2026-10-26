@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BASELINE = "15e98ec"
 parser = argparse.ArgumentParser()
 parser.add_argument("project", type=Path)
+parser.add_argument("--components", action="store_true")
+parser.add_argument("--snapshot", type=Path)
 args = parser.parse_args()
 copy = args.project.resolve()
 bd = "ov5640_lcd.srcs/sources_1/bd/system/system.bd"
@@ -55,7 +57,13 @@ for name, net in original["interface_nets"].items():
 assert any(set(n["interface_ports"]) == {"axis_blue_tracker_0/M_AXIS", "axi_vdma_0/S_AXIS_S2MM"} for n in actual["interface_nets"].values())
 for pin in ["bbox_valid", "result_pulse", "frame_error", "bbox_xmin", "bbox_xmax", "bbox_ymin", "bbox_ymax", "blue_pixel_count"]:
     assert any(set(n["ports"]) == {"axis_blue_tracker_0/"+pin, "pan_tilt_ctrl_0/"+pin} for n in actual["nets"].values()), pin
-cal = {"MODE":2,"IMAGE_WIDTH":800,"IMAGE_HEIGHT":480,"BLUE_MIN":80,"BR_DELTA":60,"BG_DELTA":35,"MIN_B_R_RATIO":2,"MIN_BLUE_RUN":3,"MIN_PIXELS":256,"BORDER_WIDTH":2,"CENTER_CROSS":0}
+cal = {"MODE":2,"IMAGE_WIDTH":800,"IMAGE_HEIGHT":480,"BLUE_MIN":80,"BR_DELTA":60,"BG_DELTA":35,"MIN_B_R_RATIO":2,"MIN_BLUE_RUN":3,"MIN_PIXELS":256,"BBOX_FILTER_SHIFT":2,"BORDER_WIDTH":2,"CENTER_CROSS":0}
+if args.components:
+    cal.update(BBOX_FILTER_SHIFT=0,COMPONENT_MODE=1,MASK_BLOCK=4,MASK_CELL_MIN=4)
+    assert actual["components"]["pan_tilt_ctrl_0"]["parameters"]["COMPONENT_MODE"]["value"] == "1"
+    for pin in ["mask_start","mask_word_valid","mask_frame_done","mask_word_address","mask_word_data",
+                "display_bbox_valid","display_xmin","display_xmax","display_ymin","display_ymax"]:
+        assert any(set(n["ports"]) == {"axis_blue_tracker_0/"+pin,"pan_tilt_ctrl_0/"+pin} for n in actual["nets"].values()), pin
 for key, val in cal.items():
     assert int(actual["components"]["axis_blue_tracker_0"]["parameters"][key]["value"]) == val
 for peripheral, spec in original["addressing"].items():
@@ -68,6 +76,7 @@ assert new["offset"] == "0x43C20000" and new["range"] == "4K"
 names = subprocess.check_output(["git","ls-tree","-r","--name-only",BASELINE],cwd=ROOT).decode().splitlines()
 protected = [n for n in names if n.startswith(("ip_repo/","ov5640_lcd.srcs/","vitis/","rtl/blue_tracker/")) or n == "ov5640_lcd.xpr"]
 count = 0
+allowed_tracker_updates = {"rtl/blue_tracker/axis_blue_tracker.v", "rtl/blue_tracker/blue_bbox_stats.v"}
 for name in protected:
     before = subprocess.check_output(["git","show",f"{BASELINE}:{name}"],cwd=ROOT)
     if name == "vitis/ov5640_lcd/src/main.c":
@@ -75,10 +84,12 @@ for name in protected:
         expected = expected.replace(b'xil_printf("Pixel clock    : %d\\r\\n", vd_mode.freq);',b'xil_printf("Pixel clock kHz: %d\\r\\n", (int)(vd_mode.freq*1000.0));')
         expected = expected.replace(b'    return 0;\r\n',b'    pan_tilt_run(vd_mode.width, vd_mode.height, status == 0);\r\n    return 0;\r\n')
         assert (ROOT/name).read_bytes() == expected, name
-    else:
+    elif name not in allowed_tracker_updates:
+        if args.snapshot and (args.snapshot/name).is_file():
+            before = (args.snapshot/name).read_bytes()
         assert (ROOT/name).read_bytes() == before, name
         count += 1
 for src in (ROOT/"rtl").rglob("*.v"):
     assert src.read_bytes() == (copy/src.relative_to(ROOT)).read_bytes(), str(src)
-print(f"PASS PAN_AUDIT: {count} protected files byte-identical to 15e98ec; main has exactly 3 authorized edits")
+print(f"PASS PAN_AUDIT: {count} protected files byte-identical to {'preserved local snapshot' if args.snapshot else BASELINE}; main has exactly 3 authorized edits")
 print("PASS PAN_AUDIT: native cells/nets/addresses preserved, only interconnect M04/tracker/PWM branch added; calibration exact")

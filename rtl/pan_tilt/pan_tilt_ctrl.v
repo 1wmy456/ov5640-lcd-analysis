@@ -1,6 +1,6 @@
 module pan_tilt_ctrl #(
     parameter integer CLOCK_HZ=100000000,IMAGE_WIDTH=800,IMAGE_HEIGHT=480,
-    parameter integer C_S_AXI_ADDR_WIDTH=12,
+    parameter integer C_S_AXI_ADDR_WIDTH=12,COMPONENT_MODE=0,MASK_BLOCK=4,
     parameter [31:0] C_S_AXI_BASEADDR=0,C_S_AXI_HIGHADDR=4095
 )(
     (* X_INTERFACE_INFO="xilinx.com:signal:clock:1.0 s_axi_aclk CLK", X_INTERFACE_PARAMETER="ASSOCIATED_BUSIF S_AXI, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 100000000" *) input s_axi_aclk,
@@ -15,6 +15,10 @@ module pan_tilt_ctrl #(
     input bbox_valid,result_pulse,frame_error,
     input [15:0] bbox_xmin,bbox_xmax,bbox_ymin,bbox_ymax,
     input [31:0] blue_pixel_count,
+    input mask_start,mask_word_valid,mask_frame_done,
+    input [9:0] mask_word_address,input [31:0] mask_word_data,
+    output display_bbox_valid,
+    output [15:0] display_xmin,display_xmax,display_ymin,display_ymax,
     output servo_yaw_pwm,servo_pitch_pwm
 );
     localparam integer TICKS_PER_US=CLOCK_HZ/1000000;
@@ -24,7 +28,8 @@ module pan_tilt_ctrl #(
     reg [31:0] w_data;reg [3:0] w_strobes;
     assign s_axi_awready=!aw_full&&!s_axi_bvalid&&s_axi_aresetn;
     assign s_axi_wready=!w_full&&!s_axi_bvalid&&s_axi_aresetn;
-    assign s_axi_arready=(!s_axi_rvalid||s_axi_rready)&&s_axi_aresetn;
+    reg mask_read_pending;
+    assign s_axi_arready=(!s_axi_rvalid||s_axi_rready)&&!mask_read_pending&&s_axi_aresetn;
     reg [1:0] enables;
     reg [15:0] yaw_shadow,pitch_shadow,yaw_min,yaw_max,pitch_min,pitch_max,yaw_center,pitch_center;
     reg commit;
@@ -53,6 +58,37 @@ module pan_tilt_ctrl #(
     wire [31:0] next_frame=live_frame+(result_pulse?32'd1:32'd0);
     wire [31:0] next_flags=frame_error ? {29'd0,(live_flags[2]|result_pulse),1'b1,1'b0} :
                            (result_pulse?{29'd0,1'b1,1'b0,bbox_valid}:live_flags);
+    localparam integer MASK_WIDTH=IMAGE_WIDTH/MASK_BLOCK,MASK_HEIGHT=IMAGE_HEIGHT/MASK_BLOCK;
+    localparam integer MASK_WORDS=(MASK_WIDTH*MASK_HEIGHT+31)/32;
+    reg mask_acquire,mask_release;
+    wire mask_locked,mask_live_error;
+    wire [31:0] mask_read_data,mask_snap_frame,mask_snap_flags,mask_snap_age,mask_snap_errors;
+    wire [31:0] mask_live_frame,mask_live_age,mask_errors,mask_snapshot_current_age;
+    wire mask_read_access=COMPONENT_MODE&&mask_locked&&s_axi_araddr>='h200&&
+        s_axi_araddr<('h200+4*MASK_WORDS)&&s_axi_araddr[1:0]==0;
+    wire [9:0] mask_read_index=(s_axi_araddr-'h200)>>2;
+    generate if(COMPONENT_MODE) begin:component_store
+        blue_mask_store #(.IMAGE_WIDTH(IMAGE_WIDTH),.IMAGE_HEIGHT(IMAGE_HEIGHT),.BLOCK(MASK_BLOCK)) masks(
+            .clk(s_axi_aclk),.resetn(s_axi_aresetn),.us_tick(us_div==TICKS_PER_US-1),
+            .frame_error(frame_error),.mask_start(mask_start),.mask_word_valid(mask_word_valid),
+            .mask_frame_done(mask_frame_done),.mask_word_address(mask_word_address),.mask_word_data(mask_word_data),
+            .acquire(mask_acquire),.release_snapshot(mask_release),
+            .read_enable(s_axi_arvalid&&s_axi_arready&&mask_read_access),.read_index(mask_read_index),
+            .read_data(mask_read_data),.locked(mask_locked),.snap_frame(mask_snap_frame),
+            .snap_flags(mask_snap_flags),.snap_age(mask_snap_age),.snap_errors(mask_snap_errors),
+            .live_frame(mask_live_frame),.live_age(mask_live_age),.error_count(mask_errors),
+            .live_error(mask_live_error),.snapshot_current_age(mask_snapshot_current_age));
+    end else begin:no_component_store
+        assign mask_locked=0;assign mask_live_error=0;assign mask_read_data=0;
+        assign mask_snap_frame=0;assign mask_snap_flags=0;assign mask_snap_age=0;assign mask_snap_errors=0;
+        assign mask_live_frame=0;assign mask_live_age=0;assign mask_errors=0;assign mask_snapshot_current_age=0;
+    end endgenerate
+    reg [31:0] cpu_shadow_x,cpu_shadow_y,cpu_shadow_count,cpu_shadow_frame,cpu_shadow_flags;
+    reg [31:0] cpu_active_x,cpu_active_y,cpu_active_frame,cpu_age,cpu_processing_us,cpu_detector_status;
+    reg cpu_valid;
+    assign display_bbox_valid=COMPONENT_MODE&&cpu_valid&&cpu_age<=250000&&!frame_error&&!mask_live_error;
+    assign display_xmin=cpu_active_x[15:0];assign display_xmax=cpu_active_x[31:16];
+    assign display_ymin=cpu_active_y[15:0];assign display_ymax=cpu_active_y[31:16];
     function [31:0] merge;
         input [31:0] old_value,new_value;input [3:0] strobes;integer i;
         begin for(i=0;i<4;i=i+1)merge[i*8+:8]=strobes[i]?new_value[i*8+:8]:old_value[i*8+:8];end
@@ -68,11 +104,16 @@ module pan_tilt_ctrl #(
             live_frame<=0;live_flags<=0;live_x<=0;live_y<=0;live_count<=0;age_us<=0;us_div<=0;error_count<=0;
             snap_frame<=0;snap_flags<=0;snap_x<=0;snap_y<=0;snap_count<=0;snap_age<=0;snap_sequence<=0;
             command_request<=0;command_ack<=0;app_status<=0;app_command_result<=0;
+            mask_read_pending<=0;mask_acquire<=0;mask_release<=0;
+            cpu_shadow_x<=0;cpu_shadow_y<=0;cpu_shadow_count<=0;cpu_shadow_frame<=0;cpu_shadow_flags<=0;
+            cpu_active_x<=0;cpu_active_y<=0;cpu_active_frame<=0;cpu_age<=32'hffffffff;cpu_valid<=0;
+            cpu_processing_us<=0;cpu_detector_status<=0;
             for(ci=0;ci<8;ci=ci+1)command_words[ci]<=0;
         end else begin
-            commit<=0;
+            commit<=0;mask_acquire<=0;mask_release<=0;
             if(us_div==TICKS_PER_US-1) begin
                 us_div<=0;if(age_us!=32'hffffffff)age_us<=age_us+1'b1;
+                if(cpu_age!=32'hffffffff)cpu_age<=cpu_age+1'b1;
             end else us_div<=us_div+1'b1;
             // result_pulse was registered with the bbox on the preceding edge:
             // consuming it here reads the updated coherent result, not the old frame.
@@ -82,6 +123,7 @@ module pan_tilt_ctrl #(
                 live_count<=blue_pixel_count;age_us<=0;
             end
             if(frame_error) begin live_flags<=next_flags;error_count<=error_count+1'b1;end
+            if(frame_error)cpu_valid<=0;
             if(s_axi_awvalid&&s_axi_awready)begin aw_full<=1;aw_address<=s_axi_awaddr;end
             if(s_axi_wvalid&&s_axi_wready)begin w_full<=1;w_data<=s_axi_wdata;w_strobes<=s_axi_wstrb;end
             if(s_axi_bvalid&&s_axi_bready)s_axi_bvalid<=0;
@@ -121,6 +163,28 @@ module pan_tilt_ctrl #(
                     end
                     'ha8:app_status<=merge(app_status,w_data,w_strobes);
                     'hac:app_command_result<=merge(app_command_result,w_data,w_strobes);
+                    'hd0:if(COMPONENT_MODE)begin
+                        if(w_strobes[0])begin mask_acquire<=w_data[0];mask_release<=!w_data[0];end
+                    end else s_axi_bresp<=2;
+                    'h100:if(COMPONENT_MODE)cpu_shadow_x<=merge(cpu_shadow_x,w_data,w_strobes);else s_axi_bresp<=2;
+                    'h104:if(COMPONENT_MODE)cpu_shadow_y<=merge(cpu_shadow_y,w_data,w_strobes);else s_axi_bresp<=2;
+                    'h108:if(COMPONENT_MODE)cpu_shadow_count<=merge(cpu_shadow_count,w_data,w_strobes);else s_axi_bresp<=2;
+                    'h10c:if(COMPONENT_MODE)cpu_shadow_frame<=merge(cpu_shadow_frame,w_data,w_strobes);else s_axi_bresp<=2;
+                    'h110:if(COMPONENT_MODE)cpu_shadow_flags<=merge(cpu_shadow_flags,w_data,w_strobes);else s_axi_bresp<=2;
+                    'h114:if(COMPONENT_MODE)begin
+                        if(w_strobes[0]&&w_data[0])begin
+                            cpu_active_x<=cpu_shadow_x;cpu_active_y<=cpu_shadow_y;cpu_active_frame<=cpu_shadow_frame;
+                            cpu_age<=mask_snapshot_current_age;
+                            // Error races invalidate rather than faulting the CPU's MMIO store.
+                            cpu_valid<=cpu_shadow_flags[0]&&mask_snap_flags==5&&
+                                cpu_shadow_frame==mask_snap_frame&&mask_errors==mask_snap_errors&&
+                                !frame_error&&!mask_live_error&&mask_snapshot_current_age<=250000&&
+                                cpu_shadow_x[15:0]<=cpu_shadow_x[31:16]&&cpu_shadow_x[31:16]<IMAGE_WIDTH&&
+                                cpu_shadow_y[15:0]<=cpu_shadow_y[31:16]&&cpu_shadow_y[31:16]<IMAGE_HEIGHT;
+                        end
+                    end else s_axi_bresp<=2;
+                    'h11c:if(COMPONENT_MODE)cpu_processing_us<=merge(cpu_processing_us,w_data,w_strobes);else s_axi_bresp<=2;
+                    'h120:if(COMPONENT_MODE)cpu_detector_status<=merge(cpu_detector_status,w_data,w_strobes);else s_axi_bresp<=2;
                     default:begin
                         if(aw_address>='h80&&aw_address<='h9c&&aw_address[1:0]==0&&command_request==command_ack)
                             command_words[aw_address[4:2]]<=merge(command_words[aw_address[4:2]],w_data,w_strobes);
@@ -132,7 +196,7 @@ module pan_tilt_ctrl #(
                 s_axi_rvalid<=1;s_axi_rresp<=0;
                 case(s_axi_araddr)
                   'h00:s_axi_rdata<=32'h50544c54;
-                  'h04:s_axi_rdata<=32'h00010000;
+                  'h04:s_axi_rdata<=COMPONENT_MODE?32'h00010100:32'h00010000;
                   'h08:s_axi_rdata<={30'd0,enables};
                   'h0c:s_axi_rdata<=yaw_shadow;'h10:s_axi_rdata<=pitch_shadow;
                   'h14:s_axi_rdata<=active_yaw;'h18:s_axi_rdata<=active_pitch;
@@ -155,12 +219,29 @@ module pan_tilt_ctrl #(
                   'hb4:s_axi_rdata<=yaw_high_ticks;'hb8:s_axi_rdata<=pitch_high_ticks;
                   'hbc:s_axi_rdata<=yaw_period_ticks;'hc0:s_axi_rdata<=pitch_period_ticks;
                   'hc4:s_axi_rdata<=yaw_rises;'hc8:s_axi_rdata<=pitch_rises;
+                  'hd0:s_axi_rdata<=COMPONENT_MODE?{31'd0,mask_locked}:0;
+                  'hd4:s_axi_rdata<=mask_snap_frame;'hd8:s_axi_rdata<=mask_snap_flags;
+                  'hdc:s_axi_rdata<=mask_snap_age;'he0:s_axi_rdata<=(MASK_HEIGHT<<16)|MASK_WIDTH;
+                  'he4:s_axi_rdata<=MASK_BLOCK;'he8:s_axi_rdata<=MASK_WORDS;
+                  'hec:s_axi_rdata<=mask_live_frame;'hf0:s_axi_rdata<=mask_live_error;
+                  'hf4:s_axi_rdata<=mask_live_age;'hf8:s_axi_rdata<=mask_errors;
+                  'hfc:s_axi_rdata<=COMPONENT_MODE?32'h43434c31:0;
+                  'h100:s_axi_rdata<=cpu_shadow_x;'h104:s_axi_rdata<=cpu_shadow_y;
+                  'h108:s_axi_rdata<=cpu_shadow_count;'h10c:s_axi_rdata<=cpu_active_frame;
+                  'h110:s_axi_rdata<=cpu_shadow_flags;'h114:s_axi_rdata<=0;
+                  'h118:s_axi_rdata<=display_bbox_valid;'h11c:s_axi_rdata<=cpu_processing_us;
+                  'h120:s_axi_rdata<=cpu_detector_status;
+                  'h124:s_axi_rdata<=mask_snap_errors;
                   default:begin
-                      if(s_axi_araddr>='h80&&s_axi_araddr<='h9c&&s_axi_araddr[1:0]==0)s_axi_rdata<=command_words[s_axi_araddr[4:2]];
+                      if(mask_read_access)begin s_axi_rvalid<=0;mask_read_pending<=1;end
+                      else if(s_axi_araddr>='h80&&s_axi_araddr<='h9c&&s_axi_araddr[1:0]==0)s_axi_rdata<=command_words[s_axi_araddr[4:2]];
                       else begin s_axi_rdata<=0;s_axi_rresp<=2;end
                   end
                 endcase
             end else if(s_axi_rvalid&&s_axi_rready)s_axi_rvalid<=0;
+            if(mask_read_pending)begin
+                mask_read_pending<=0;s_axi_rvalid<=1;s_axi_rdata<=mask_read_data;s_axi_rresp<=0;
+            end
         end
     end
 endmodule

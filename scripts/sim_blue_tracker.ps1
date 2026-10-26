@@ -8,11 +8,12 @@ try {
     $rtl = @(Get-ChildItem "$repo/rtl/blue_tracker/*.v" | ForEach-Object FullName)
     & "$VivadoBin/xvlog.bat" --sv @rtl "$repo/sim/blue_tracker/tb_axis_blue_tracker.sv"
     if ($LASTEXITCODE) { throw 'xvlog failed' }
-    foreach ($variant in @('default','single_pixel','cross','calibrated')) {
+    foreach ($variant in @('default','single_pixel','cross','calibrated','filtered')) {
         $top = 'tb_axis_blue_tracker'
         if ($variant -eq 'single_pixel') { $top = 'tb_single_pixel' }
         if ($variant -eq 'cross') { $top = 'tb_cross' }
         if ($variant -eq 'calibrated') { $top = 'tb_calibrated' }
+        if ($variant -eq 'filtered') { $top = 'tb_filtered' }
         $argsList = @($top,'-s',"tracker_$variant",'-timescale','1ns/1ps')
         & "$VivadoBin/xelab.bat" @argsList
         if ($LASTEXITCODE) { throw "xelab $variant failed" }

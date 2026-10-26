@@ -1,0 +1,15 @@
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/pan_tilt/xsim_script.tcl
+# xsim {pan_tilt} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS PAN_RTL checks=251 actual_100MHz_pulses=4
+$finish called at time : 83332001 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv" Line 105
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 10:38:45 2026...

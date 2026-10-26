@@ -2,16 +2,19 @@
 set pan_root [file normalize [file join [file dirname [info script]] ..]]
 set pan_out build/pan_tilt_tracking
 set pan_apply 0
+set pan_components 0
 for {set i 0} {$i<[llength $argv]} {incr i} {
     set k [lindex $argv $i]
-    if {$k eq "-apply"} {set pan_apply 1} elseif {$k eq "-out"} {
+    if {$k eq "-apply"} {set pan_apply 1} elseif {$k eq "-components"} {set pan_components 1} elseif {$k eq "-out"} {
         incr i;set pan_out [lindex $argv $i]
     } else {error "Unknown pan-tilt argument $k"}
 }
-puts "PAN PLAN: MODE2 800x480, blue=80/60/35 ratio=2 run=3 count=256 border=2 cross=0"
+puts "PAN PLAN: MODE2 800x480, blue=80/60/35 ratio=2 run=3 count=256 bbox_filter=2 border=2 cross=0"
 puts "PAN PLAN: new AXI-Lite 0x43C20000/4K; J4-3 U5 yaw, J4-4 T5 pitch, reset PWM OFF"
 if {!$pan_apply} {puts "Review only; use -apply -out build/<new-copy>";return}
-set argv [list -apply -out $pan_out -width 800 -height 480 -mode 2 -blue_min 80 -br_delta 60 -bg_delta 35 -red_ratio 2 -min_run 3 -min_pixels 256]
+set pan_filter [expr {$pan_components?0:2}]
+puts "PAN PLAN: component_mode=$pan_components mask200x120 triple-bank, PS shape/lock, selected-box feedback"
+set argv [list -apply -out $pan_out -width 800 -height 480 -mode 2 -blue_min 80 -br_delta 60 -bg_delta 35 -red_ratio 2 -min_run 3 -min_pixels 256 -bbox_filter $pan_filter -component_mode $pan_components]
 source [file join $pan_root scripts integrate_blue_tracker.tcl]
 set pan_folder [file normalize [file join $pan_root $pan_out]]
 set pan_ip [file join $pan_folder ip_repo pan_tilt_ctrl]
@@ -58,6 +61,7 @@ foreach seg [get_bd_addr_segs -of_objects [get_bd_addr_spaces processing_system7
 }
 set_property CONFIG.NUM_MI 5 [get_bd_cells ps7_0_axi_periph]
 create_bd_cell -type ip -vlnv user.org:user:pan_tilt_ctrl:1.0 pan_tilt_ctrl_0
+set_property -dict [list CONFIG.COMPONENT_MODE $pan_components CONFIG.MASK_BLOCK 4] [get_bd_cells pan_tilt_ctrl_0]
 connect_bd_intf_net [get_bd_intf_pins ps7_0_axi_periph/M04_AXI] [get_bd_intf_pins pan_tilt_ctrl_0/S_AXI]
 foreach pin {pan_tilt_ctrl_0/s_axi_aclk ps7_0_axi_periph/M04_ACLK} {
     connect_bd_net [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk] [get_bd_pins $pin]
@@ -67,6 +71,14 @@ foreach pin {pan_tilt_ctrl_0/s_axi_aresetn ps7_0_axi_periph/M04_ARESETN} {
 }
 foreach pin {bbox_valid result_pulse frame_error bbox_xmin bbox_xmax bbox_ymin bbox_ymax blue_pixel_count} {
     connect_bd_net [get_bd_pins axis_blue_tracker_0/$pin] [get_bd_pins pan_tilt_ctrl_0/$pin]
+}
+if {$pan_components} {
+    foreach pin {mask_start mask_word_valid mask_frame_done mask_word_address mask_word_data} {
+        connect_bd_net [get_bd_pins axis_blue_tracker_0/$pin] [get_bd_pins pan_tilt_ctrl_0/$pin]
+    }
+    foreach pin {display_bbox_valid display_xmin display_xmax display_ymin display_ymax} {
+        connect_bd_net [get_bd_pins pan_tilt_ctrl_0/$pin] [get_bd_pins axis_blue_tracker_0/$pin]
+    }
 }
 foreach pin {servo_yaw_pwm servo_pitch_pwm} {
     create_bd_port -dir O $pin
@@ -80,7 +92,7 @@ validate_bd_design
 save_bd_design
 write_bd_tcl [file join $pan_folder system_pan_tilt.tcl]
 set fp [open [file join $pan_folder pan_tilt_summary.txt] w]
-puts $fp "MODE2 800x480 BLUE_MIN=80 BR_DELTA=60 BG_DELTA=35 MIN_B_R_RATIO=2 MIN_BLUE_RUN=3 MIN_PIXELS=256 BORDER_WIDTH=2 CENTER_CROSS=0"
+puts $fp "MODE2 800x480 BLUE_MIN=80 BR_DELTA=60 BG_DELTA=35 MIN_B_R_RATIO=2 MIN_BLUE_RUN=3 MIN_PIXELS=256 BBOX_FILTER_SHIFT=$pan_filter BORDER_WIDTH=2 CENTER_CROSS=0 COMPONENT_MODE=$pan_components MASK_BLOCK=4 MASK_CELL_MIN=4"
 puts $fp "AXI-Lite address: [get_property OFFSET [get_bd_addr_segs processing_system7_0/Data/SEG_pan_tilt_ctrl_0_Reg]]; clock100MHz; reset disabled PWM"
 puts $fp "J4-3 U5 yaw; J4-4 T5 pitch; actual package/bank check during full implementation"
 close $fp

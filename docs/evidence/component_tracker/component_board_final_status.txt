@@ -1,0 +1,7 @@
+mode=auto frame=79725 valid=1 err=0 age=14770 bbox=357,419,241,264 ex=-12 ey=12 yaw=1367 pitch=1623 en=3 hold=0 limit=0 det=ready drop=0
+VISION mask_frame=79728 src_error=0 age=9207 errors=5082433 objects=1 candidates=1 locked=1 reason=ready process_us=7722 largest=72/16x6 cells
+mode=auto frame=79728 valid=1 err=0 age=20060 bbox=357,419,241,264 ex=-12 ey=12 yaw=1367 pitch=1623 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=79748 valid=1 err=0 age=21627 bbox=357,419,241,264 ex=-12 ey=12 yaw=1367 pitch=1623 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=79768 valid=1 err=0 age=23059 bbox=357,419,241,264 ex=-12 ey=12 yaw=1367 pitch=1623 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=79788 valid=1 err=0 age=24481 bbox=357,419,241,264 ex=-12 ey=12 yaw=1367 pitch=1623 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=79808 valid=1 err=0 age=26061 bbox=357,419,241,264 ex=-12 ey=12 yaw=1367 pitch=1623 en=3 hold=0 limit=0 det=ready drop=0

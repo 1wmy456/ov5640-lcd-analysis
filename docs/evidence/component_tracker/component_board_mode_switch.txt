@@ -1,0 +1,14 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=73606 valid=1 err=0 age=10065 bbox=359,446,214,283 ex=2 ey=8 yaw=1454 pitch=1556 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=73607 valid=1 err=0 age=25485 bbox=360,447,215,285 ex=3 ey=10 yaw=1454 pitch=1556 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=73627 valid=1 err=0 age=26909 bbox=368,459,221,292 ex=13 ey=16 yaw=1454 pitch=1556 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=73647 valid=1 err=0 age=28342 bbox=365,456,234,306 ex=10 ey=30 yaw=1454 pitch=1556 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=73667 valid=1 err=0 age=29763 bbox=357,452,248,322 ex=4 ey=45 yaw=1454 pitch=1556 en=3 hold=1 limit=0 det=ready drop=0
+mauto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+mode=auto frame=73712 valid=1 err=0 age=7786 bbox=349,444,252,323 ex=-4 ey=47 yaw=1454 pitch=1556 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=73728 valid=1 err=0 age=8917 bbox=352,444,249,320 ex=-2 ey=44 yaw=1454 pitch=1562 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=73748 valid=1 err=0 age=10492 bbox=341,436,256,329 ex=-12 ey=52 yaw=1454 pitch=1569 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=73768 valid=1 err=0 age=11924 bbox=348,446,261,336 ex=-3 ey=58 yaw=1454 pitch=1578 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=73788 valid=1 err=0 age=13344 bbox=349,448,276,351 ex=-2 ey=73 yaw=1454 pitch=1588 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=73807 valid=1 err=0 age=19768 bbox=345,447,272,346 ex=-4 ey=69 yaw=1454 pitch=1599 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=73827 valid=1 err=0 age=21351 bbox=351,453,240,317 ex=2 ey=38 yaw=1454 pitch=1607 en=3 hold=0 limit=0 det=ready drop=0
