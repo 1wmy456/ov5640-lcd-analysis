@@ -46,7 +46,7 @@ python scripts/pan_tilt_serial.py --port COM5 --command status --command vision 
 ./scripts/restore_component_calibration.ps1 -Port COM5 -EnableAuto
 ```
 
-固定接线：水平 J4-3/U5，俯仰 J4-4/T5；外部 5V 与板卡共地。本轮已按5μs小步、逐段现场确认，扩大为 yaw=1350～1650μs、中心1500、方向−1；pitch=1390～1650μs、中心1520、方向+1。增益0.3μs/(pixel·s)，限速25μs/s，死区±15px。未新增 PID。旧 `restore_pan_tilt_calibration.ps1` 保留原窄范围供回退使用。扩大范围仍有限，不能保证从任意云台姿态覆盖整个摄像头视野。
+固定接线：水平 J4-3/U5，俯仰 J4-4/T5；外部 5V 与板卡共地。已按5μs小步、逐段现场确认：yaw=1100～1650μs、中心1500、方向−1；pitch=1390～1650μs、中心1520、方向+1。水平下限在重新上电后的右侧目标复测中从1350逐段扩展至1100μs，记录见 `docs/evidence/component_tracker/YAW_RIGHT_RANGE.md`；水平上限和俯仰范围保持原标定值。增益0.3μs/(pixel·s)，限速25μs/s，死区±15px。未新增 PID。旧 `restore_pan_tilt_calibration.ps1` 保留原窄范围供回退使用。范围仍有限，不能保证从任意云台姿态覆盖整个摄像头视野。
 
 串口 115200 8N1、ASCII，每条命令以 CR/LF 结束：
 

@@ -1,0 +1,840 @@
+mode=auto frame=6176 valid=0 err=0 age=18344 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+VISION mask_frame=6179 src_error=0 age=13747 errors=0 objects=1 candidates=0 locked=0 reason=no_blob process_us=7697 largest=46/13x4 cells
+PWM_NET clk=100000000 flags=30f yaw high=141500 period=2000000 rises=6618 pitch high=155500 period=2000000 rises=6618 ticks; connector voltage unmeasured
+mode=auto frame=6187 valid=0 err=0 age=24189 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=6207 valid=0 err=0 age=25770 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=6227 valid=0 err=0 age=27194 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=6247 valid=0 err=0 age=28617 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=6267 valid=0 err=0 age=30052 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=6287 valid=0 err=0 age=31468 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1555 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=8083 valid=1 err=0 age=21341 bbox=683,751,197,248 ex=317 ey=-18 yaw=1350 pitch=1477 en=3 hold=0 limit=1 det=ready drop=0
+VISION mask_frame=8086 src_error=0 age=3918 errors=0 objects=2 candidates=1 locked=1 reason=ready process_us=7754 largest=180/17x13 cells
+manual/hold: PWM enable and position retained
+mode=manual frame=8088 valid=1 err=0 age=16634 bbox=684,751,197,248 ex=317 ey=-18 yaw=1350 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=8108 valid=1 err=0 age=18055 bbox=684,753,193,248 ex=318 ey=-20 yaw=1350 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=8128 valid=1 err=0 age=19480 bbox=684,755,196,248 ex=319 ey=-18 yaw=1350 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=8148 valid=1 err=0 age=21058 bbox=686,755,196,251 ex=320 ey=-17 yaw=1350 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=8167 valid=1 err=0 age=27480 bbox=688,755,196,251 ex=321 ey=-17 yaw=1350 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=9799 valid=1 err=0 age=22481 bbox=740,799,170,228 ex=369 ey=-41 yaw=1350 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1300 1650
+yaw limits=1300..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1345
+TX step yaw -5
+mode=manual frame=9808 valid=1 err=0 age=18060 bbox=740,799,172,228 ex=369 ey=-40 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=9828 valid=1 err=0 age=19480 bbox=717,785,183,238 ex=351 ey=-30 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1340
+TX step yaw -5
+mode=manual frame=9848 valid=1 err=0 age=21060 bbox=701,768,184,239 ex=334 ey=-29 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1335
+TX step yaw -5
+mode=manual frame=9868 valid=1 err=0 age=22481 bbox=699,766,184,239 ex=332 ey=-29 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=9888 valid=1 err=0 age=23911 bbox=689,756,184,239 ex=322 ey=-29 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1330
+TX step yaw -5
+mode=manual frame=9908 valid=1 err=0 age=25481 bbox=681,748,181,233 ex=314 ey=-33 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=9928 valid=1 err=0 age=26907 bbox=684,751,174,228 ex=317 ey=-39 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1325
+TX step yaw -5
+mode=manual frame=9948 valid=1 err=0 age=28333 bbox=697,764,166,219 ex=330 ey=-48 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1320
+TX step yaw -5
+mode=manual frame=9968 valid=1 err=0 age=29770 bbox=765,799,145,191 ex=382 ey=-72 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=9988 valid=0 err=0 age=31184 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=-5 us requested=1315
+TX step yaw -5
+mode=manual frame=10008 valid=1 err=0 age=32511 bbox=703,760,113,164 ex=331 ey=-102 yaw=1315 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1310
+TX step yaw -5
+mode=manual frame=10028 valid=1 err=0 age=13921 bbox=501,557,96,141 ex=129 ey=-122 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=10048 valid=1 err=0 age=15489 bbox=526,587,125,175 ex=156 ey=-90 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1305
+TX step yaw -5
+mode=manual frame=10068 valid=1 err=0 age=16917 bbox=527,594,158,212 ex=160 ey=-55 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=10088 valid=1 err=0 age=18346 bbox=475,534,21,71 ex=104 ey=-194 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1300
+TX status
+mode=manual frame=10108 valid=1 err=0 age=19770 bbox=521,582,63,114 ex=151 ey=-152 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=10122 valid=1 err=0 age=20774 bbox=536,599,91,145 ex=167 ey=-122 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=130000 period=2000000 rises=11546 pitch high=147700 period=2000000 rises=11546 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=12210 valid=1 err=0 age=11916 bbox=680,744,172,224 ex=312 ey=-42 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1300 1650
+yaw limits=1300..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1305
+TX step yaw 5
+mode=manual frame=12227 valid=1 err=0 age=8062 bbox=680,744,172,224 ex=312 ey=-42 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12247 valid=1 err=0 age=9495 bbox=680,745,172,224 ex=312 ey=-42 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1310
+TX step yaw 5
+mode=manual frame=12267 valid=1 err=0 age=11062 bbox=684,751,172,224 ex=317 ey=-42 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12287 valid=1 err=0 age=12491 bbox=688,751,169,224 ex=319 ey=-44 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12307 valid=1 err=0 age=13916 bbox=685,751,169,224 ex=318 ey=-44 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1315
+TX step yaw 5
+mode=manual frame=12326 valid=1 err=0 age=20488 bbox=700,767,172,224 ex=333 ey=-42 yaw=1315 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12346 valid=1 err=0 age=21915 bbox=700,766,172,227 ex=333 ey=-41 yaw=1315 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1320
+TX step yaw 5
+mode=manual frame=12366 valid=1 err=0 age=23340 bbox=700,767,172,227 ex=333 ey=-41 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12386 valid=1 err=0 age=24769 bbox=700,767,172,227 ex=333 ey=-41 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1325
+TX step yaw 5
+mode=manual frame=12406 valid=1 err=0 age=26341 bbox=700,767,173,227 ex=333 ey=-40 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12426 valid=1 err=0 age=27763 bbox=705,772,173,227 ex=338 ey=-40 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12446 valid=1 err=0 age=29194 bbox=705,772,173,225 ex=338 ey=-41 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1330
+TX step yaw 5
+mode=manual frame=12466 valid=1 err=0 age=30618 bbox=712,779,173,227 ex=345 ey=-40 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12486 valid=1 err=0 age=32039 bbox=712,779,176,227 ex=345 ey=-39 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1335
+TX step yaw 5
+mode=manual frame=12507 valid=1 err=0 age=8344 bbox=719,785,176,227 ex=352 ey=-39 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12527 valid=1 err=0 age=9774 bbox=720,787,176,227 ex=353 ey=-39 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12547 valid=1 err=0 age=11345 bbox=720,787,176,227 ex=353 ey=-39 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1340
+TX step yaw 5
+mode=manual frame=12567 valid=1 err=0 age=12776 bbox=740,799,176,227 ex=369 ey=-39 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12587 valid=1 err=0 age=14203 bbox=739,799,176,229 ex=369 ey=-38 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1345
+TX step yaw 5
+mode=manual frame=12606 valid=1 err=0 age=20773 bbox=744,799,176,228 ex=371 ey=-38 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12626 valid=1 err=0 age=22197 bbox=744,799,176,231 ex=371 ey=-37 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12646 valid=1 err=0 age=23628 bbox=744,799,177,231 ex=371 ey=-36 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1350
+TX status
+mode=manual frame=12666 valid=1 err=0 age=25055 bbox=754,799,180,231 ex=376 ey=-35 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=12686 valid=1 err=0 age=26621 bbox=756,799,177,231 ex=377 ey=-36 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=12695 valid=1 err=0 age=22201 bbox=756,799,177,231 ex=377 ey=-36 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=135000 period=2000000 rises=14763 pitch high=147700 period=2000000 rises=14763 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=13276 valid=1 err=0 age=18909 bbox=753,799,181,232 ex=376 ey=-34 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX limits yaw 1300 1650
+yaw limits=1300..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1345
+TX step yaw -5
+mode=manual frame=13286 valid=1 err=0 age=29764 bbox=753,799,181,232 ex=376 ey=-34 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13306 valid=1 err=0 age=31185 bbox=753,799,181,235 ex=376 ey=-32 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1340
+TX step yaw -5
+mode=manual frame=13326 valid=1 err=0 age=32491 bbox=753,799,181,235 ex=376 ey=-32 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13347 valid=1 err=0 age=8917 bbox=753,799,181,235 ex=376 ey=-32 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13367 valid=1 err=0 age=10499 bbox=753,799,181,235 ex=376 ey=-32 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1335
+TX step yaw -5
+mode=manual frame=13387 valid=1 err=0 age=11922 bbox=737,799,181,235 ex=368 ey=-32 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13407 valid=1 err=0 age=13344 bbox=737,799,181,232 ex=368 ey=-34 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1330
+TX step yaw -5
+mode=manual frame=13427 valid=1 err=0 age=14768 bbox=732,797,181,232 ex=364 ey=-34 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13447 valid=1 err=0 age=16344 bbox=725,795,181,235 ex=360 ey=-32 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13467 valid=1 err=0 age=17801 bbox=725,792,181,235 ex=358 ey=-32 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1325
+TX step yaw -5
+mode=manual frame=13486 valid=1 err=0 age=23911 bbox=709,776,181,233 ex=342 ey=-33 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13506 valid=1 err=0 age=25482 bbox=709,776,181,233 ex=342 ey=-33 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1320
+TX step yaw -5
+mode=manual frame=13526 valid=1 err=0 age=26906 bbox=705,772,181,232 ex=338 ey=-34 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13546 valid=1 err=0 age=28335 bbox=705,772,180,232 ex=338 ey=-34 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13566 valid=1 err=0 age=29759 bbox=705,772,180,232 ex=338 ey=-34 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1315
+TX step yaw -5
+mode=manual frame=13586 valid=1 err=0 age=31188 bbox=693,760,180,232 ex=326 ey=-34 yaw=1315 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13606 valid=1 err=0 age=32500 bbox=693,760,180,234 ex=326 ey=-33 yaw=1315 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1310
+TX step yaw -5
+mode=manual frame=13627 valid=1 err=0 age=8918 bbox=689,756,180,234 ex=322 ey=-33 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13647 valid=1 err=0 age=10498 bbox=689,756,180,232 ex=322 ey=-34 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1305
+TX step yaw -5
+mode=manual frame=13667 valid=1 err=0 age=11922 bbox=692,759,178,232 ex=325 ey=-35 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13687 valid=1 err=0 age=13342 bbox=685,751,180,232 ex=318 ey=-34 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=13707 valid=1 err=0 age=14772 bbox=681,748,180,234 ex=314 ey=-33 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1300
+TX status
+mode=manual frame=13727 valid=1 err=0 age=16347 bbox=677,744,180,234 ex=310 ey=-33 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=13747 valid=1 err=0 age=17773 bbox=677,744,180,234 ex=310 ey=-33 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=13761 valid=1 err=0 age=28904 bbox=677,744,180,235 ex=310 ey=-33 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=130000 period=2000000 rises=16095 pitch high=147700 period=2000000 rises=16095 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=15835 valid=1 err=0 age=26916 bbox=697,768,180,235 ex=332 ey=-33 yaw=1300 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1250 1650
+yaw limits=1250..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1295
+TX step yaw -5
+mode=manual frame=15846 valid=1 err=0 age=32495 bbox=693,760,178,235 ex=326 ey=-34 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=15867 valid=1 err=0 age=8914 bbox=692,760,171,228 ex=326 ey=-41 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1290
+TX step yaw -5
+mode=manual frame=15887 valid=1 err=0 age=10063 bbox=685,756,168,224 ex=320 ey=-44 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1285
+TX step yaw -5
+mode=manual frame=15907 valid=1 err=0 age=11350 bbox=678,749,169,224 ex=313 ey=-44 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=15927 valid=1 err=0 age=12778 bbox=684,751,165,220 ex=317 ey=-48 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1280
+TX step yaw -5
+mode=manual frame=15947 valid=1 err=0 age=14201 bbox=681,748,168,223 ex=314 ey=-45 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1275
+TX step yaw -5
+mode=manual frame=15967 valid=1 err=0 age=15771 bbox=681,748,168,224 ex=314 ey=-44 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=15987 valid=1 err=0 age=17206 bbox=669,736,168,224 ex=302 ey=-44 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1270
+TX step yaw -5
+mode=manual frame=16007 valid=1 err=0 age=18629 bbox=665,732,168,227 ex=298 ey=-43 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=16027 valid=1 err=0 age=20060 bbox=665,732,168,224 ex=298 ey=-44 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1265
+TX step yaw -5
+mode=manual frame=16047 valid=1 err=0 age=21630 bbox=668,735,154,212 ex=301 ey=-57 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1260
+TX step yaw -5
+mode=manual frame=16067 valid=1 err=0 age=23051 bbox=670,737,153,208 ex=303 ey=-60 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=16087 valid=1 err=0 age=24483 bbox=665,732,156,211 ex=298 ey=-57 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1255
+TX step yaw -5
+mode=manual frame=16107 valid=1 err=0 age=26052 bbox=660,727,160,215 ex=293 ey=-53 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=16126 valid=1 err=0 age=32220 bbox=670,735,153,209 ex=302 ey=-59 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1250
+TX status
+mode=manual frame=16147 valid=1 err=0 age=8353 bbox=660,727,156,211 ex=293 ey=-57 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=16160 valid=1 err=0 age=24191 bbox=657,724,154,211 ex=290 ey=-58 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=125000 period=2000000 rises=19093 pitch high=147700 period=2000000 rises=19093 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=18635 valid=1 err=0 age=28047 bbox=677,748,224,283 ex=312 ey=13 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1250 1650
+yaw limits=1250..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1255
+TX step yaw 5
+mode=manual frame=18647 valid=1 err=0 age=28904 bbox=677,748,224,283 ex=312 ey=13 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18667 valid=1 err=0 age=30330 bbox=676,747,224,280 ex=311 ey=12 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18687 valid=1 err=0 age=31754 bbox=673,747,221,280 ex=310 ey=10 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1260
+TX step yaw 5
+mode=manual frame=18708 valid=1 err=0 age=7822 bbox=673,747,221,280 ex=310 ey=10 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18728 valid=1 err=0 age=9252 bbox=677,750,224,282 ex=313 ey=13 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18748 valid=1 err=0 age=10788 bbox=677,748,225,284 ex=312 ey=14 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1265
+TX step yaw 5
+mode=manual frame=18768 valid=1 err=0 age=12227 bbox=688,759,228,287 ex=323 ey=17 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18787 valid=1 err=0 age=18671 bbox=686,759,225,284 ex=322 ey=14 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18807 valid=1 err=0 age=20111 bbox=685,759,225,284 ex=322 ey=14 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1270
+TX step yaw 5
+mode=manual frame=18827 valid=1 err=0 age=21643 bbox=685,759,225,284 ex=322 ey=14 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18847 valid=1 err=0 age=23087 bbox=685,759,228,287 ex=322 ey=17 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18867 valid=1 err=0 age=24194 bbox=688,759,228,287 ex=323 ey=17 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1275
+TX step yaw 5
+mode=manual frame=18887 valid=1 err=0 age=25776 bbox=696,767,228,287 ex=331 ey=17 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18907 valid=1 err=0 age=27192 bbox=693,764,228,287 ex=328 ey=17 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18927 valid=1 err=0 age=28621 bbox=693,767,225,284 ex=330 ey=14 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1280
+TX step yaw 5
+mode=manual frame=18947 valid=1 err=0 age=30043 bbox=700,775,228,287 ex=337 ey=17 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18967 valid=1 err=0 age=31475 bbox=701,775,228,287 ex=338 ey=17 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=18988 valid=1 err=0 age=7777 bbox=701,775,228,287 ex=338 ey=17 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1285
+TX step yaw 5
+mode=manual frame=19008 valid=1 err=0 age=9207 bbox=704,779,228,287 ex=341 ey=17 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19028 valid=1 err=0 age=10780 bbox=705,779,228,287 ex=342 ey=17 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19048 valid=1 err=0 age=12203 bbox=705,779,228,287 ex=342 ey=17 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1290
+TX step yaw 5
+mode=manual frame=19068 valid=1 err=0 age=13632 bbox=720,795,229,287 ex=357 ey=18 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19087 valid=1 err=0 age=20058 bbox=720,792,229,287 ex=356 ey=18 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19107 valid=1 err=0 age=21630 bbox=720,795,228,287 ex=357 ey=17 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1295
+TX step yaw 5
+mode=manual frame=19127 valid=1 err=0 age=23057 bbox=728,799,228,287 ex=363 ey=17 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19147 valid=1 err=0 age=24482 bbox=728,799,228,287 ex=363 ey=17 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19167 valid=1 err=0 age=26062 bbox=728,799,228,287 ex=363 ey=17 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1300
+TX status
+mode=manual frame=19187 valid=1 err=0 age=27481 bbox=729,799,232,291 ex=364 ey=21 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=19207 valid=1 err=0 age=28906 bbox=731,799,232,291 ex=365 ey=21 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19227 valid=1 err=0 age=30331 bbox=729,799,229,288 ex=364 ey=18 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19239 valid=1 err=0 age=31190 bbox=729,799,229,288 ex=364 ey=18 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=130000 period=2000000 rises=22942 pitch high=147700 period=2000000 rises=22942 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=19620 valid=1 err=0 age=13634 bbox=732,799,232,291 ex=365 ey=21 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX limits yaw 1250 1650
+yaw limits=1250..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1295
+TX step yaw -5
+mode=manual frame=19628 valid=1 err=0 age=14203 bbox=732,799,232,291 ex=365 ey=21 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19648 valid=1 err=0 age=15772 bbox=729,799,229,288 ex=364 ey=18 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19667 valid=1 err=0 age=22204 bbox=729,799,229,288 ex=364 ey=18 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1290
+TX step yaw -5
+mode=manual frame=19687 valid=1 err=0 age=23621 bbox=729,799,229,288 ex=364 ey=18 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19707 valid=1 err=0 age=25056 bbox=729,799,229,288 ex=364 ey=18 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19727 valid=1 err=0 age=26621 bbox=729,799,230,291 ex=364 ey=20 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1285
+TX step yaw -5
+mode=manual frame=19747 valid=1 err=0 age=28051 bbox=722,796,232,291 ex=359 ey=21 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19767 valid=1 err=0 age=29473 bbox=721,796,229,289 ex=358 ey=19 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19787 valid=1 err=0 age=30904 bbox=724,799,225,284 ex=361 ey=14 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1280
+TX step yaw -5
+mode=manual frame=19807 valid=1 err=0 age=32226 bbox=721,794,226,287 ex=357 ey=16 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19828 valid=1 err=0 age=8640 bbox=721,792,228,287 ex=356 ey=17 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19848 valid=1 err=0 age=10065 bbox=721,792,228,287 ex=356 ey=17 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1275
+TX step yaw -5
+mode=manual frame=19868 valid=1 err=0 age=11631 bbox=710,785,228,287 ex=347 ey=17 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19888 valid=1 err=0 age=13062 bbox=709,780,228,287 ex=344 ey=17 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19908 valid=1 err=0 age=14485 bbox=705,780,225,286 ex=342 ey=15 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1270
+TX step yaw -5
+mode=manual frame=19928 valid=1 err=0 age=16059 bbox=701,776,225,284 ex=338 ey=14 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19947 valid=1 err=0 age=22481 bbox=703,776,228,287 ex=339 ey=17 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=19967 valid=1 err=0 age=23911 bbox=704,776,228,287 ex=340 ey=17 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1265
+TX step yaw -5
+mode=manual frame=19987 valid=1 err=0 age=25483 bbox=702,774,228,287 ex=338 ey=17 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=20007 valid=1 err=0 age=26912 bbox=697,772,228,287 ex=334 ey=17 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=20027 valid=1 err=0 age=28333 bbox=697,772,228,287 ex=334 ey=17 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1260
+TX step yaw -5
+mode=manual frame=20047 valid=1 err=0 age=29760 bbox=697,770,228,287 ex=333 ey=17 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=20067 valid=1 err=0 age=31185 bbox=689,764,228,287 ex=326 ey=17 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=20087 valid=1 err=0 age=32503 bbox=689,760,228,287 ex=324 ey=17 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1255
+TX step yaw -5
+mode=manual frame=20108 valid=1 err=0 age=8922 bbox=683,758,225,284 ex=320 ey=14 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=20128 valid=1 err=0 age=10490 bbox=684,755,228,287 ex=319 ey=17 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=20148 valid=1 err=0 age=11921 bbox=684,755,228,287 ex=319 ey=17 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1250
+TX status
+mode=manual frame=20168 valid=1 err=0 age=13350 bbox=682,755,228,287 ex=318 ey=17 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=20188 valid=1 err=0 age=14779 bbox=681,755,228,287 ex=318 ey=17 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=20208 valid=1 err=0 age=16344 bbox=681,755,228,285 ex=318 ey=16 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=20225 valid=1 err=0 age=12492 bbox=681,754,225,284 ex=317 ey=14 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=125000 period=2000000 rises=24174 pitch high=147700 period=2000000 rises=24174 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=22490 valid=1 err=0 age=9205 bbox=733,799,225,292 ex=366 ey=18 yaw=1250 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1200 1650
+yaw limits=1200..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1245
+TX step yaw -5
+mode=manual frame=22508 valid=1 err=0 age=20488 bbox=723,799,222,288 ex=361 ey=15 yaw=1245 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22528 valid=1 err=0 age=21910 bbox=724,799,224,291 ex=361 ey=17 yaw=1245 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1240
+TX step yaw -5
+mode=manual frame=22548 valid=1 err=0 age=23336 bbox=717,799,228,295 ex=358 ey=21 yaw=1240 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22567 valid=1 err=0 age=29765 bbox=717,799,232,295 ex=358 ey=23 yaw=1240 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1235
+TX step yaw -5
+mode=manual frame=22587 valid=1 err=0 age=31188 bbox=717,799,232,295 ex=358 ey=23 yaw=1235 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22607 valid=1 err=0 age=32497 bbox=701,784,230,296 ex=342 ey=23 yaw=1235 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22628 valid=1 err=0 age=8921 bbox=697,783,229,292 ex=340 ey=20 yaw=1235 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1230
+TX step yaw -5
+mode=manual frame=22648 valid=1 err=0 age=10064 bbox=693,779,229,292 ex=336 ey=20 yaw=1230 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22668 valid=1 err=0 age=11348 bbox=693,779,232,295 ex=336 ey=23 yaw=1230 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1225
+TX step yaw -5
+mode=manual frame=22688 valid=1 err=0 age=12776 bbox=693,777,232,297 ex=335 ey=24 yaw=1225 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22708 valid=1 err=0 age=14201 bbox=688,771,233,296 ex=329 ey=24 yaw=1225 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22728 valid=1 err=0 age=15777 bbox=688,771,233,299 ex=329 ey=26 yaw=1225 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1220
+TX step yaw -5
+mode=manual frame=22748 valid=1 err=0 age=17198 bbox=681,764,233,296 ex=322 ey=24 yaw=1220 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22768 valid=1 err=0 age=18629 bbox=681,764,229,296 ex=322 ey=22 yaw=1220 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1215
+TX step yaw -5
+mode=manual frame=22788 valid=1 err=0 age=20058 bbox=663,746,229,292 ex=304 ey=20 yaw=1215 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22808 valid=1 err=0 age=21625 bbox=661,744,229,295 ex=302 ey=22 yaw=1215 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22828 valid=1 err=0 age=23051 bbox=664,747,232,295 ex=305 ey=23 yaw=1215 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1210
+TX step yaw -5
+mode=manual frame=22848 valid=1 err=0 age=24482 bbox=661,744,232,295 ex=302 ey=23 yaw=1210 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22867 valid=1 err=0 age=30899 bbox=661,743,232,295 ex=302 ey=23 yaw=1210 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1205
+TX step yaw -5
+mode=manual frame=22887 valid=1 err=0 age=32221 bbox=645,728,229,293 ex=286 ey=21 yaw=1205 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=22908 valid=1 err=0 age=8344 bbox=645,728,228,291 ex=286 ey=19 yaw=1205 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1200
+TX status
+mode=manual frame=22928 valid=1 err=0 age=9496 bbox=645,728,228,291 ex=286 ey=19 yaw=1200 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=22948 valid=1 err=0 age=10781 bbox=637,720,232,295 ex=278 ey=23 yaw=1200 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=22968 valid=1 err=0 age=12203 bbox=637,720,232,295 ex=278 ey=23 yaw=1200 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=22975 valid=1 err=0 age=17778 bbox=637,720,232,295 ex=278 ey=23 yaw=1200 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=120000 period=2000000 rises=27611 pitch high=147700 period=2000000 rises=27611 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=24607 valid=1 err=0 age=16061 bbox=660,743,237,296 ex=301 ey=26 yaw=1200 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1150 1650
+yaw limits=1150..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1195
+TX step yaw -5
+mode=manual frame=24608 valid=1 err=0 age=31178 bbox=660,743,237,296 ex=301 ey=26 yaw=1195 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24628 valid=1 err=0 age=32516 bbox=660,743,233,296 ex=301 ey=24 yaw=1195 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24649 valid=1 err=0 age=8923 bbox=661,740,225,288 ex=300 ey=16 yaw=1195 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1190
+TX step yaw -5
+mode=manual frame=24669 valid=1 err=0 age=10494 bbox=657,736,222,284 ex=296 ey=13 yaw=1190 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24688 valid=1 err=0 age=16919 bbox=655,736,228,290 ex=295 ey=19 yaw=1190 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1185
+TX step yaw -5
+mode=manual frame=24708 valid=1 err=0 age=18346 bbox=651,732,236,299 ex=291 ey=27 yaw=1185 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24728 valid=1 err=0 age=19771 bbox=649,732,238,300 ex=290 ey=29 yaw=1185 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24748 valid=1 err=0 age=21349 bbox=655,738,233,294 ex=296 ey=23 yaw=1185 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1180
+TX step yaw -5
+mode=manual frame=24768 valid=1 err=0 age=22772 bbox=632,714,235,295 ex=273 ey=25 yaw=1180 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24788 valid=1 err=0 age=24191 bbox=625,704,236,295 ex=264 ey=25 yaw=1180 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1175
+TX step yaw -5
+mode=manual frame=24808 valid=1 err=0 age=25766 bbox=628,707,240,303 ex=267 ey=31 yaw=1175 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24828 valid=1 err=0 age=27193 bbox=625,707,240,300 ex=266 ey=30 yaw=1175 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24848 valid=1 err=0 age=28618 bbox=625,704,241,303 ex=264 ey=32 yaw=1175 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1170
+TX step yaw -5
+mode=manual frame=24868 valid=1 err=0 age=30044 bbox=617,700,237,297 ex=258 ey=27 yaw=1170 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24888 valid=1 err=0 age=31470 bbox=617,696,233,296 ex=256 ey=24 yaw=1170 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1165
+TX step yaw -5
+mode=manual frame=24909 valid=1 err=0 age=7781 bbox=616,696,236,296 ex=256 ey=26 yaw=1165 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24929 valid=1 err=0 age=9203 bbox=624,703,231,291 ex=263 ey=21 yaw=1165 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1160
+TX step yaw -5
+mode=manual frame=24949 valid=1 err=0 age=10785 bbox=619,699,232,295 ex=259 ey=23 yaw=1160 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24968 valid=1 err=0 age=17204 bbox=605,684,232,292 ex=244 ey=22 yaw=1160 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=24988 valid=1 err=0 age=18630 bbox=601,680,232,292 ex=240 ey=22 yaw=1160 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1155
+TX step yaw -5
+mode=manual frame=25008 valid=1 err=0 age=20058 bbox=596,675,229,288 ex=235 ey=18 yaw=1155 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=25028 valid=1 err=0 age=21625 bbox=597,676,232,292 ex=236 ey=22 yaw=1155 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1150
+TX status
+mode=manual frame=25048 valid=1 err=0 age=23057 bbox=597,677,232,295 ex=237 ey=23 yaw=1150 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=25068 valid=1 err=0 age=24480 bbox=593,672,232,295 ex=232 ey=23 yaw=1150 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=25088 valid=1 err=0 age=26055 bbox=593,672,232,292 ex=232 ey=22 yaw=1150 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=25092 valid=1 err=0 age=26346 bbox=593,672,232,292 ex=232 ey=22 yaw=1150 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=115000 period=2000000 rises=30257 pitch high=147700 period=2000000 rises=30257 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=35934 valid=1 err=0 age=13631 bbox=446,517,352,400 ex=81 ey=136 yaw=1150 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw -5
+yaw step=-5 us requested=1145
+TX step yaw -5
+mode=manual frame=35937 valid=1 err=0 age=18903 bbox=445,514,352,400 ex=79 ey=136 yaw=1145 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=35956 valid=1 err=0 age=20489 bbox=441,512,349,400 ex=76 ey=134 yaw=1145 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=35975 valid=1 err=0 age=21910 bbox=440,511,352,399 ex=75 ey=135 yaw=1145 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1140
+TX step yaw -5
+mode=manual frame=35994 valid=0 err=1 age=48066 bbox=424,492,352,402 ex=58 ey=137 yaw=1140 pitch=1477 en=3 hold=1 limit=0 det=frame_error drop=0
+mode=manual frame=36013 valid=1 err=0 age=29478 bbox=421,491,352,400 ex=56 ey=136 yaw=1140 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1135
+TX step yaw -5
+mode=manual frame=36033 valid=1 err=0 age=30901 bbox=421,491,345,396 ex=56 ey=130 yaw=1135 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36053 valid=1 err=0 age=32231 bbox=421,491,345,396 ex=56 ey=130 yaw=1135 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36073 valid=1 err=0 age=8352 bbox=420,491,346,395 ex=55 ey=130 yaw=1135 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1130
+TX step yaw -5
+mode=manual frame=36092 valid=1 err=0 age=9503 bbox=396,463,336,383 ex=29 ey=119 yaw=1130 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36111 valid=1 err=0 age=11067 bbox=407,475,338,386 ex=41 ey=122 yaw=1130 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1125
+TX step yaw -5
+mode=manual frame=36131 valid=1 err=0 age=12490 bbox=409,480,342,393 ex=44 ey=127 yaw=1125 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36151 valid=1 err=0 age=13918 bbox=412,483,339,392 ex=47 ey=125 yaw=1125 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1120
+TX step yaw -5
+mode=manual frame=36171 valid=1 err=0 age=15497 bbox=423,497,341,395 ex=60 ey=128 yaw=1125 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36190 valid=0 err=0 age=16771 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1120 pitch=1477 en=3 hold=1 limit=0 det=acquire drop=0
+mode=manual frame=36209 valid=1 err=0 age=18347 bbox=414,487,344,395 ex=50 ey=129 yaw=1120 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1115
+TX step yaw -5
+mode=manual frame=36229 valid=1 err=0 age=19766 bbox=404,476,344,395 ex=40 ey=129 yaw=1115 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36248 valid=1 err=0 age=21349 bbox=404,479,341,395 ex=41 ey=128 yaw=1115 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1110
+TX step yaw -5
+mode=manual frame=36268 valid=1 err=0 age=22770 bbox=410,482,337,392 ex=46 ey=124 yaw=1110 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36287 valid=1 err=0 age=23913 bbox=427,506,321,377 ex=66 ey=109 yaw=1110 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36305 valid=1 err=0 age=30334 bbox=464,549,295,358 ex=106 ey=86 yaw=1110 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1105
+TX step yaw -5
+mode=manual frame=36325 valid=1 err=0 age=31758 bbox=483,574,313,379 ex=128 ey=106 yaw=1105 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=36346 valid=1 err=0 age=8058 bbox=422,530,348,422 ex=76 ey=145 yaw=1105 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=-5 us requested=1100
+TX status
+mode=manual frame=36366 valid=1 err=0 age=9206 bbox=432,554,354,438 ex=93 ey=156 yaw=1100 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX pwm
+mode=manual frame=36386 valid=1 err=0 age=10492 bbox=573,675,285,368 ex=224 ey=86 yaw=1100 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=36406 valid=1 err=0 age=11921 bbox=570,666,223,302 ex=218 ey=22 yaw=1100 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+mode=manual frame=36407 valid=1 err=0 age=27202 bbox=571,667,224,303 ex=219 ey=23 yaw=1100 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=110000 period=2000000 rises=44430 pitch high=147700 period=2000000 rises=44430 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=39806 valid=1 err=0 age=32496 bbox=552,615,148,203 ex=183 ey=-65 yaw=1100 pitch=1477 en=3 hold=1 limit=1 det=ready drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1105
+TX step yaw 5
+mode=manual frame=39822 valid=1 err=0 age=13633 bbox=549,612,148,203 ex=180 ey=-65 yaw=1105 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1110
+TX step yaw 5
+mode=manual frame=39842 valid=1 err=0 age=15080 bbox=552,615,152,203 ex=183 ey=-63 yaw=1110 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1115
+TX step yaw 5
+mode=manual frame=39861 valid=1 err=0 age=21631 bbox=556,619,149,203 ex=187 ey=-64 yaw=1115 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1120
+TX step yaw 5
+mode=manual frame=39881 valid=1 err=0 age=23054 bbox=525,586,132,183 ex=155 ey=-83 yaw=1120 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1125
+TX step yaw 5
+mode=manual frame=39901 valid=1 err=0 age=24483 bbox=510,569,124,175 ex=139 ey=-91 yaw=1125 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1130
+TX step yaw 5
+mode=manual frame=39921 valid=1 err=0 age=26057 bbox=511,568,143,194 ex=139 ey=-72 yaw=1130 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1135
+TX step yaw 5
+mode=manual frame=39941 valid=1 err=0 age=27478 bbox=614,674,160,211 ex=244 ey=-55 yaw=1135 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1140
+TX step yaw 5
+mode=manual frame=39961 valid=1 err=0 age=28906 bbox=643,703,160,212 ex=273 ey=-54 yaw=1140 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1145
+TX step yaw 5
+mode=manual frame=39981 valid=1 err=0 age=30335 bbox=635,694,160,211 ex=264 ey=-55 yaw=1145 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1150
+TX status
+mode=manual frame=40001 valid=1 err=0 age=31761 bbox=646,703,155,206 ex=274 ey=-60 yaw=1150 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=40012 valid=1 err=0 age=17484 bbox=658,715,156,207 ex=286 ey=-59 yaw=1150 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=115000 period=2000000 rises=49016 pitch high=147700 period=2000000 rises=49016 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=40035 valid=1 err=0 age=24197 bbox=684,743,171,222 ex=313 ey=-44 yaw=1150 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1155
+TX step yaw 5
+mode=manual frame=40042 valid=1 err=0 age=9496 bbox=684,740,170,221 ex=312 ey=-45 yaw=1155 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1160
+TX step yaw 5
+mode=manual frame=40062 valid=1 err=0 age=11070 bbox=650,712,172,223 ex=281 ey=-43 yaw=1160 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1165
+TX step yaw 5
+mode=manual frame=40082 valid=1 err=0 age=12490 bbox=621,684,176,228 ex=252 ey=-38 yaw=1165 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1170
+TX step yaw 5
+mode=manual frame=40102 valid=1 err=0 age=13919 bbox=619,677,170,220 ex=248 ey=-45 yaw=1170 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1175
+TX step yaw 5
+mode=manual frame=40122 valid=1 err=0 age=15493 bbox=590,648,180,231 ex=219 ey=-35 yaw=1175 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1180
+TX step yaw 5
+mode=manual frame=40141 valid=1 err=0 age=21915 bbox=591,653,194,245 ex=222 ey=-21 yaw=1180 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1185
+TX step yaw 5
+mode=manual frame=40161 valid=1 err=0 age=23337 bbox=596,658,194,245 ex=227 ey=-21 yaw=1185 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1190
+TX step yaw 5
+mode=manual frame=40181 valid=1 err=0 age=24765 bbox=604,667,196,247 ex=235 ey=-19 yaw=1190 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1195
+TX step yaw 5
+mode=manual frame=40201 valid=1 err=0 age=26336 bbox=734,791,187,238 ex=362 ey=-28 yaw=1195 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1200
+TX status
+mode=manual frame=40221 valid=1 err=0 age=27768 bbox=755,799,196,251 ex=377 ey=-17 yaw=1200 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=40241 valid=1 err=0 age=8920 bbox=555,613,192,239 ex=184 ey=-25 yaw=1200 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=120000 period=2000000 rises=49301 pitch high=147700 period=2000000 rises=49301 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=40263 valid=1 err=0 age=20777 bbox=556,619,196,243 ex=187 ey=-21 yaw=1200 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1205
+TX step yaw 5
+mode=manual frame=40281 valid=1 err=0 age=32035 bbox=560,619,199,247 ex=189 ey=-17 yaw=1205 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1210
+TX step yaw 5
+mode=manual frame=40302 valid=1 err=0 age=8349 bbox=568,631,200,247 ex=199 ey=-17 yaw=1210 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1215
+TX step yaw 5
+mode=manual frame=40322 valid=1 err=0 age=9776 bbox=576,635,200,247 ex=205 ey=-17 yaw=1215 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1220
+TX step yaw 5
+mode=manual frame=40340 valid=1 err=0 age=10778 bbox=592,654,197,247 ex=223 ey=-18 yaw=1220 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1225
+TX step yaw 5
+mode=manual frame=40360 valid=1 err=0 age=12211 bbox=604,663,197,244 ex=233 ey=-20 yaw=1225 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1230
+TX step yaw 5
+mode=manual frame=40380 valid=1 err=0 age=13634 bbox=624,687,196,247 ex=255 ey=-19 yaw=1230 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1235
+TX step yaw 5
+mode=manual frame=40400 valid=1 err=0 age=15063 bbox=628,691,197,247 ex=259 ey=-18 yaw=1235 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1240
+TX step yaw 5
+mode=manual frame=40420 valid=1 err=0 age=16628 bbox=636,699,197,248 ex=267 ey=-18 yaw=1240 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1245
+TX step yaw 5
+mode=manual frame=40439 valid=1 err=0 age=23055 bbox=640,699,200,248 ex=269 ey=-16 yaw=1245 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1250
+TX status
+mode=manual frame=40459 valid=1 err=0 age=24479 bbox=656,715,200,251 ex=285 ey=-15 yaw=1250 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=40467 valid=1 err=0 age=25057 bbox=656,715,200,251 ex=285 ey=-15 yaw=1250 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=30f yaw high=125000 period=2000000 rises=49588 pitch high=147700 period=2000000 rises=49588 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=40490 valid=1 err=0 age=31782 bbox=656,719,197,248 ex=287 ey=-18 yaw=1250 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1255
+TX step yaw 5
+mode=manual frame=40499 valid=1 err=0 age=27483 bbox=664,727,197,248 ex=295 ey=-18 yaw=1255 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1260
+TX step yaw 5
+mode=manual frame=40519 valid=1 err=0 age=28905 bbox=676,738,197,248 ex=307 ey=-18 yaw=1260 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1265
+TX step yaw 5
+mode=manual frame=40539 valid=1 err=0 age=30331 bbox=680,743,200,251 ex=311 ey=-15 yaw=1265 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1270
+TX step yaw 5
+mode=manual frame=40559 valid=1 err=0 age=31761 bbox=684,747,200,251 ex=315 ey=-15 yaw=1270 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1275
+TX step yaw 5
+mode=manual frame=40580 valid=1 err=0 age=8065 bbox=692,752,200,251 ex=322 ey=-15 yaw=1275 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1280
+TX step yaw 5
+mode=manual frame=40600 valid=1 err=0 age=9495 bbox=699,759,200,251 ex=329 ey=-15 yaw=1280 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1285
+TX step yaw 5
+mode=manual frame=40620 valid=1 err=0 age=11061 bbox=704,767,200,251 ex=335 ey=-15 yaw=1285 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1290
+TX step yaw 5
+mode=manual frame=40640 valid=1 err=0 age=12491 bbox=714,776,200,251 ex=345 ey=-15 yaw=1290 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1295
+TX step yaw 5
+mode=manual frame=40660 valid=1 err=0 age=13916 bbox=722,785,203,255 ex=353 ey=-11 yaw=1295 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1300
+TX status
+mode=manual frame=40680 valid=1 err=0 age=15494 bbox=727,789,204,255 ex=358 ey=-11 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=40696 valid=1 err=0 age=16636 bbox=728,791,204,255 ex=359 ey=-11 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=130000 period=2000000 rises=49873 pitch high=147700 period=2000000 rises=49873 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=40718 valid=1 err=0 age=28334 bbox=728,791,204,255 ex=359 ey=-11 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+mode=manual frame=40719 valid=1 err=0 age=23338 bbox=728,791,204,255 ex=359 ey=-11 yaw=1300 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1305
+TX step yaw 5
+mode=manual frame=40739 valid=1 err=0 age=24771 bbox=721,784,210,262 ex=352 ey=-4 yaw=1305 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1310
+TX step yaw 5
+mode=manual frame=40759 valid=1 err=0 age=26339 bbox=732,795,209,260 ex=363 ey=-6 yaw=1310 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1315
+TX step yaw 5
+mode=manual frame=40779 valid=1 err=0 age=27766 bbox=740,799,209,260 ex=369 ey=-6 yaw=1315 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1320
+TX step yaw 5
+mode=manual frame=40799 valid=1 err=0 age=29197 bbox=748,799,209,263 ex=373 ey=-4 yaw=1320 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1325
+TX step yaw 5
+mode=manual frame=40819 valid=1 err=0 age=30621 bbox=752,799,209,260 ex=375 ey=-6 yaw=1325 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1330
+TX step yaw 5
+mode=manual frame=40839 valid=1 err=0 age=32037 bbox=761,799,209,263 ex=380 ey=-4 yaw=1330 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1335
+TX step yaw 5
+mode=manual frame=40860 valid=1 err=0 age=8351 bbox=770,799,219,267 ex=384 ey=3 yaw=1335 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1340
+TX step yaw 5
+mode=manual frame=40880 valid=1 err=0 age=9778 bbox=752,799,382,423 ex=375 ey=162 yaw=1340 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1345
+TX step yaw 5
+mode=manual frame=40900 valid=0 err=0 age=11346 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1345 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1350
+TX status
+mode=manual frame=40920 valid=0 err=0 age=12775 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+TX pwm
+mode=manual frame=40925 valid=0 err=0 age=8073 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+PWM_NET clk=100000000 flags=f yaw high=135000 period=2000000 rises=50159 pitch high=147700 period=2000000 rises=50159 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=40948 valid=0 err=0 age=14483 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1350 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1355
+TX step yaw 5
+mode=manual frame=40960 valid=0 err=0 age=15488 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1355 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1360
+TX step yaw 5
+mode=manual frame=40980 valid=0 err=0 age=16914 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1360 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1365
+TX step yaw 5
+mode=manual frame=41000 valid=0 err=0 age=18347 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1365 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1370
+TX step yaw 5
+mode=manual frame=41019 valid=0 err=0 age=24762 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1370 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1375
+TX step yaw 5
+mode=manual frame=41039 valid=0 err=0 age=26341 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1375 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1380
+TX step yaw 5
+mode=manual frame=41059 valid=0 err=0 age=27765 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1380 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1385
+TX step yaw 5
+mode=manual frame=41079 valid=0 err=0 age=29194 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1385 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1390
+TX step yaw 5
+mode=manual frame=41099 valid=0 err=0 age=30615 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1390 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1395
+TX step yaw 5
+mode=manual frame=41119 valid=0 err=0 age=32035 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1395 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1400
+TX status
+mode=manual frame=41140 valid=0 err=0 age=8349 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1400 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+TX pwm
+mode=manual frame=41152 valid=0 err=0 age=29480 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1400 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+PWM_NET clk=100000000 flags=f yaw high=140000 period=2000000 rises=50444 pitch high=147700 period=2000000 rises=50444 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=41176 valid=0 err=0 age=11066 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1400 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1405
+TX step yaw 5
+mode=manual frame=41180 valid=0 err=0 age=11336 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1405 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1410
+TX step yaw 5
+mode=manual frame=41200 valid=0 err=0 age=12776 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1410 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1415
+TX step yaw 5
+mode=manual frame=41220 valid=0 err=0 age=14196 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1415 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1420
+TX step yaw 5
+mode=manual frame=41240 valid=0 err=0 age=15773 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1420 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1425
+TX step yaw 5
+mode=manual frame=41260 valid=0 err=0 age=17204 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1425 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1430
+TX step yaw 5
+mode=manual frame=41280 valid=0 err=0 age=18633 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1430 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1435
+TX step yaw 5
+mode=manual frame=41299 valid=0 err=0 age=25055 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1435 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1440
+TX step yaw 5
+mode=manual frame=41319 valid=0 err=0 age=26631 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1440 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+mode=manual frame=41339 valid=0 err=0 age=28050 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1440 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1445
+TX step yaw 5
+mode=manual frame=41359 valid=0 err=0 age=29483 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1445 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1450
+TX status
+mode=manual frame=41379 valid=0 err=0 age=30903 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1450 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+TX pwm
+mode=manual frame=41381 valid=0 err=0 age=21063 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1450 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+PWM_NET clk=100000000 flags=f yaw high=145000 period=2000000 rises=50729 pitch high=147700 period=2000000 rises=50729 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=41404 valid=0 err=0 age=27764 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1450 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+TX limits yaw 1100 1650
+yaw limits=1100..1650 us; verify again
+TX step yaw 5
+yaw step=5 us requested=1455
+TX step yaw 5
+mode=manual frame=41420 valid=0 err=0 age=8631 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1455 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1460
+TX step yaw 5
+mode=manual frame=41440 valid=1 err=0 age=10068 bbox=537,587,149,191 ex=162 ey=-70 yaw=1460 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1465
+TX step yaw 5
+mode=manual frame=41460 valid=1 err=0 age=11638 bbox=549,604,199,244 ex=176 ey=-19 yaw=1465 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1470
+TX step yaw 5
+mode=manual frame=41480 valid=0 err=0 age=13063 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1470 pitch=1477 en=3 hold=1 limit=0 det=no_blob drop=0
+yaw step=5 us requested=1475
+TX step yaw 5
+mode=manual frame=41500 valid=1 err=0 age=14493 bbox=497,540,216,253 ex=118 ey=-6 yaw=1475 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1480
+TX step yaw 5
+mode=manual frame=41520 valid=1 err=0 age=16065 bbox=358,403,224,263 ex=-20 ey=3 yaw=1480 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1485
+TX step yaw 5
+mode=manual frame=41540 valid=1 err=0 age=17493 bbox=376,423,217,256 ex=-1 ey=-4 yaw=1485 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1490
+TX step yaw 5
+mode=manual frame=41560 valid=1 err=0 age=18910 bbox=406,454,188,227 ex=30 ey=-33 yaw=1490 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1495
+TX step yaw 5
+mode=manual frame=41579 valid=1 err=0 age=25481 bbox=416,463,192,233 ex=39 ey=-28 yaw=1495 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+yaw step=5 us requested=1500
+TX status
+mode=manual frame=41599 valid=1 err=0 age=26907 bbox=420,469,196,235 ex=44 ey=-25 yaw=1500 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=41611 valid=1 err=0 age=27768 bbox=421,468,200,239 ex=44 ey=-21 yaw=1500 pitch=1477 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=150000 period=2000000 rises=51018 pitch high=147700 period=2000000 rises=51018 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
