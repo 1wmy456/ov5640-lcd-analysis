@@ -46,7 +46,7 @@ python scripts/pan_tilt_serial.py --port COM5 --command status --command vision 
 ./scripts/restore_component_calibration.ps1 -Port COM5 -EnableAuto
 ```
 
-固定接线：水平 J4-3/U5，俯仰 J4-4/T5；外部 5V 与板卡共地。已按5μs小步、逐段现场确认：yaw=1100～1650μs、中心1500、方向−1；pitch=1240～1800μs、中心1520、方向+1。水平下限扩展记录见 `docs/evidence/component_tracker/YAW_RIGHT_RANGE.md`，后续俯仰两端扩展记录见 `PITCH_RANGE.md`。默认速度经现场确认提高为增益0.5μs/(pixel·s)、限速50μs/s，死区仍±15px；加 `-Conservative` 使用原0.3/25速度档。恢复脚本会先关闭PWM、设置中心，再按EnableAuto选项启动；仅现场调速可直接发送gain/rate命令，避免重置位置。未新增 PID。旧 `restore_pan_tilt_calibration.ps1` 保留原窄范围供回退使用。范围仍有限，不能保证从任意云台姿态覆盖整个摄像头视野。
+固定接线：水平 J4-3/U5，俯仰 J4-4/T5；外部 5V 与板卡共地。已按5μs小步、逐段现场确认：yaw=1100～1650μs、中心1500、方向−1；pitch=1240～1800μs、中心1520、方向+1。水平下限扩展记录见 `docs/evidence/component_tracker/YAW_RIGHT_RANGE.md`，后续俯仰两端扩展记录见 `PITCH_RANGE.md`。当前默认速度经现场确认提高为增益0.7μs/(pixel·s)、限速75μs/s，死区仍±15px；`-Speed fast` 使用上一档0.5/50，`-Conservative`（或 `-Speed conservative`）使用0.3/25。记录见 `SPEED_TUNING_FASTER.md`。恢复脚本会先关闭PWM、设置中心，再按EnableAuto选项启动；仅现场调速可直接发送gain/rate命令，避免重置位置。未新增 PID。旧 `restore_pan_tilt_calibration.ps1` 保留原窄范围供回退使用。范围仍有限，不能保证从任意云台姿态覆盖整个摄像头视野。
 
 串口 115200 8N1、ASCII，每条命令以 CR/LF 结束：
 

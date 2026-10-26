@@ -1,0 +1,54 @@
+mode=auto frame=173737 valid=0 err=0 age=8065 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+yaw gain=700 milli-us/(pixel*s)
+pitch gain=700 milli-us/(pixel*s)
+mode=auto frame=173742 valid=0 err=0 age=23360 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+yaw rate=75000 milli-us/s
+pitch rate=75000 milli-us/s
+mode=auto frame=173748 valid=0 err=0 age=13632 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173762 valid=0 err=0 age=24765 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173782 valid=0 err=0 age=26338 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173802 valid=0 err=0 age=27761 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173822 valid=0 err=0 age=29190 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173842 valid=0 err=0 age=30624 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173862 valid=0 err=0 age=32031 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173882 valid=0 err=0 age=13348 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173902 valid=0 err=0 age=14775 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173922 valid=0 err=0 age=16348 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=173942 valid=0 err=0 age=17772 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175436 valid=0 err=0 age=26053 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+VISION mask_frame=175439 src_error=0 age=10757 errors=24318729 objects=0 candidates=0 locked=0 reason=no_blob process_us=7688 largest=0/0x0 cells
+mode=auto frame=175440 valid=0 err=0 age=26336 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175460 valid=0 err=0 age=27773 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175480 valid=0 err=0 age=29195 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175500 valid=0 err=0 age=30620 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175520 valid=0 err=0 age=32037 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175541 valid=0 err=0 age=8073 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175561 valid=0 err=0 age=9486 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175581 valid=0 err=0 age=11072 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175600 valid=0 err=0 age=17486 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175620 valid=0 err=0 age=18915 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175640 valid=0 err=0 age=20489 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175660 valid=0 err=0 age=21911 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175680 valid=0 err=0 age=23336 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175700 valid=0 err=0 age=24768 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175720 valid=0 err=0 age=26343 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175740 valid=0 err=0 age=27764 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=175760 valid=0 err=0 age=29194 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1182 pitch=1487 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=181854 valid=1 err=0 age=17490 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+VISION mask_frame=181857 src_error=0 age=9880 errors=24318729 objects=1 candidates=1 locked=1 reason=ready process_us=7720 largest=76/15x7 cells
+mode=auto frame=181861 valid=1 err=0 age=23056 bbox=377,436,241,265 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=181881 valid=1 err=0 age=24488 bbox=377,436,241,265 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=181901 valid=1 err=0 age=26052 bbox=377,436,241,266 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=181921 valid=1 err=0 age=27482 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=181941 valid=1 err=0 age=28908 bbox=377,436,241,266 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=181961 valid=1 err=0 age=30335 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=181981 valid=1 err=0 age=31760 bbox=377,436,241,265 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182002 valid=1 err=0 age=8061 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182022 valid=1 err=0 age=9496 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182041 valid=1 err=0 age=16064 bbox=377,436,241,266 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182061 valid=1 err=0 age=17494 bbox=377,436,241,265 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182081 valid=1 err=0 age=18912 bbox=377,436,241,265 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182101 valid=1 err=0 age=20485 bbox=377,436,241,266 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182121 valid=1 err=0 age=21922 bbox=377,436,241,266 ex=6 ey=13 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182141 valid=1 err=0 age=23342 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=182161 valid=1 err=0 age=24763 bbox=377,436,241,267 ex=6 ey=14 yaw=1377 pitch=1631 en=3 hold=0 limit=0 det=ready drop=0

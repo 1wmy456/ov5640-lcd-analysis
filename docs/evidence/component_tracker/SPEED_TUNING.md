@@ -23,3 +23,5 @@ rate pitch 50
 ```
 
 新包为 `build/component_tracker_fast.zip`；旧下载包和提交af90cd5保留。bit/XSA/BSP/ELF沿用已验证版本，本次仅参数与恢复配置变化，不声称重新综合或完成新的时序测试。
+
+后续再次提速至0.7/75并经现场确认；当前默认值及上一档恢复命令以 `SPEED_TUNING_FASTER.md` 为准。本文件保留最初0.5/50档的验收历史。

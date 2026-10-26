@@ -1,10 +1,15 @@
-param([string]$Port='COM5',[switch]$EnableAuto,[switch]$Conservative)
+param([string]$Port='COM5',[switch]$EnableAuto,[switch]$Conservative,
+ [ValidateSet('conservative','fast','faster')][string]$Speed='faster')
 $ErrorActionPreference='Stop'
 # Confirmed on 2026-10-26 in docs/evidence/component_tracker/BOARD_VALIDATION.md.
 # Keep the legacy restore script unchanged for rollback. Recheck after remounting.
-$speedGain=if($Conservative){'0.3'}else{'0.5'}
-$speedRate=if($Conservative){'25'}else{'50'}
-$speedLabel=if($Conservative){'conservative'}else{'fast'}
+if($Conservative){$Speed='conservative'}
+switch($Speed){
+ 'conservative' {$speedGain='0.3';$speedRate='25'}
+ 'fast' {$speedGain='0.5';$speedRate='50'}
+ 'faster' {$speedGain='0.7';$speedRate='75'}
+}
+$speedLabel=$Speed
 $commands=@('manual','disable','vision','dir yaw -1','dir pitch 1',
  'limits yaw 1100 1650','limits pitch 1240 1800',
  'center yaw 1500','center pitch 1520',"gain yaw $speedGain","gain pitch $speedGain",
