@@ -1,0 +1,218 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=146006 valid=1 err=0 age=17771 bbox=394,455,228,279 ex=24 ey=13 yaw=1205 pitch=1345 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=146008 valid=1 err=0 age=7778 bbox=393,455,228,279 ex=24 ey=13 yaw=1205 pitch=1345 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=146028 valid=1 err=0 age=8917 bbox=393,455,229,277 ex=24 ey=13 yaw=1205 pitch=1345 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=146048 valid=1 TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=146501 valid=1 err=0 age=17484 bbox=401,464,224,275 ex=32 ey=9 yaw=1205 pitch=1345 en=3 hold=1 limit=0 det=ready drop=0
+TX limits pitch 1240 1800
+pitch limits=1240..1800 us; verify again
+TX step pitch 5
+pitch step=5 us requested=1350
+TX step pitch 5
+mode=manual frame=146508 valid=1 err=0 age=23055 bbox=401,464,224,275 ex=32 ey=9 yaw=1205 pitch=1350 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1355
+TX step pitch 5
+mode=manual frame=146528 valid=1 err=0 age=24485 bbox=401,463,221,270 ex=32 ey=5 yaw=1205 pitch=1355 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1360
+TX step pitch 5
+mode=manual frame=146548 valid=1 err=0 age=26059 bbox=408,473,219,269 ex=40 ey=4 yaw=1205 pitch=1360 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1365
+TX step pitch 5
+mode=manual frame=146568 valid=1 err=0 age=27483 bbox=405,468,212,263 ex=36 ey=-3 yaw=1205 pitch=1365 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1370
+TX step pitch 5
+mode=manual frame=146588 valid=1 err=0 age=28908 bbox=407,469,203,254 ex=38 ey=-12 yaw=1205 pitch=1370 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1375
+TX step pitch 5
+mode=manual frame=146608 valid=1 err=0 age=30331 bbox=415,479,193,244 ex=47 ey=-22 yaw=1205 pitch=1375 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1380
+TX step pitch 5
+mode=manual frame=146628 valid=1 err=0 age=31755 bbox=420,483,193,244 ex=51 ey=-22 yaw=1205 pitch=1380 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1385
+TX step pitch 5
+mode=manual frame=146648 valid=1 err=0 age=13064 bbox=420,483,192,245 ex=51 ey=-22 yaw=1205 pitch=1385 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1390
+TX step pitch 5
+mode=manual frame=146668 valid=1 err=0 age=14510 bbox=421,484,188,241 ex=52 ey=-26 yaw=1205 pitch=1390 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1395
+TX status
+mode=manual frame=146688 valid=1 err=0 age=16063 bbox=417,480,185,237 ex=48 ey=-29 yaw=1205 pitch=1395 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=146705 valid=1 err=0 age=32228 bbox=417,483,186,240 ex=50 ey=-27 yaw=1205 pitch=1395 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=120500 period=2000000 rises=182477 pitch high=139500 period=2000000 rises=182477 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=146730 valid=1 err=0 age=8923 bbox=398,461,192,243 ex=29 ey=-23 yaw=1205 pitch=1395 en=3 hold=1 limit=0 det=ready drop=0
+TX limits pitch 1240 1800
+pitch limits=1240..1800 us; verify again
+TX step pitch 5
+pitch step=5 us requested=1400
+TX step pitch 5
+mode=manual frame=146748 valid=1 err=0 age=20059 bbox=378,439,184,235 ex=8 ey=-31 yaw=1205 pitch=1400 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1405
+TX step pitch 5
+mode=manual frame=146768 valid=1 err=0 age=21632 bbox=373,432,176,227 ex=2 ey=-39 yaw=1205 pitch=1405 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1410
+TX step pitch 5
+mode=manual frame=146788 valid=1 err=0 age=23054 bbox=376,436,176,226 ex=6 ey=-39 yaw=1205 pitch=1410 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1415
+TX step pitch 5
+mode=manual frame=146808 valid=1 err=0 age=24483 bbox=373,436,174,225 ex=4 ey=-41 yaw=1205 pitch=1415 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1420
+TX step pitch 5
+mode=manual frame=146828 valid=1 err=0 age=26057 bbox=389,455,167,220 ex=22 ey=-47 yaw=1205 pitch=1420 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1425
+TX step pitch 5
+mode=manual frame=146848 valid=1 err=0 age=27484 bbox=413,479,157,212 ex=46 ey=-56 yaw=1205 pitch=1425 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1430
+TX step pitch 5
+mode=manual frame=146868 valid=1 err=0 age=28905 bbox=405,472,153,208 ex=38 ey=-60 yaw=1205 pitch=1430 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1435
+TX step pitch 5
+mode=manual frame=146888 valid=1 err=0 age=30334 bbox=407,471,153,204 ex=39 ey=-62 yaw=1205 pitch=1435 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1440
+TX step pitch 5
+mode=manual frame=146908 valid=1 err=0 age=31756 bbox=397,464,153,207 ex=30 ey=-60 yaw=1205 pitch=1440 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1445
+TX status
+mode=manual frame=146929 valid=1 err=0 age=8065 bbox=401,468,149,203 ex=34 ey=-64 yaw=1205 pitch=1445 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=146933 valid=1 err=0 age=28624 bbox=401,464,149,201 ex=32 ey=-65 yaw=1205 pitch=1445 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=120500 period=2000000 rises=182762 pitch high=144500 period=2000000 rises=182762 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=146957 valid=1 err=0 age=10068 bbox=397,462,143,196 ex=29 ey=-71 yaw=1205 pitch=1445 en=3 hold=1 limit=0 det=ready drop=0
+TX limits pitch 1240 1800
+pitch limits=1240..1800 us; verify again
+TX step pitch 5
+pitch step=5 us requested=1450
+TX step pitch 5
+mode=manual frame=146968 valid=1 err=0 age=16063 bbox=397,461,145,196 ex=29 ey=-70 yaw=1205 pitch=1450 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1455
+TX step pitch 5
+mode=manual frame=146988 valid=1 err=0 age=17490 bbox=404,471,144,196 ex=37 ey=-70 yaw=1205 pitch=1455 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1460
+TX step pitch 5
+mode=manual frame=147008 valid=1 err=0 age=18916 bbox=397,464,144,199 ex=30 ey=-69 yaw=1205 pitch=1460 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1465
+TX step pitch 5
+mode=manual frame=147028 valid=1 err=0 age=20485 bbox=397,461,144,198 ex=29 ey=-69 yaw=1205 pitch=1465 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1470
+TX step pitch 5
+mode=manual frame=147048 valid=1 err=0 age=21917 bbox=397,464,137,191 ex=30 ey=-76 yaw=1205 pitch=1470 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1475
+TX step pitch 5
+mode=manual frame=147068 valid=1 err=0 age=23054 bbox=393,457,128,179 ex=25 ey=-87 yaw=1205 pitch=1475 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1480
+TX step pitch 5
+mode=manual frame=147088 valid=1 err=0 age=24484 bbox=392,459,120,174 ex=25 ey=-93 yaw=1205 pitch=1480 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1485
+TX step pitch 5
+mode=manual frame=147108 valid=1 err=0 age=26056 bbox=398,464,109,164 ex=31 ey=-104 yaw=1205 pitch=1485 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1490
+TX step pitch 5
+mode=manual frame=147128 valid=1 err=0 age=27484 bbox=395,461,109,162 ex=28 ey=-105 yaw=1205 pitch=1490 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1495
+TX status
+mode=manual frame=147148 valid=1 err=0 age=28909 bbox=402,467,108,160 ex=34 ey=-106 yaw=1205 pitch=1495 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=147161 valid=1 err=0 age=24768 bbox=401,464,118,170 ex=32 ey=-96 yaw=1205 pitch=1495 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=120500 period=2000000 rises=183046 pitch high=149500 period=2000000 rises=183046 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+TX manual
+manual/hold: PWM enable and position retained
+TX status
+mode=manual frame=147184 valid=1 err=0 age=31472 bbox=404,469,153,204 ex=36 ey=-62 yaw=1205 pitch=1495 en=3 hold=1 limit=0 det=ready drop=0
+TX limits pitch 1240 1800
+pitch limits=1240..1800 us; verify again
+TX step pitch 5
+pitch step=5 us requested=1500
+TX step pitch 5
+mode=manual frame=147188 valid=1 err=0 age=31757 bbox=410,475,159,211 ex=42 ey=-55 yaw=1205 pitch=1500 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1505
+TX step pitch 5
+mode=manual frame=147209 valid=1 err=0 age=8065 bbox=419,483,146,198 ex=51 ey=-68 yaw=1205 pitch=1505 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1510
+TX step pitch 5
+mode=manual frame=147228 valid=1 err=0 age=14486 bbox=416,482,141,193 ex=49 ey=-73 yaw=1205 pitch=1510 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1515
+TX step pitch 5
+mode=manual frame=147248 valid=1 err=0 age=16064 bbox=401,466,168,219 ex=33 ey=-47 yaw=1205 pitch=1515 en=3 hold=1 limit=0 det=ready drop=0
+pitch step=5 us requested=1520
+TX status
+mode=manual frame=147268 valid=1 err=0 age=17486 bbox=401,468,160,210 ex=34 ey=-55 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+TX pwm
+mode=manual frame=147287 valid=1 err=0 age=23908 bbox=411,478,144,195 ex=44 ey=-71 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+PWM_NET clk=100000000 flags=f yaw high=120500 period=2000000 rises=183204 pitch high=152000 period=2000000 rises=183204 ticks; connector voltage unmeasured
+SEGMENT_COMPLETE: manual hold; mechanical clearance REQUIRES operator observation; no verify/auto command sent
+mode=manual frame=148280 valid=1 err=0 age=30900 bbox=401,467,413,462 ex=34 ey=197 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+auto refused: dimensions/camera, both enables and verify yaw/pitch required
+mode=manual frame=148288 valid=1 err=0 age=31470 bbox=401,467,413,462 ex=34 ey=197 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148309 valid=1 err=0 age=7777 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148329 valid=1 err=0 age=9204 bbox=401,467,413,460 ex=34 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148349 valid=1 err=0 age=10775 bbox=401,467,413,460 ex=34 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148369 valid=1 err=0 age=12203 bbox=401,467,413,461 ex=34 ey=197 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148388 valid=1 err=0 age=18625 bbox=401,467,413,460 ex=34 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148408 valid=1 err=0 age=20060 bbox=401,465,413,460 ex=33 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148428 valid=1 err=0 age=21625 bbox=401,467,413,460 ex=34 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148448 valid=1 err=0 age=23053 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148468 valid=1 err=0 age=24478 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148488 valid=1 err=0 age=26052 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148508 valid=1 err=0 age=27478 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148528 valid=1 err=0 age=28906 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148548 valid=1 err=0 age=30330 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148568 valid=1 err=0 age=31757 bbox=401,464,416,463 ex=32 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148589 valid=1 err=0 age=8062 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148609 valid=1 err=0 age=9488 bbox=401,466,416,463 ex=33 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148629 valid=1 err=0 age=11062 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148649 valid=1 err=0 age=12486 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148668 valid=1 err=0 age=18909 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148688 valid=1 err=0 age=20488 bbox=401,467,416,463 ex=34 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148708 valid=1 err=0 age=21912 bbox=401,467,414,463 ex=34 ey=198 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148728 valid=1 err=0 age=23338 bbox=401,466,414,463 ex=33 ey=198 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148748 valid=1 err=0 age=24762 bbox=401,465,413,460 ex=33 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148768 valid=1 err=0 age=26338 bbox=401,467,413,460 ex=34 ey=196 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148788 valid=1 err=0 age=27764 bbox=401,464,416,463 ex=32 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148808 valid=1 err=0 age=29190 bbox=401,464,416,462 ex=32 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=148828 valid=1 err=0 age=30614 bbox=401,464,416,463 ex=32 ey=199 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+mode=manual frame=150228 valid=1 err=0 age=16648 bbox=381,451,404,455 ex=16 ey=189 yaw=1205 pitch=1520 en=3 hold=1 limit=0 det=ready drop=0
+axis pitch center/limits/direction marked verified by operator
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+mode=auto frame=150246 valid=1 err=0 age=7823 bbox=381,451,396,448 ex=16 ey=182 yaw=1205 pitch=1535 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150266 valid=1 err=0 age=9253 bbox=381,451,373,424 ex=16 ey=158 yaw=1205 pitch=1560 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150286 valid=1 err=0 age=10790 bbox=381,451,351,404 ex=16 ey=137 yaw=1205 pitch=1585 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150306 valid=1 err=0 age=12230 bbox=381,451,329,378 ex=16 ey=113 yaw=1205 pitch=1610 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150326 valid=1 err=0 age=13675 bbox=381,452,305,356 ex=16 ey=90 yaw=1205 pitch=1635 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150346 valid=1 err=0 age=15133 bbox=383,455,287,338 ex=19 ey=72 yaw=1205 pitch=1655 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150366 valid=1 err=0 age=16648 bbox=384,455,271,324 ex=19 ey=57 yaw=1205 pitch=1672 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150386 valid=1 err=0 age=18091 bbox=381,455,261,315 ex=18 ey=48 yaw=1205 pitch=1684 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150405 valid=1 err=0 age=24530 bbox=384,456,247,300 ex=20 ey=33 yaw=1205 pitch=1694 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150425 valid=1 err=0 age=26065 bbox=388,462,237,289 ex=25 ey=23 yaw=1205 pitch=1701 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150445 valid=1 err=0 age=27509 bbox=392,467,224,279 ex=29 ey=11 yaw=1205 pitch=1702 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150465 valid=1 err=0 age=28952 bbox=396,467,228,282 ex=31 ey=15 yaw=1205 pitch=1702 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150485 valid=1 err=0 age=30392 bbox=396,468,232,283 ex=32 ey=17 yaw=1205 pitch=1702 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150505 valid=1 err=0 age=31832 bbox=393,467,232,283 ex=30 ey=17 yaw=1205 pitch=1704 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150526 valid=1 err=0 age=8102 bbox=393,467,229,280 ex=30 ey=14 yaw=1205 pitch=1708 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150546 valid=1 err=0 age=9539 bbox=393,467,229,280 ex=30 ey=14 yaw=1205 pitch=1708 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150566 valid=1 err=0 age=11073 bbox=393,467,229,283 ex=30 ey=16 yaw=1205 pitch=1710 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150586 valid=1 err=0 age=12519 bbox=393,467,229,280 ex=30 ey=14 yaw=1205 pitch=1713 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150606 valid=1 err=0 age=13963 bbox=397,472,220,274 ex=34 ey=7 yaw=1205 pitch=1713 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150626 valid=1 err=0 age=15499 bbox=397,468,224,275 ex=32 ey=9 yaw=1205 pitch=1713 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150646 valid=1 err=0 age=16933 bbox=393,468,234,283 ex=30 ey=18 yaw=1205 pitch=1714 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150666 valid=1 err=0 age=18381 bbox=392,467,233,283 ex=29 ey=18 yaw=1205 pitch=1719 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150685 valid=1 err=0 age=24811 bbox=392,464,232,283 ex=28 ey=17 yaw=1205 pitch=1720 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150705 valid=1 err=0 age=26354 bbox=392,467,229,280 ex=29 ey=14 yaw=1205 pitch=1721 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150725 valid=1 err=0 age=27799 bbox=396,468,228,279 ex=32 ey=13 yaw=1205 pitch=1721 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150745 valid=1 err=0 age=29200 bbox=390,464,232,279 ex=27 ey=15 yaw=1205 pitch=1721 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150765 valid=1 err=0 age=30616 bbox=389,464,234,283 ex=26 ey=18 yaw=1205 pitch=1723 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150785 valid=1 err=0 age=32030 bbox=389,464,233,283 ex=26 ey=18 yaw=1205 pitch=1727 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150806 valid=1 err=0 age=8347 bbox=389,464,233,280 ex=26 ey=16 yaw=1205 pitch=1731 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150826 valid=1 err=0 age=9774 bbox=389,464,232,280 ex=26 ey=16 yaw=1205 pitch=1732 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150846 valid=1 err=0 age=11357 bbox=389,467,232,280 ex=28 ey=16 yaw=1205 pitch=1736 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=150866 valid=1 err=0 age=12778 bbox=389,464,229,280 ex=26 ey=14 yaw=1205 pitch=1737 en=3 hold=0 limit=0 det=ready drop=0

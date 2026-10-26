@@ -1,0 +1,13 @@
+yaw gain=500 milli-us/(pixel*s)
+mode=auto frame=153738 valid=1 err=0 age=23052 bbox=333,419,216,283 ex=-24 ey=9 yaw=1205 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+VISION mask_frame=153741 src_error=0 age=14216 errors=24318723 objects=1 candidates=1 locked=1 reason=ready process_us=7779 largest=284/22x17 cells
+PWM_NET clk=100000000 flags=f yaw high=120700 period=2000000 rises=191305 pitch high=157300 period=2000000 rises=191305 ticks; connector voltage unmeasured
+mode=auto frame=153743 valid=1 err=0 age=18347 bbox=333,419,216,283 ex=-24 ey=9 yaw=1207 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153763 valid=1 err=0 age=19769 bbox=344,430,216,283 ex=-13 ey=9 yaw=1212 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153783 valid=1 err=0 age=21345 bbox=344,431,220,287 ex=-13 ey=13 yaw=1212 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153803 valid=1 err=0 age=22767 bbox=350,434,213,280 ex=-8 ey=6 yaw=1212 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153823 valid=1 err=0 age=24193 bbox=332,412,220,283 ex=-28 ey=11 yaw=1219 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153843 valid=1 err=0 age=25770 bbox=341,424,220,283 ex=-18 ey=11 yaw=1222 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153863 valid=1 err=0 age=27197 bbox=348,428,218,281 ex=-12 ey=9 yaw=1223 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153883 valid=1 err=0 age=28619 bbox=348,429,217,280 ex=-12 ey=8 yaw=1223 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=153903 valid=1 err=0 age=30050 bbox=349,428,217,280 ex=-12 ey=8 yaw=1223 pitch=1573 en=3 hold=0 limit=0 det=ready drop=0

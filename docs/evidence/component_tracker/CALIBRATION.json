@@ -3,12 +3,13 @@
   "fixture": "current MG90S mounting and J4 U5/T5 wiring; recheck after remounting",
   "confirmed_by": "on-site user observation after 5us manual steps",
   "yaw": {"minimum_us":1100,"maximum_us":1650,"center_us":1500,"direction":-1},
-  "pitch": {"minimum_us":1390,"maximum_us":1650,"center_us":1520,"direction":1},
+  "pitch": {"minimum_us":1240,"maximum_us":1800,"center_us":1520,"direction":1},
   "gain_us_per_pixel_second":0.5,
   "rate_us_per_second":50,
   "conservative_speed":{"gain_us_per_pixel_second":0.3,"rate_us_per_second":25,"restore_switch":"-Conservative"},
   "deadband_pixels":15,
   "reset_default":"manual, PWM disabled; calibration must be explicitly restored",
   "legacy_rollback_calibration":"restore_pan_tilt_calibration.ps1 unchanged",
-  "yaw_extension":"1350 -> 1100 us, 50us segments in 5us steps; each segment confirmed normal by operator; upper endpoint unchanged"
+  "yaw_extension":"1350 -> 1100 us, 50us segments in 5us steps; each segment confirmed normal by operator; upper endpoint unchanged",
+  "pitch_extension":"1390 -> 1240 us and 1650 -> 1800 us, 50us segments in 5us steps; all six new segments confirmed normal by operator"
 }

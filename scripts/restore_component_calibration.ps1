@@ -6,7 +6,7 @@ $speedGain=if($Conservative){'0.3'}else{'0.5'}
 $speedRate=if($Conservative){'25'}else{'50'}
 $speedLabel=if($Conservative){'conservative'}else{'fast'}
 $commands=@('manual','disable','vision','dir yaw -1','dir pitch 1',
- 'limits yaw 1100 1650','limits pitch 1390 1650',
+ 'limits yaw 1100 1650','limits pitch 1240 1800',
  'center yaw 1500','center pitch 1520',"gain yaw $speedGain","gain pitch $speedGain",
  "rate yaw $speedRate","rate pitch $speedRate",'deadband 15','center')
 if($EnableAuto){$commands+=@('enable both','verify yaw','verify pitch','auto')}
@@ -20,4 +20,4 @@ if(-not($result -match '^VISION mask_frame=')){throw 'Component firmware not con
 if($EnableAuto){
  if(-not($result -match '^auto on:') -or -not($result -match '^mode=auto .*en=3 ')){throw 'Auto mode not confirmed'}
 }elseif(-not($result -match '^mode=manual .*en=0 ')){throw 'Manual/PWM OFF not confirmed'}
-Write-Output "COMPONENT_CALIBRATION: PASS; volatile yaw1100..1650 pitch1390..1650 speed=$speedLabel gain=$speedGain rate=$speedRate; reapply after reset."
+Write-Output "COMPONENT_CALIBRATION: PASS; volatile yaw1100..1650 pitch1240..1800 speed=$speedLabel gain=$speedGain rate=$speedRate; reapply after reset."
