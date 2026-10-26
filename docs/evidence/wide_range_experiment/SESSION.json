@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-26",
+  "original_branch": "codex/component-cap-tracking",
+  "original_commit": "b8b87f6",
+  "experiment_branch": "codex/wide-range-experiment",
+  "bounds_us": [
+    500,
+    2500
+  ],
+  "mechanically_calibrated": false,
+  "user_feedback": "Range improved, tracking normal, requested to keep experimental mode",
+  "original_hashes": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "497232BC3A1707D5D2910D8893077867C7997C36FC81712BFB8E8863A03D8849",
+      "Path": "D:\\2026.test\\ov5640_lcd\\scripts\\restore_component_calibration.ps1"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "69622539542808C32C247F52EBA735D5E69161FCE428E3FB0B98F111153596B4",
+      "Path": "D:\\2026.test\\ov5640_lcd\\vitis\\ov5640_lcd\\src\\pan_tilt\\tracking_control.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "79572C5270A411E4882D602D3A193CCC6D84417D3FF7A79549CE045AF80AA3E1",
+      "Path": "D:\\2026.test\\ov5640_lcd\\rtl\\pan_tilt\\pan_tilt_ctrl.v"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=196423 valid=0 err=0 age=28339 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=1 limit=0 det=no_blob drop=0
+VISION mask_frame=196426 src_error=0 age=20914 errors=24660332 objects=0 candidates=0 locked=0 reason=no_blob process_us=7692 largest=0/0x0 cells
+mode=manual frame=196440 valid=0 err=0 age=24482 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=1 limit=0 det=no_blob drop=0
+mode=manual frame=196460 valid=0 err=0 age=26056 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=1 limit=0 det=no_blob drop=0
+mode=manual frame=196480 valid=0 err=0 age=27481 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=1 limit=0 det=no_blob drop=0
+mode=manual frame=196500 valid=0 err=0 age=28909 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=1 limit=0 det=no_blob drop=0
+manual/hold: PWM enable and position retained
+yaw limits=500..2500 us; verify again
+mode=manual frame=205661 valid=0 err=0 age=24768 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=1 limit=0 det=no_blob drop=0
+pitch limits=500..2500 us; verify again
+yaw gain=700 milli-us/(pixel*s)
+pitch gain=700 milli-us/(pixel*s)
+yaw rate=75000 milli-us/s
+pitch rate=75000 milli-us/s
+axis yaw center/limits/direction marked verified by operator
+axis pitch center/limits/direction marked verified by operator
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+mode=auto frame=205681 valid=0 err=0 age=26348 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=205681 valid=0 err=0 age=26348 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+PWM_NET clk=100000000 flags=30f yaw high=123400 period=2000000 rises=256235 pitch high=138300 period=2000000 rises=256235 ticks; connector voltage unmeasured
+mode=auto frame=205701 valid=0 err=0 age=27770 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=205721 valid=0 err=0 age=29198 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=205741 valid=0 err=0 age=30615 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=205761 valid=0 err=0 age=32040 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=205782 valid=0 err=0 age=8346 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=205802 valid=0 err=0 age=9776 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1234 pitch=1383 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=209609 valid=0 err=0 age=8063 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1281 pitch=1420 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=209622 valid=1 err=0 age=23908 bbox=756,799,409,479 ex=377 ey=204 yaw=1269 pitch=1432 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=209642 valid=1 err=0 age=25481 bbox=687,789,404,479 ex=338 ey=201 yaw=1232 pitch=1470 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=209662 valid=1 err=0 age=26918 bbox=644,742,373,451 ex=293 ey=172 yaw=1194 pitch=1508 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=209682 valid=1 err=0 age=28341 bbox=636,730,369,441 ex=283 ey=165 yaw=1158 pitch=1544 en=3 hold=0 limit=0 det=ready drop=0
+mode=auto frame=217146 valid=0 err=0 age=11068 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1228 pitch=1448 en=3 hold=3 limit=0 det=no_blob drop=0
+PWM_NET clk=100000000 flags=f yaw high=122800 period=2000000 rises=270568 pitch high=144800 period=2000000 rises=270568 ticks; connector voltage unmeasured
+mode=auto frame=217160 valid=0 err=0 age=22200 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1228 pitch=1448 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=217180 valid=0 err=0 age=23626 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1228 pitch=1448 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=217200 valid=0 err=0 age=25057 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1228 pitch=1448 en=3 hold=3 limit=0 det=no_blob drop=0
+mode=auto frame=217220 valid=0 err=0 age=26624 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1228 pitch=1448 en=3 hold=3 limit=0 det=no_blob drop=0
