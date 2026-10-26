@@ -1,0 +1,5 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=235044 valid=0 err=0 age=10066 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1373 pitch=1481 en=3 hold=1 limit=0 det=no_blob drop=0
+PWM_NET clk=100000000 flags=f yaw high=137300 period=2000000 rises=292943 pitch high=148100 period=2000000 rises=292943 ticks; connector voltage unmeasured
+mode=manual frame=235059 valid=0 err=0 age=16064 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1373 pitch=1481 en=3 hold=1 limit=0 det=no_blob drop=0
+mode=manual frame=235079 valid=0 err=0 age=17490 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1373 pitch=1481 en=3 hold=1 limit=0 det=no_blob drop=0

@@ -1,0 +1,8 @@
+mode=manual frame=2222 valid=0 err=0 age=20059 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+MOTION smooth=1 deadband=15/22 accel=200,200 decel=400,400 us/s2; gain_milli=100,100 rate=25,25 us/s
+mode=manual frame=2227 valid=0 err=0 age=15475 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+VISION mask_frame=2228 src_error=0 age=4201 errors=0 objects=0 candidates=0 locked=0 reason=no_blob process_us=7687 largest=0/0x0 cells
+mode=manual frame=2247 valid=0 err=0 age=16921 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=manual frame=2267 valid=0 err=0 age=18346 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=manual frame=2287 valid=0 err=0 age=19768 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=manual frame=2307 valid=0 err=0 age=21341 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0

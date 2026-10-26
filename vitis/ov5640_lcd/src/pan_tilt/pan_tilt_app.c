@@ -20,9 +20,9 @@ static PtTarget target;
 static int command_result;
 static char tx[4096],line[128];static unsigned tx_head,tx_tail,line_used,dropped;static int line_overflow;
 static void log_text(const char *fmt,...){
-    char text[256];int i,n;va_list ap;va_start(ap,fmt);n=vsnprintf(text,sizeof(text),fmt,ap);va_end(ap);
+    char text[512];int i,n;va_list ap;va_start(ap,fmt);n=vsnprintf(text,sizeof(text),fmt,ap);va_end(ap);
     if(n<0)return;
-    if(n>255)n=255;
+    if(n>511)n=511;
     for(i=0;i<n;i++){unsigned next=(tx_head+1)%sizeof(tx);if(next==tx_tail){dropped++;break;}tx[tx_head]=text[i];tx_head=next;}
 }
 static uint64_t now_us(void){XTime t;XTime_GetTime(&t);return (t/COUNTS_PER_SECOND)*1000000ull+(t%COUNTS_PER_SECOND)*1000000ull/COUNTS_PER_SECOND;}
@@ -32,16 +32,27 @@ static void show_status(void){
     unsigned yaw=pt_reg_read(pt_base,PT_YAW_ACTIVE),pitch=pt_reg_read(pt_base,PT_PITCH_ACTIVE);
     unsigned limit=(yaw<=control.minimum[0]||yaw>=control.maximum[0]?1:0)|
                    (pitch<=control.minimum[1]||pitch>=control.maximum[1]?2:0);
-    log_text("mode=%s frame=%lu valid=%u err=%u age=%lu bbox=%u,%u,%u,%u ex=%d ey=%d yaw=%lu pitch=%lu en=%d hold=%d limit=%u det=%s drop=%u\r\n",
+    log_text("mode=%s frame=%lu valid=%u err=%u age=%lu bbox=%u,%u,%u,%u ex=%d ey=%d yaw=%lu pitch=%lu en=%d hold=%d limit=%u det=%s drop=%u smooth=%d db=%d/%d vel_milli=%d,%d active=%d,%d\r\n",
       control.automatic?"auto":"manual",(unsigned long)target.frame_id,target.flags&1,(target.flags>>1)&1,
       (unsigned long)target.age_us,target.xmin,target.xmax,target.ymin,target.ymax,control.ex,control.ey,
       (unsigned long)yaw,(unsigned long)pitch,control.enabled,control.hold_reason,limit,
-      cap_reason_name(cap_runtime_result()->reason),dropped);
+      cap_reason_name(cap_runtime_result()->reason),dropped,control.smooth_enabled,control.deadband,control.deadband_outer,
+      (int)(control.velocity[0]*1000),(int)(control.velocity[1]*1000),control.motion_active[0],control.motion_active[1]);
 }
 static void command(char *s){
     char *w[5],*p;int n=0,a;double v,lo,hi;command_result=0;
     for(p=strtok(s," \t");p&&n<5;p=strtok(NULL," \t"))w[n++]=p;
     if(!n)return;
+    if(n==1&&!strcmp(w[0],"motion")){
+        log_text("MOTION smooth=%d deadband=%d/%d accel=%d,%d decel=%d,%d us/s2; gain_milli=%d,%d rate=%d,%d us/s\r\n",
+            control.smooth_enabled,control.deadband,control.deadband_outer,
+            (int)control.acceleration[0],(int)control.acceleration[1],(int)control.deceleration[0],(int)control.deceleration[1],
+            (int)(control.gain[0]*1000),(int)(control.gain[1]*1000),(int)control.rate[0],(int)control.rate[1]);return;
+    }
+    if(n==2&&!strcmp(w[0],"smooth")&&(!strcmp(w[1],"on")||!strcmp(w[1],"off"))){
+        pt_control_smooth(&control,!strcmp(w[1],"on"));
+        log_text("smooth=%d; pulse retained, motion state reset\r\n",control.smooth_enabled);return;
+    }
     if(n==1&&!strcmp(w[0],"vision")){
         const CapResult *r=cap_runtime_result();
         log_text("VISION mask_frame=%lu src_error=%lu age=%lu errors=%lu objects=%u candidates=%u locked=%u reason=%s process_us=%lu largest=%u/%ux%u cells\r\n",
@@ -85,6 +96,10 @@ static void command(char *s){
         pt_driver_commit(pt_base,&control);log_text("%s step=%d us requested=%d\r\n",w[1],(int)v,pos);return;
     }
     if(n==3&&(a=axis_of(w[1]))>=0&&number(w[2],&v)){
+        if((!strcmp(w[0],"accel")||!strcmp(w[0],"decel"))&&v>=10&&v<=2000){
+            if(!strcmp(w[0],"accel"))control.acceleration[a]=v;else control.deceleration[a]=v;
+            log_text("%s %s=%d us/s2\r\n",w[1],w[0],(int)v);return;
+        }
         if(!strcmp(w[0],"dir")&&(v==1||v==-1)){control.direction[a]=(int)v;control.verified[a]=0;pt_control_manual(&control);log_text("%s direction=%d; verify again\r\n",w[1],(int)v);return;}
         if(!strcmp(w[0],"gain")&&v>=0&&v<=2){control.gain[a]=v;log_text("%s gain=%d milli-us/(pixel*s)\r\n",w[1],(int)(v*1000));return;}
         if(!strcmp(w[0],"rate")&&v>0&&v<=100){control.rate[a]=v;log_text("%s rate=%d milli-us/s\r\n",w[1],(int)(v*1000));return;}
@@ -96,7 +111,15 @@ static void command(char *s){
         pt_driver_limits(pt_base,a,(int)lo,(int)hi);pt_reg_write(pt_base,a?PT_PITCH_CENTER:PT_YAW_CENTER,control.center[a]);pt_driver_commit(pt_base,&control);
         log_text("%s limits=%d..%d us; verify again\r\n",w[1],(int)lo,(int)hi);return;
     }
-    if(n==2&&!strcmp(w[0],"deadband")&&number(w[1],&v)&&v>=0&&v<=100&&v==(int)v){control.deadband=(int)v;return;}
+    if(n==2&&!strcmp(w[0],"deadband")&&number(w[1],&v)&&v>=0&&v<=100&&v==(int)v){
+        control.deadband=(int)v;control.deadband_outer=(int)v+7;pt_control_smooth(&control,control.smooth_enabled);
+        log_text("deadband=%d/%d px\r\n",control.deadband,control.deadband_outer);return;
+    }
+    if(n==3&&!strcmp(w[0],"deadband")&&number(w[1],&lo)&&number(w[2],&hi)&&
+       lo>=0&&hi>=lo&&hi<=120&&lo==(int)lo&&hi==(int)hi){
+        control.deadband=(int)lo;control.deadband_outer=(int)hi;pt_control_smooth(&control,control.smooth_enabled);
+        log_text("deadband=%d/%d px\r\n",control.deadband,control.deadband_outer);return;
+    }
 bad:command_result=1;log_text("invalid command/value; examples: enable yaw | step yaw +5 | dir yaw -1 | limits yaw 1400 1600 | gain yaw 0.1 | center | verify yaw | auto | status\r\n");
 }
 static void app_state(void){
@@ -137,6 +160,7 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
     pt_driver_commit(pt_base,&control);
     log_text("PAN_TILT ready manual PWM OFF 115200 8N1; range1400..1600 center1500; first step5us\r\n");
     log_text("VISION component/ellipse/lock mask200x120 block4 acquisition2frames; command: vision\r\n");
+    log_text("SMOOTH defaults ON deadband15/22 accel200 decel400 us/s2; motion | smooth on/off | accel/decel yaw/pitch <value>\r\n");
     if(!control.dimensions_ok)log_text("AUTO DISABLED: camera/display/tracker mismatch display=%ux%u tracker=%ux%u camera_ok=%d\r\n",width,height,dimensions&65535,dimensions>>16,camera_ok);
     last_tick=last_log=now_us();
     app_state();

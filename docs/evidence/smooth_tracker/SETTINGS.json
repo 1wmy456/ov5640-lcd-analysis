@@ -1,0 +1,20 @@
+{
+  "date":"2026-10-26",
+  "baseline_commit":"4d48de5",
+  "branch":"codex/smooth-pan-tilt",
+  "smooth":true,
+  "deadband_inner_px":15,
+  "deadband_outer_px":22,
+  "field_acceleration_us_s2":400,
+  "field_deceleration_us_s2":600,
+  "firmware_initial_acceleration_us_s2":200,
+  "firmware_initial_deceleration_us_s2":400,
+  "gain_us_pixel_s":0.7,
+  "rate_us_s":75,
+  "field_range_mode":"previously requested wide-range experiment",
+  "field_bounds_us":[500,2500],
+  "wide_bounds_mechanically_calibrated":false,
+  "startup":"manual, PWM OFF",
+  "rollback_workspace":"build/component_tracker_v2_sw",
+  "new_workspace":"build/smooth_tracker_sw"
+}

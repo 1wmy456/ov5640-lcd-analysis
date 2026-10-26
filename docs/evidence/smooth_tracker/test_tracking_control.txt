@@ -1,0 +1,1 @@
+PASS PAN_CONTROL sign/deadband/direction/rate/limits/fraction/repeat/stale/loss/recovery/manual-auto

@@ -1,0 +1,50 @@
+{
+  "baseline": "15e98ec",
+  "branch": "codex/smooth-pan-tilt",
+  "project": "build/component_tracker_v2",
+  "workspace": "build/smooth_tracker_sw",
+  "calibration": "MODE2 800x480 BLUE_MIN=80 BR_DELTA=60 BG_DELTA=35 MIN_B_R_RATIO=2 MIN_BLUE_RUN=3 MIN_PIXELS=256 BBOX_FILTER_SHIFT=0 BORDER_WIDTH=2 CENTER_CROSS=0 COMPONENT_MODE=1 MASK_BLOCK=4 MASK_CELL_MIN=4\nAXI-Lite address: 0x43C20000; clock100MHz; reset disabled PWM\nJ4-3 U5 yaw; J4-4 T5 pitch; actual package/bank check during full implementation\n",
+  "compiled_sources": [
+    "clk_wiz/clk_wiz.c",
+    "display_ctrl/display_ctrl.c",
+    "emio_sccb_cfg/emio_sccb_cfg.c",
+    "main.c",
+    "ov5640/ov5640_init.c",
+    "pan_tilt/cap_components.c",
+    "pan_tilt/cap_runtime.c",
+    "pan_tilt/pan_tilt_app.c",
+    "pan_tilt/pan_tilt_driver.c",
+    "pan_tilt/tracking_control.c",
+    "vdma_api/vdma_api.c"
+  ],
+  "program_end": "0x134c50",
+  "framebuffer_start": "0x01100000",
+  "bsp_base_macro": "#define XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR 0x43C20000",
+  "artifact_sha256": {
+    "build/component_tracker_v2/ov5640_lcd.runs/impl_1/system_wrapper.bit": "b13090612002ac5f8b7a175564a69a28b30d716584dd40a087c12840acc868a3",
+    "build/component_tracker_v2/system_wrapper.xsa": "119d6fdf1aa3d8f392b669944793d419d09f173d58e530244336e5f2ab66750d",
+    "build/smooth_tracker_sw/app_compiled/ov5640_lcd.elf": "5620111e35328db301caa47ed58ba24064e5bb8d6887caee057212121b4b1f5a",
+    "build/smooth_tracker_sw/board_platform/ps7_cortexa9_0/standalone_domain/bsp/ps7_cortexa9_0/include/xparameters.h": "5393d18cd6e6871f480ab640bb9962ca2806a4ad0daadba3aa6a99e557984d2b"
+  },
+  "rtl_sha256": {
+    "rtl/blue_tracker/axis_blue_tracker.v": "c6baae77db336d9f45a33dc247cfbf2975dcb6938862f7b1d0804018156e1917",
+    "rtl/blue_tracker/blue_bbox_stats.v": "cd4b419ecdef7a443bfe55d35a34f48fd2fd3c2733b59035be8c7fd91f5ef5dc",
+    "rtl/blue_tracker/blue_frame_stats.v": "3ca2d0d10a6686282c7c80a84f879f2c6e5460437f35cc50eeb535158b33a4f5",
+    "rtl/blue_tracker/blue_mask_sampler.v": "7392830599281e23a44c9b3addc5f7e7614bb56d3cc2c52ccda90bd07343e934",
+    "rtl/blue_tracker/blue_pixel_detect.v": "2c7a30bfae8164af1670e314386bba3d42d7337d4b79cd8befc2d7872e1ce9a9",
+    "rtl/blue_tracker/video_box_overlay.v": "131c7e91e20f5e96428ba493b888b05d172ec8d0c85c534bbd6495bb925ad684",
+    "rtl/pan_tilt/blue_mask_store.v": "6c73cbf7d73aec7b8af027720d01461f995eea458bb2bb46f3b5e33842c9ea64",
+    "rtl/pan_tilt/dual_servo_pwm.v": "d01193a809f4abce87a6503e465dbdc0c42e365b83c8e95a18cb3ebb4114f8b7",
+    "rtl/pan_tilt/pan_tilt_ctrl.v": "79572c5270a411e4882d602d3a193ccc6d84417d3ff7a79549ce045af80aa3e1",
+    "rtl/pan_tilt/pwm_wave_monitor.v": "63b20fe89f1dee5aa72eddb54706ed40e8537ef829af6a5f8ba32f24526e6af9"
+  },
+  "report_sha256": {
+    "bus_skew.rpt": "d66bcb5dae6f7d6a783f8d2b785179cf3d1e9c9c1f526a73338f918fc6606817",
+    "cdc.rpt": "a32eeff75abd18a88d2e2c943059abf8e7a6cdf44a554bed429252f801085b97",
+    "drc.rpt": "e96b05cd1233ac3d149e8c32fa86d2089d4e681989101bff7d72227999ac4fc3",
+    "servo_io_excerpt.txt": "8290b9a1d1eaafe664c4d043835429799c22034e713e7b297226127b8f722cdd",
+    "servo_pins.txt": "619968d9fefa42ce495135fee3845ee5d091d82460cade97367fc3cb9f3d614d",
+    "timing_summary.rpt": "6728c9a912aa4117e4f32d3086e051678badcb4887033e97f05feb239bbb4eaf",
+    "utilization.rpt": "8f385301db027b5810de5314c4fb9a533b14a2c451a44728dbd40f9efcf80b73"
+  }
+}

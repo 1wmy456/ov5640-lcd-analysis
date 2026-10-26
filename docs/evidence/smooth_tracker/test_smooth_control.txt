@@ -1,0 +1,1 @@
+PASS SMOOTH_CONTROL A=200 D=400 checks=1913 startup_delta=0.2000 legacy_delta=1.5000 noise_pulse_changes=0 legacy=120; accel/decel/reverse/hysteresis/duplicate/error/stale/recovery/limits/manual/wrap

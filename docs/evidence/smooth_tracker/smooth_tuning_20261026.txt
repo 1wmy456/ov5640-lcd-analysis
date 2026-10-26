@@ -1,0 +1,12 @@
+yaw accel=400 us/s2
+pitch accel=400 us/s2
+yaw decel=600 us/s2
+mode=auto frame=10432 valid=0 err=0 age=17757 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+pitch decel=600 us/s2
+MOTION smooth=1 deadband=15/22 accel=400,400 decel=600,600 us/s2; gain_milli=700,700 rate=75,75 us/s
+mode=auto frame=10452 valid=0 err=0 age=18916 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=10472 valid=0 err=0 age=20492 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=10492 valid=0 err=0 age=21913 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=10512 valid=0 err=0 age=23343 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=10532 valid=0 err=0 age=24764 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=10552 valid=0 err=0 age=26345 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1235 pitch=1519 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0

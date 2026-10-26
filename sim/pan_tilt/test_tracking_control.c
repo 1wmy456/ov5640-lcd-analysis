@@ -5,7 +5,7 @@
 static PtTarget target(unsigned f,int xc,int yc){PtTarget t={0};t.frame_id=f;t.flags=5;t.xmin=xc-2;t.xmax=xc+2;t.ymin=yc-2;t.ymax=yc+2;return t;}
 int main(void){
  PtControl c;PtTarget t;double p;unsigned f;
- pt_control_init(&c,1);assert(!c.automatic&&!c.enabled&&c.position[0]==1500);
+ pt_control_init(&c,1);pt_control_smooth(&c,0);assert(!c.automatic&&!c.enabled&&c.position[0]==1500);
  assert(!pt_control_auto(&c));c.enabled=3;c.verified[0]=c.verified[1]=1;assert(pt_control_auto(&c));
  t=target(1,600,100);assert(!pt_control_update(&c,&t,0));
  t.frame_id++;pt_control_update(&c,&t,20000);assert(c.position[0]>1500&&c.position[1]<1500);
@@ -29,13 +29,13 @@ int main(void){
  assert(!pt_control_limits(&c,0,499,1600));assert(!pt_control_limits(&c,0,1600,1400));
  pt_control_init(&c,0);c.enabled=3;c.verified[0]=c.verified[1]=1;assert(!pt_control_auto(&c));
  // Small fractional steps must accumulate instead of truncating every update.
- pt_control_init(&c,1);c.enabled=3;c.verified[0]=c.verified[1]=1;c.gain[0]=0.01;assert(pt_control_auto(&c));
+ pt_control_init(&c,1);pt_control_smooth(&c,0);c.enabled=3;c.verified[0]=c.verified[1]=1;c.gain[0]=0.01;assert(pt_control_auto(&c));
  for(f=1;f<=200;f++){t=target(f,420,240);pt_control_update(&c,&t,f*20000ull);}
  assert(c.position[0]>1500.5&&pt_control_pulse(&c,0)>1500);
  c.gain[0]=2;
  for(f=201;f<2000;f++){t=target(f,5,475);pt_control_update(&c,&t,f*20000ull);}
  assert(c.position[0]==1400&&c.position[1]<=1600); // negative error cannot underflow
- pt_control_init(&c,1);c.enabled=3;c.verified[0]=c.verified[1]=1;assert(pt_control_auto(&c));
+ pt_control_init(&c,1);pt_control_smooth(&c,0);c.enabled=3;c.verified[0]=c.verified[1]=1;assert(pt_control_auto(&c));
  t=target(0xffffffffu,500,240);pt_control_update(&c,&t,0);t.frame_id=0;pt_control_update(&c,&t,20000);
  assert(c.position[0]>1500); // frame ID wrap is a new frame
  puts("PASS PAN_CONTROL sign/deadband/direction/rate/limits/fraction/repeat/stale/loss/recovery/manual-auto");return 0;

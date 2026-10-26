@@ -1,0 +1,16 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=33914 valid=0 err=0 age=32496 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=manual frame=33915 valid=0 err=0 age=27771 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+smooth=0; pulse retained, motion state reset
+mode=manual frame=33919 valid=0 err=0 age=7783 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=1 limit=0 det=no_blob drop=0 smooth=0 db=15/22 vel_milli=0,0 active=0,0
+smooth=1; pulse retained, motion state reset
+mode=manual frame=33923 valid=0 err=0 age=28056 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+mode=auto frame=33928 valid=0 err=0 age=23340 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+MOTION smooth=1 deadband=15/22 accel=400,400 decel=600,600 us/s2; gain_milli=700,700 rate=75,75 us/s
+mode=auto frame=33935 valid=0 err=0 age=28911 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=33955 valid=0 err=0 age=30338 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=33975 valid=0 err=0 age=31757 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=33996 valid=0 err=0 age=8070 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=34016 valid=0 err=0 age=9493 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
+mode=auto frame=34036 valid=0 err=0 age=11069 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1268 pitch=1471 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0
