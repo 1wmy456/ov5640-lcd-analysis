@@ -1,0 +1,575 @@
+PASS CAP_COMPONENTS checks=12348 frames=34 host_ms=6.00 circle/ellipse/multiple/background/lock/loss/recovery/edge/duplicate/wrap
+PASS CAP_RUNTIME checks=7267 reads=6750 commits=9 coherent-mask/error-epoch/loss/stale/version
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/axis_blue_tracker.v" into library work
+INFO: [VRFC 10-311] analyzing module axis_blue_tracker
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_bbox_stats.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_bbox_stats
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_frame_stats.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_frame_stats
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_mask_sampler.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_mask_sampler
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_pixel_detect.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_pixel_detect
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/video_box_overlay.v" into library work
+INFO: [VRFC 10-311] analyzing module video_box_overlay
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/blue_mask_store.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_mask_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/dual_servo_pwm.v" into library work
+INFO: [VRFC 10-311] analyzing module dual_servo_pwm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/pan_tilt_ctrl.v" into library work
+INFO: [VRFC 10-311] analyzing module pan_tilt_ctrl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/pwm_wave_monitor.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_wave_monitor
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_component_video.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_component_video
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_component_video -s component_video -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'servo_yaw_pwm' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_component_video.sv:18]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_frame_stats(IMAGE_WIDTH=16,...
+Compiling module work.blue_mask_sampler(IMAGE_WIDTH=16...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=16...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=16...
+Compiling module work.pwm_wave_monitor
+Compiling module work.dual_servo_pwm(CLOCK_HZ=1000000)
+Compiling module work.blue_mask_store(IMAGE_WIDTH=16,I...
+Compiling module work.pan_tilt_ctrl(CLOCK_HZ=1000000,I...
+Compiling module work.tb_component_video
+Built simulation snapshot component_video
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/component_video/xsim_script.tcl
+# xsim {component_video} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS COMPONENT_VIDEO checks=4569 accepted=1730 outputs=1730 stalls=803 green=144 triple-bank/AXI/overlay/error/stale/last-pixel
+$finish called at time : 2552500 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_component_video.sv" Line 110
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:22:22 2026...
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_mask_words.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_mask_words
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_mask_words -s mask_words -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_mask_sampler(IMAGE_WIDTH=40...
+Compiling module work.tb_mask_words
+Built simulation snapshot mask_words
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/mask_words/xsim_script.tcl
+# xsim {mask_words} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS MASK_WORDS checks=25 frames=4 multiple-words/partial-last/reset-cells/bubbles/final-pixel
+$finish called at time : 68470 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_mask_words.sv" Line 34
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:22:28 2026...
+PASS PAN_CONTROL sign/deadband/direction/rate/limits/fraction/repeat/stale/loss/recovery/manual-auto
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/dual_servo_pwm.v" into library work
+INFO: [VRFC 10-311] analyzing module dual_servo_pwm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/pwm_wave_monitor.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_wave_monitor
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/pan_tilt_ctrl.v" into library work
+INFO: [VRFC 10-311] analyzing module pan_tilt_ctrl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_pan_tilt
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_pan_tilt -s pan_tilt -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 3 for port 's_axi_awprot' [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv:10]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 3 for port 's_axi_arprot' [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv:13]
+WARNING: [VRFC 10-5021] port 'mask_start' is not connected on this instance [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv:9]
+WARNING: [VRFC 10-3645] port 'display_bbox_valid' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv:9]
+WARNING: [VRFC 10-3645] port 'active_yaw_us' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv:47]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.pwm_wave_monitor
+Compiling module work.dual_servo_pwm(CLOCK_HZ=1000000)
+Compiling module work.pan_tilt_ctrl(CLOCK_HZ=1000000)
+Compiling module work.dual_servo_pwm_default
+Compiling module work.tb_pan_tilt
+Built simulation snapshot pan_tilt
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/pan_tilt/xsim_script.tcl
+# xsim {pan_tilt} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS PAN_RTL checks=251 actual_100MHz_pulses=4
+$finish called at time : 83332001 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_pan_tilt.sv" Line 105
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:22:37 2026...
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/axis_blue_tracker.v" into library work
+INFO: [VRFC 10-311] analyzing module axis_blue_tracker
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_bbox_stats.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_bbox_stats
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_frame_stats.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_frame_stats
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_mask_sampler.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_mask_sampler
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_pixel_detect.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_pixel_detect
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/video_box_overlay.v" into library work
+INFO: [VRFC 10-311] analyzing module video_box_overlay
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_axis_blue_tracker
+INFO: [VRFC 10-311] analyzing module tb_calibrated
+INFO: [VRFC 10-311] analyzing module tb_single_pixel
+INFO: [VRFC 10-311] analyzing module tb_cross
+INFO: [VRFC 10-311] analyzing module tb_filtered
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_axis_blue_tracker -s tracker_default -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'mask_start' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv:16]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_bbox_stats(IMAGE_WIDTH=12,I...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.blue_pixel_detect(R_BYTE=0,B_BYT...
+Compiling module work.tb_axis_blue_tracker
+Built simulation snapshot tracker_default
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_default/xsim_script.tcl
+# xsim {tracker_default} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=2
+CASE kind=3
+CASE kind=4
+CASE kind=5
+CASE kind=6
+CASE kind=7
+CASE kind=8
+CASE kind=0
+CASE kind=0
+CASE kind=9
+CASE kind=10
+CASE kind=11
+CASE kind=13
+CASE kind=14
+CASE kind=15
+CASE kind=16
+CASE kind=0
+CASE kind=17
+CASE kind=18
+CASE kind=19
+CASE kind=20
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=3
+CASE kind=0
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=0
+CASE kind=0
+PASS checks=115886 failures=0 complete_frames=36 errors_seen=4 accepted=3474 output=3473 stalls=1375 bubbles=9835 MIN=4/2/2 CROSS=0 FILTER=0
+$finish called at time : 134910 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" Line 250
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:22:44 2026...
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_single_pixel -s tracker_single_pixel -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'mask_start' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv:16]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_bbox_stats(IMAGE_WIDTH=12,I...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.blue_pixel_detect(R_BYTE=0,B_BYT...
+Compiling module work.tb_axis_blue_tracker(MIN_PIXELS=...
+Compiling module work.tb_single_pixel
+Built simulation snapshot tracker_single_pixel
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_single_pixel/xsim_script.tcl
+# xsim {tracker_single_pixel} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=2
+CASE kind=3
+CASE kind=4
+CASE kind=5
+CASE kind=6
+CASE kind=7
+CASE kind=8
+CASE kind=0
+CASE kind=0
+CASE kind=9
+CASE kind=10
+CASE kind=11
+CASE kind=13
+CASE kind=14
+CASE kind=15
+CASE kind=16
+CASE kind=0
+CASE kind=17
+CASE kind=18
+CASE kind=19
+CASE kind=20
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=3
+CASE kind=0
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=0
+CASE kind=0
+PASS checks=115886 failures=0 complete_frames=36 errors_seen=4 accepted=3474 output=3473 stalls=1375 bubbles=9835 MIN=1/1/1 CROSS=0 FILTER=0
+$finish called at time : 134910 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" Line 250
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:22:50 2026...
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_cross -s tracker_cross -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'mask_start' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv:16]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_bbox_stats(IMAGE_WIDTH=12,I...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.blue_pixel_detect(R_BYTE=0,B_BYT...
+Compiling module work.tb_axis_blue_tracker(CENTER_CROS...
+Compiling module work.tb_cross
+Built simulation snapshot tracker_cross
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_cross/xsim_script.tcl
+# xsim {tracker_cross} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=2
+CASE kind=3
+CASE kind=4
+CASE kind=5
+CASE kind=6
+CASE kind=7
+CASE kind=8
+CASE kind=0
+CASE kind=0
+CASE kind=9
+CASE kind=10
+CASE kind=11
+CASE kind=13
+CASE kind=14
+CASE kind=15
+CASE kind=16
+CASE kind=0
+CASE kind=17
+CASE kind=18
+CASE kind=19
+CASE kind=20
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=3
+CASE kind=0
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=0
+CASE kind=0
+PASS checks=115886 failures=0 complete_frames=36 errors_seen=4 accepted=3474 output=3473 stalls=1375 bubbles=9835 MIN=4/2/2 CROSS=1 FILTER=0
+$finish called at time : 134910 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" Line 250
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:22:56 2026...
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_calibrated -s tracker_calibrated -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'mask_start' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv:16]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect(BR_DELTA=60,BG...
+Compiling module work.blue_bbox_stats(IMAGE_WIDTH=12,I...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_pixel_detect(R_BYTE=0,B_BYT...
+Compiling module work.tb_axis_blue_tracker(MIN_BLUE_RU...
+Compiling module work.tb_calibrated
+Built simulation snapshot tracker_calibrated
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_calibrated/xsim_script.tcl
+# xsim {tracker_calibrated} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=2
+CASE kind=3
+CASE kind=4
+CASE kind=5
+CASE kind=6
+CASE kind=7
+CASE kind=8
+CASE kind=0
+CASE kind=0
+CASE kind=9
+CASE kind=10
+CASE kind=11
+CASE kind=13
+CASE kind=14
+CASE kind=15
+CASE kind=16
+CASE kind=0
+CASE kind=17
+CASE kind=18
+CASE kind=19
+CASE kind=20
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=3
+CASE kind=0
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=0
+CASE kind=0
+PASS checks=115886 failures=0 complete_frames=36 errors_seen=4 accepted=3474 output=3473 stalls=1375 bubbles=9835 MIN=4/2/2 CROSS=0 FILTER=0
+$finish called at time : 134910 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" Line 250
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:23:02 2026...
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_filtered -s tracker_filtered -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'mask_start' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv:16]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_bbox_stats(IMAGE_WIDTH=12,I...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.blue_pixel_detect(R_BYTE=0,B_BYT...
+Compiling module work.tb_axis_blue_tracker(BBOX_FILTER...
+Compiling module work.tb_filtered
+Built simulation snapshot tracker_filtered
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_filtered/xsim_script.tcl
+# xsim {tracker_filtered} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=2
+CASE kind=3
+CASE kind=4
+CASE kind=5
+CASE kind=6
+CASE kind=7
+CASE kind=8
+CASE kind=0
+CASE kind=0
+CASE kind=9
+CASE kind=10
+CASE kind=11
+CASE kind=13
+CASE kind=14
+CASE kind=15
+CASE kind=16
+CASE kind=0
+CASE kind=17
+CASE kind=18
+CASE kind=19
+CASE kind=20
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=3
+CASE kind=0
+CASE kind=0
+CASE kind=1
+CASE kind=1
+CASE kind=0
+CASE kind=0
+PASS checks=115886 failures=0 complete_frames=36 errors_seen=4 accepted=3474 output=3473 stalls=1375 bubbles=9835 MIN=4/2/2 CROSS=0 FILTER=2
+$finish called at time : 134910 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_axis_blue_tracker.sv" Line 250
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:23:07 2026...
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Xilinxx/Vivado/2020.2/data/ip/xilinx/v_vid_in_axi4s_v4_0/hdl/v_vid_in_axi4s_v4_0_vl_rfs.v" into library work
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_fifo_async
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_fifo_sync
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_cdc_single
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_coupler
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_formatter
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_drop
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9_remap
+INFO: [VRFC 10-311] analyzing module v_vid_in_axi4s_v4_0_9
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Xilinxx/Vivado/2020.2/data/verilog/src/glbl.v" into library work
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_video_in_color_order.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_video_in_color_order
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_video_in_color_order glbl -L xpm -s tracker_ip_color -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'fid' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_video_in_color_order.sv:19]
+WARNING: [VRFC 10-3645] port 'bbox_valid' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_video_in_color_order.sv:30]
+WARNING: [VRFC 10-3645] port 'almost_full' remains unconnected for this instance [C:/Xilinxx/Vivado/2020.2/data/ip/xilinx/v_vid_in_axi4s_v4_0/hdl/v_vid_in_axi4s_v4_0_vl_rfs.v:91]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xpm.xpm_cdc_single(SRC_INPUT_REG=0)
+Compiling module work.v_vid_in_axi4s_v4_0_9_cdc_single
+Compiling module work.v_vid_in_axi4s_v4_0_9_formatter
+Compiling module xpm.xpm_cdc_sync_rst(INIT=0,INIT_SYN...
+Compiling module xpm.xpm_fifo_rst(COMMON_CLOCK=0,CDC_...
+Compiling module xpm.xpm_fifo_reg_bit
+Compiling module xpm.xpm_counter_updn(COUNTER_WIDTH=1...
+Compiling module xpm.xpm_counter_updn(COUNTER_WIDTH=1...
+Compiling module xpm.xpm_counter_updn(COUNTER_WIDTH=1...
+Compiling module xpm.xpm_memory_base(MEMORY_TYPE=1,ME...
+Compiling module xpm.xpm_cdc_gray(INIT_SYNC_FF=1,WIDT...
+Compiling module xpm.xpm_fifo_reg_vec(REG_WIDTH=10)
+Compiling module xpm.xpm_cdc_gray(DEST_SYNC_FF=6,INIT...
+Compiling module xpm.xpm_fifo_reg_vec(REG_WIDTH=11)
+Compiling module xpm.xpm_cdc_gray(INIT_SYNC_FF=1,WIDT...
+Compiling module xpm.xpm_counter_updn(COUNTER_WIDTH=2...
+Compiling module xpm.xpm_fifo_base(COMMON_CLOCK=0,FIF...
+Compiling module xpm.xpm_fifo_async(FIFO_WRITE_DEPTH=...
+Compiling module work.v_vid_in_axi4s_v4_0_9_fifo_async...
+Compiling module work.v_vid_in_axi4s_v4_0_9_coupler(C_...
+Compiling module work.v_vid_in_axi4s_v4_0_9(C_FAMILY="...
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_bbox_stats(IMAGE_WIDTH=12,I...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=12...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=12...
+Compiling module work.tb_video_in_color_order
+Compiling module work.glbl
+Built simulation snapshot tracker_ip_color
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tracker_ip_color/xsim_script.tcl
+# xsim {tracker_ip_color} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. tb_video_in_color_order.video_in.COUPLER_INST.\generate_async_fifo.FIFO_INST .XPM_FIFO_ASYNC_INST.\gnuram_async_fifo.xpm_fifo_base_inst .\gen_sdpram.xpm_memory_base_inst .config_drc
+Time: 1 ps  Iteration: 0  Process: /tb_video_in_color_order/video_in/COUPLER_INST/generate_async_fifo.FIFO_INST/XPM_FIFO_ASYNC_INST/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/Initial294_42  Scope: tb_video_in_color_order.video_in.COUPLER_INST.\generate_async_fifo.FIFO_INST .XPM_FIFO_ASYNC_INST.\gnuram_async_fifo.xpm_fifo_base_inst .\gen_sdpram.xpm_memory_base_inst .config_drc  File: /wrk/ci/prod/2020.2/sw/continuous/733/packages/customer/vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 488
+PASS IP_COLOR checks=2449 frames=3 pixels=288 RGB byte order R=2 G=1 B=0 async CDC preserved
+$finish called at time : 10472 ns : File "D:/2026.test/ov5640_lcd/sim/blue_tracker/tb_video_in_color_order.sv" Line 70
+exit
+INFO: [Common 17-206] Exiting xsim at Mon Oct 26 21:23:14 2026...

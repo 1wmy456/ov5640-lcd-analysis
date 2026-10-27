@@ -1,0 +1,24 @@
+enable=3; starts at next period boundary
+axis yaw center/limits/direction marked verified by operator
+mode=manual frame=9708 valid=1 err=0 age=28336 bbox=385,460,232,291 ex=22 ey=21 yaw=1331 pitch=1386 en=3 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+axis pitch center/limits/direction marked verified by operator
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=9715 valid=1 err=0 age=13628 bbox=385,460,232,291 ex=22 ey=21 yaw=1331 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9728 valid=1 err=0 age=29763 bbox=385,460,232,289 ex=22 ey=20 yaw=1331 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9748 valid=1 err=0 age=31192 bbox=385,457,229,288 ex=21 ey=18 yaw=1331 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9768 valid=1 err=0 age=12497 bbox=385,458,229,288 ex=21 ey=18 yaw=1331 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9788 valid=1 err=0 age=13924 bbox=385,459,232,288 ex=22 ey=20 yaw=1331 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9808 valid=1 err=0 age=15490 bbox=381,456,232,288 ex=18 ey=20 yaw=1325 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-12031,0 active=1,0 ctrl=pd
+mode=auto frame=9828 valid=1 err=0 age=16914 bbox=365,440,232,291 ex=2 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9848 valid=1 err=0 age=18346 bbox=368,442,232,291 ex=5 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9868 valid=1 err=0 age=19769 bbox=368,440,232,289 ex=4 ey=20 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9888 valid=1 err=0 age=21339 bbox=368,440,229,288 ex=4 ey=18 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9908 valid=1 err=0 age=22773 bbox=368,443,229,288 ex=5 ey=18 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9928 valid=1 err=0 age=24195 bbox=368,443,232,291 ex=5 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9948 valid=1 err=0 age=25773 bbox=368,443,232,291 ex=5 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9968 valid=1 err=0 age=27201 bbox=372,443,232,291 ex=7 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=9988 valid=1 err=0 age=28622 bbox=372,444,232,291 ex=8 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=10006 valid=1 err=0 age=29763 bbox=369,443,232,291 ex=6 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=10026 valid=1 err=0 age=31195 bbox=369,443,232,291 ex=6 ey=21 yaw=1323 pitch=1386 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd

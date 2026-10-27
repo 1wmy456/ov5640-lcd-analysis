@@ -1,0 +1,8 @@
+mode=manual frame=9156 valid=1 err=0 age=28903 bbox=381,459,225,284 ex=20 ey=14 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+VISION mask_frame=9159 src_error=0 age=20784 errors=0 objects=1 candidates=1 locked=1 reason=ready process_us=7751 largest=221/19x15 cells
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=manual frame=9168 valid=1 err=0 age=9492 bbox=381,456,225,287 ex=18 ey=16 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=9188 valid=1 err=0 age=10779 bbox=381,456,228,287 ex=18 ey=17 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=9208 valid=1 err=0 age=12205 bbox=384,459,225,287 ex=21 ey=16 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=9228 valid=1 err=0 age=13630 bbox=384,459,228,287 ex=21 ey=17 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd

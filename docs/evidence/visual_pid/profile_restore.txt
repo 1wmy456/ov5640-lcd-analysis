@@ -1,0 +1,115 @@
+Wide experiment 500..2500us is not a mechanically calibrated range.
+manual/hold: PWM enable and position retained
+
+PWM disabled; stored position retained
+
+yaw direction=-1; verify again
+
+pitch direction=1; verify again
+
+yaw limits=500..2500 us; verify again
+
+pitch limits=500..2500 us; verify again
+
+yaw center configured; use center to move
+
+pitch center configured; use center to move
+
+mode=manual frame=3527 valid=0 err=0 age=29762 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=p
+
+smooth=1 controller=p; pulse retained, motion state reset
+
+deadband=15/22 px
+
+yaw accel=400 us/s2
+
+pitch accel=400 us/s2
+
+yaw decel=600 us/s2
+
+pitch decel=600 us/s2
+
+yaw rate=75000 milli-us/s
+
+pitch rate=75000 milli-us/s
+
+mode=manual frame=3547 valid=0 err=0 age=31186 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=p
+
+PID controller=p kp_milli=100,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=100,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=100,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=100,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=100,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=100,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+yaw gain=700 milli-us/(pixel*s)
+
+PID controller=p kp_milli=700,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=700,100 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+mode=manual frame=3567 valid=0 err=0 age=32491 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1500 pitch=1500 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=p
+
+pitch gain=700 milli-us/(pixel*s)
+
+PID controller=p kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+PID controller=p kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+controller=pd; pulse/enables retained, velocity/I/D reset; new frame baseline required
+
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+yaw requested=1331 us
+
+pitch requested=1386 us
+
+mode=manual frame=3581 valid=0 err=0 age=23625 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+MOTION smooth=1 deadband=15/22 accel=400,400 decel=600,600 us/s2; gain_milli=700,700 rate=75,75 us/s
+
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+
+mode=manual frame=3588 valid=0 err=0 age=8916 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+mode=manual frame=3607 valid=0 err=0 age=15497 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+mode=manual frame=3627 valid=0 err=0 age=16917 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+mode=manual frame=3647 valid=0 err=0 age=18338 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+mode=manual frame=3667 valid=0 err=0 age=19768 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+mode=manual frame=3687 valid=0 err=0 age=21344 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+
+m
+VISUAL_PID_PROFILE: PASS; controller=pd Kp=0.7 Ki=0 Kd=0.03; volatile, restore after reset.

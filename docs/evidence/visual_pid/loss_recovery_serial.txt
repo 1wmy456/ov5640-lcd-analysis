@@ -1,0 +1,80 @@
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14047 valid=0 err=0 age=15489 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1227 pitch=1494 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14067 valid=0 err=0 age=16913 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1227 pitch=1494 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14087 valid=0 err=0 age=18344 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1227 pitch=1494 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14106 valid=0 err=0 age=24760 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1227 pitch=1494 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14126 valid=0 err=0 age=26341 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1227 pitch=1494 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14146 valid=0 err=0 age=27762 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1227 pitch=1494 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=-90300,125999 i_milli=0,0 d_milli=8958,-6041 requested_milli=-81341,119958 us/s; D filtered px/s=-298,-201
+mode=auto frame=14166 valid=1 err=0 age=28908 bbox=392,475,319,383 ex=33 ey=111 yaw=1223 pitch=1499 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-18260,62017 active=1,1 ctrl=pd
+mode=auto frame=14186 valid=1 err=0 age=30333 bbox=303,390,228,295 ex=-54 ey=21 yaw=1239 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=36271,0 active=1,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=25200,0 i_milli=0,0 d_milli=-2544,0 requested_milli=22655,0 us/s; D filtered px/s=84,0
+mode=auto frame=14206 valid=1 err=0 age=31761 bbox=324,411,224,292 ex=-33 ey=18 yaw=1255 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=21072,0 active=1,0 ctrl=pd
+mode=auto frame=14227 valid=1 err=0 age=8060 bbox=345,431,225,292 ex=-12 ey=18 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14247 valid=1 err=0 age=9209 bbox=345,431,221,291 ex=-12 ey=16 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14267 valid=1 err=0 age=10501 bbox=364,447,208,275 ex=5 ey=1 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14287 valid=0 err=0 age=11915 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1260 pitch=1504 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14307 valid=1 err=0 age=13348 bbox=364,451,213,283 ex=7 ey=8 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14327 valid=1 err=0 age=14769 bbox=374,459,213,280 ex=16 ey=6 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14347 valid=1 err=0 age=16344 bbox=365,453,212,283 ex=9 ey=7 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14367 valid=1 err=0 age=17772 bbox=365,452,204,275 ex=8 ey=-1 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=14387 valid=1 err=0 age=19200 bbox=361,448,204,275 ex=4 ey=-1 yaw=1260 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,-28700 i_milli=0,0 d_milli=0,-3213 requested_milli=0,-31913 us/s; D filtered px/s=0,-107
+mode=auto frame=14406 valid=1 err=0 age=25767 bbox=361,451,163,236 ex=6 ey=-41 yaw=1260 pitch=1502 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,-31913 active=0,1 ctrl=pd
+mode=auto frame=14426 valid=1 err=0 age=27200 bbox=277,366,155,228 ex=-79 ey=-49 yaw=1271 pitch=1478 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=60153,-31696 active=1,1 ctrl=pd
+mode=auto frame=14446 valid=1 err=0 age=28619 bbox=359,444,166,237 ex=1 ey=-39 yaw=1291 pitch=1463 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,-26025 active=0,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,-24500 i_milli=0,0 d_milli=0,1764 requested_milli=0,-22735 us/s; D filtered px/s=0,58
+mode=auto frame=14466 valid=1 err=0 age=30043 bbox=428,516,200,275 ex=72 ey=-3 yaw=1274 pitch=1459 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-51738,0 active=1,0 ctrl=pd
+mode=auto frame=14486 valid=1 err=0 age=31472 bbox=398,488,201,276 ex=43 ey=-2 yaw=1256 pitch=1459 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-29061,0 active=1,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=-30099,0 i_milli=0,0 d_milli=1038,0 requested_milli=-29061,0 us/s; D filtered px/s=-34,0
+mode=auto frame=14507 valid=1 err=0 age=7788 bbox=373,464,204,279 ex=18 ey=1 yaw=1246 pitch=1459 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-10843,0 active=1,0 ctrl=pd
+mode=auto frame=14527 valid=1 err=0 age=9205 bbox=342,430,199,272 ex=-14 ey=-5 yaw=1244 pitch=1459 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=14547 valid=1 err=0 age=10493 bbox=333,418,300,365 ex=-25 ey=92 yaw=1255 pitch=1473 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=14552,69771 active=1,1 ctrl=pd
+mode=auto frame=14567 valid=1 err=0 age=11918 bbox=352,439,285,352 ex=-5 ey=78 yaw=1257 pitch=1504 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,54106 active=0,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,54599 i_milli=0,0 d_milli=0,-493 requested_milli=0,54106 us/s; D filtered px/s=0,-16
+mode=auto frame=14587 valid=1 err=0 age=13344 bbox=328,412,228,292 ex=-30 ey=20 yaw=1257 pitch=1525 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=16000,7208 active=1,1 ctrl=pd
+mode=auto frame=14607 valid=1 err=0 age=14770 bbox=208,295,177,248 ex=-149 ey=-28 yaw=1288 pitch=1521 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=75000,-19713 active=1,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=104300,-19599 i_milli=0,0 d_milli=4775,-113 requested_milli=109075,-19713 us/s; D filtered px/s=-159,-3
+mode=auto frame=14627 valid=1 err=0 age=16058 bbox=183,270,190,261 ex=-174 ey=-15 yaw=1326 pitch=1513 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=75000,0 active=1,0 ctrl=pd
+mode=auto frame=14647 valid=1 err=0 age=17484 bbox=201,291,184,257 ex=-154 ey=-20 yaw=1364 pitch=1512 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=75000,0 active=1,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=107800,0 i_milli=0,0 d_milli=-1984,0 requested_milli=105815,0 us/s; D filtered px/s=66,0
+mode=auto frame=14667 valid=1 err=0 age=18909 bbox=245,332,171,244 ex=-112 ey=-33 yaw=1401 pitch=1503 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=73435,-23195 active=1,1 ctrl=pd
+mode=auto frame=14687 valid=1 err=0 age=20484 bbox=352,442,147,222 ex=-3 ey=-56 yaw=1427 pitch=1488 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,-40236 active=0,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,-39199 i_milli=0,0 d_milli=0,-1036 requested_milli=0,-40236 us/s; D filtered px/s=0,-34
+mode=auto frame=14706 valid=1 err=0 age=26907 bbox=538,639,152,234 ex=188 ey=-47 yaw=1399 pitch=1467 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-75000,-31060 active=1,1 ctrl=pd
+mode=auto frame=14726 valid=1 err=0 age=28333 bbox=559,664,166,248 ex=211 ey=-33 yaw=1363 pitch=1455 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-75000,-23080 active=1,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=-147000,-23799 i_milli=0,0 d_milli=755,-199 requested_milli=-146244,-23999 us/s; D filtered px/s=-25,-6
+mode=auto frame=14746 valid=1 err=0 age=29760 bbox=596,704,191,275 ex=250 ey=-7 yaw=1325 pitch=1451 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-75000,0 active=1,0 ctrl=pd
+mode=auto frame=14766 valid=1 err=0 age=31194 bbox=631,735,263,344 ex=283 ey=63 yaw=1288 pitch=1455 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-75000,50376 active=1,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=-194600,50400 i_milli=0,0 d_milli=75,6398 requested_milli=-194524,56798 us/s; D filtered px/s=-2,213
+mode=auto frame=14786 valid=1 err=0 age=32534 bbox=463,554,313,384 ex=108 ey=108 yaw=1250 pitch=1491 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-63485,74827 active=1,1 ctrl=pd
+mode=auto frame=14807 valid=1 err=0 age=8916 bbox=256,336,257,316 ex=-104 ey=46 yaw=1251 pitch=1525 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=75000,23026 active=1,1 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=72800,32199 i_milli=0,0 d_milli=9400,-9173 requested_milli=82200,23026 us/s; D filtered px/s=-313,-305
+mode=auto frame=14827 valid=1 err=0 age=10064 bbox=202,290,130,199 ex=-154 ey=-76 yaw=1289 pitch=1521 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=75000,-60966 active=1,1 ctrl=pd

@@ -1,0 +1,7 @@
+{
+  "yaw_us": 1252,
+  "pitch_us": 1454,
+  "wide_experiment": true,
+  "source": "final_serial.txt",
+  "controller": "pd"
+}

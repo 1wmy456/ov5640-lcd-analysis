@@ -1,0 +1,22 @@
+PASS PAN_CONTROL sign/deadband/direction/rate/limits/fraction/repeat/stale/loss/recovery/manual-auto
+PASS SMOOTH_CONTROL A=200 D=400 checks=1913 startup_delta=0.2000 legacy_delta=1.5000 noise_pulse_changes=0 legacy=120; accel/decel/reverse/hysteresis/duplicate/error/stale/recovery/limits/manual/wrap
+PASS SMOOTH_CONTROL A=400 D=600 checks=1907 startup_delta=0.4000 legacy_delta=1.5000 noise_pulse_changes=0 legacy=120; accel/decel/reverse/hysteresis/duplicate/error/stale/recovery/limits/manual/wrap
+PLANT synthetic mode=0 direction=-1 scale=0.80 final_us=1329.648 settled_samples=299
+PLANT synthetic mode=0 direction=-1 scale=1.30 final_us=1394.258 settled_samples=299
+PLANT synthetic mode=0 direction=-1 scale=1.80 final_us=1422.760 settled_samples=299
+PLANT synthetic mode=0 direction=1 scale=0.80 final_us=1670.352 settled_samples=299
+PLANT synthetic mode=0 direction=1 scale=1.30 final_us=1605.742 settled_samples=299
+PLANT synthetic mode=0 direction=1 scale=1.80 final_us=1577.240 settled_samples=299
+PLANT synthetic mode=1 direction=-1 scale=0.80 final_us=1329.885 settled_samples=299
+PLANT synthetic mode=1 direction=-1 scale=1.30 final_us=1394.407 settled_samples=299
+PLANT synthetic mode=1 direction=-1 scale=1.80 final_us=1423.095 settled_samples=299
+PLANT synthetic mode=1 direction=1 scale=0.80 final_us=1670.115 settled_samples=299
+PLANT synthetic mode=1 direction=1 scale=1.30 final_us=1605.593 settled_samples=299
+PLANT synthetic mode=1 direction=1 scale=1.80 final_us=1576.905 settled_samples=299
+PLANT synthetic mode=2 direction=-1 scale=0.80 final_us=1329.612 settled_samples=299
+PLANT synthetic mode=2 direction=-1 scale=1.30 final_us=1394.125 settled_samples=299
+PLANT synthetic mode=2 direction=-1 scale=1.80 final_us=1422.972 settled_samples=299
+PLANT synthetic mode=2 direction=1 scale=0.80 final_us=1670.388 settled_samples=299
+PLANT synthetic mode=2 direction=1 scale=1.30 final_us=1605.875 settled_samples=299
+PLANT synthetic mode=2 direction=1 scale=1.80 final_us=1577.028 settled_samples=299
+PASS VISUAL_PID checks=115169; P/PD/PID/filter/sign/actual-dt/anti-windup/slew/limits/hysteresis/holds/recovery/switch/wrap/synthetic-plants

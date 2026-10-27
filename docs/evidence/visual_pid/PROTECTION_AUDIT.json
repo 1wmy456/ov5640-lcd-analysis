@@ -1,0 +1,23 @@
+{
+  "baseline": "c7b9d02",
+  "protected_files": 44,
+  "user_dirty_files_unchanged": [
+    "docs/evidence/pan_tilt/BUILD_MANIFEST.json",
+    "docs/evidence/pan_tilt/tool_reports/bus_skew.rpt",
+    "docs/evidence/pan_tilt/tool_reports/cdc.rpt",
+    "docs/evidence/pan_tilt/tool_reports/drc.rpt",
+    "docs/evidence/pan_tilt/tool_reports/timing_summary.rpt",
+    "docs/evidence/pan_tilt/tool_reports/utilization.rpt",
+    "ov5640_lcd.xpr",
+    "vitis/ov5640_lcd/src/emio_sccb_cfg/emio_sccb_cfg.c"
+  ],
+  "old_hardware_reused": true,
+  "new_sources": [
+    "tracking_control.c",
+    "tracking_control.h",
+    "pan_tilt_app.c"
+  ],
+  "pid_checks": 115169,
+  "physical_pd_accepted": true,
+  "physical_nonzero_ki_accepted": false
+}

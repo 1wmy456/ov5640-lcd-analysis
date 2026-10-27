@@ -1,0 +1,71 @@
+{
+  "controller": "pd",
+  "kp": [
+    0.7,
+    0.7
+  ],
+  "ki": [
+    0,
+    0
+  ],
+  "kd": [
+    0.03,
+    0.03
+  ],
+  "tau_ms": [
+    100,
+    100
+  ],
+  "rate_us_s": [
+    75,
+    75
+  ],
+  "acceleration_us_s2": [
+    400,
+    400
+  ],
+  "deceleration_us_s2": [
+    600,
+    600
+  ],
+  "deadband_px": [
+    15,
+    22
+  ],
+  "integral_limit_us_s": [
+    10,
+    10
+  ],
+  "derivative_limit_px_s": [
+    1000,
+    1000
+  ],
+  "direction": [
+    -1,
+    1
+  ],
+  "yaw_limits_us": [
+    500,
+    2500
+  ],
+  "pitch_limits_us": [
+    500,
+    2500
+  ],
+  "wide_experiment": true,
+  "mechanically_calibrated_limits_us": [
+    [
+      1100,
+      1650
+    ],
+    [
+      1240,
+      1800
+    ]
+  ],
+  "yaw_us": 1252,
+  "pitch_us": 1454,
+  "enabled": 3,
+  "automatic": true,
+  "note": "Runtime wide experiment inherited by explicit user choice; Ki remains zero for accepted PD. Cold boot P/manual/PWM OFF."
+}

@@ -1,0 +1,20 @@
+manual/hold: PWM enable and position retained
+mode=manual frame=16586 valid=1 err=0 age=20057 bbox=357,432,153,210 ex=-6 ey=-59 yaw=1305 pitch=1228 en=3 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=16587 valid=1 err=0 age=15061 bbox=359,434,161,219 ex=-4 ey=-50 yaw=1305 pitch=1228 en=3 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+controller=p; pulse/enables retained, velocity/I/D reset; new frame baseline required
+PID controller=p kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=manual frame=16591 valid=1 err=0 age=15494 bbox=366,448,187,253 ex=7 ey=-20 yaw=1305 pitch=1228 en=3 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=p
+controller=pd; pulse/enables retained, velocity/I/D reset; new frame baseline required
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=manual frame=16595 valid=1 err=0 age=15775 bbox=368,455,206,272 ex=11 ey=-1 yaw=1305 pitch=1228 en=3 hold=1 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+auto on: K us/(pixel*s), rate us/s; first frame establishes baseline
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=auto frame=16607 valid=1 err=0 age=16630 bbox=357,441,205,272 ex=-1 ey=-2 yaw=1305 pitch=1228 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=16627 valid=1 err=0 age=18057 bbox=361,444,156,219 ex=2 ey=-53 yaw=1305 pitch=1225 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=0,-42159 active=0,1 ctrl=pd
+mode=auto frame=16647 valid=0 err=0 age=19485 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1305 pitch=1198 en=3 hold=3 limit=0 det=lock_miss drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=16667 valid=0 err=0 age=21055 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1305 pitch=1197 en=3 hold=3 limit=0 det=lock_miss drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=16687 valid=1 err=0 age=22480 bbox=395,471,267,322 ex=33 ey=54 yaw=1302 pitch=1196 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-24407,42574 active=1,1 ctrl=pd
+mode=auto frame=16707 valid=1 err=0 age=23910 bbox=397,474,295,358 ex=35 ey=86 yaw=1287 pitch=1225 en=3 hold=0 limit=0 det=ready drop=0 smooth=1 db=15/22 vel_milli=-23314,60895 active=1,1 ctrl=pd

@@ -1,0 +1,31 @@
+controller=pid; pulse/enables retained, velocity/I/D reset; new frame baseline required
+PID controller=pid kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+PID controller=pid kp_milli=700,700 ki_milli=10,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+PID controller=pid kp_milli=700,700 ki_milli=10,10 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+PID controller=pid kp_milli=700,700 ki_milli=10,10 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+controller=p; pulse/enables retained, velocity/I/D reset; new frame baseline required
+PID controller=p kp_milli=700,700 ki_milli=10,10 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+controller=pd; pulse/enables retained, velocity/I/D reset; new frame baseline required
+PID controller=pd kp_milli=700,700 ki_milli=10,10 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+PID controller=pd kp_milli=700,700 ki_milli=0,10 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=manual frame=3747 valid=0 err=0 age=25481 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+invalid command/value; examples: enable yaw | step yaw +5 | dir yaw -1 | limits yaw 1400 1600 | gain yaw 0.1 | center | verify yaw | auto | status
+invalid command/value; examples: enable yaw | step yaw +5 | dir yaw -1 | limits yaw 1400 1600 | gain yaw 0.1 | center | verify yaw | auto | status
+invalid command/value; examples: enable yaw | step yaw +5 | dir yaw -1 | limits yaw 1400 1600 | gain yaw 0.1 | center | verify yaw | auto | status
+invalid command/value; examples: enable yaw | step yaw +5 | dir yaw -1 | limits yaw 1400 1600 | gain yaw 0.1 | center | verify yaw | auto | status
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+mode=manual frame=3762 valid=0 err=0 age=31476 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=3767 valid=0 err=0 age=26907 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=3787 valid=0 err=0 age=28337 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=3807 valid=0 err=0 age=29762 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=manual frame=3827 valid=0 err=0 age=31183 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1331 pitch=1386 en=0 hold=1 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd

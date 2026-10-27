@@ -1,0 +1,10 @@
+mode=auto frame=20444 valid=0 err=0 age=8637 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1252 pitch=1454 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+MOTION smooth=1 deadband=15/22 accel=400,400 decel=600,600 us/s2; gain_milli=700,700 rate=75,75 us/s
+mode=auto frame=20448 valid=0 err=0 age=8693 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1252 pitch=1454 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+PID controller=pd kp_milli=700,700 ki_milli=0,0 kd_milli=30,30 tau_ms=100,100 imax_milli=10000,10000 dlimit=1000,1000
+PID_TERMS p_milli=0,0 i_milli=0,0 d_milli=0,0 requested_milli=0,0 us/s; D filtered px/s=0,0
+PWM_NET clk=100000000 flags=f yaw high=125200 period=2000000 rises=13434 pitch high=145400 period=2000000 rises=13434 ticks; connector voltage unmeasured
+mode=auto frame=20468 valid=0 err=0 age=10063 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1252 pitch=1454 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=20488 valid=0 err=0 age=11629 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1252 pitch=1454 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=20508 valid=0 err=0 age=13055 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1252 pitch=1454 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
+mode=auto frame=20528 valid=0 err=0 age=14487 bbox=0,0,0,0 ex=-400 ey=-240 yaw=1252 pitch=1454 en=3 hold=3 limit=0 det=no_blob drop=0 smooth=1 db=15/22 vel_milli=0,0 active=0,0 ctrl=pd
