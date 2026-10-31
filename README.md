@@ -17,6 +17,7 @@
 9. [连通域分离、圆形/椭圆筛选和目标锁定](docs/COMPONENT_TRACKER.md) / [新版本构建与仿真](docs/evidence/component_tracker/BUILD_REPORT.md) / [新版本现场记录](docs/evidence/component_tracker/BOARD_VALIDATION.md)
 10. [平滑跟随：加减速限制、死区滞回与回退入口](docs/SMOOTH_TRACKING.md) / [平滑控制测试](docs/evidence/smooth_tracker/BUILD_REPORT.md) / [现场验证](docs/evidence/smooth_tracker/BOARD_VALIDATION.md)
 11. [视觉PD/PID：滤波微分、积分抗饱和与原P对照](docs/VISUAL_PID.md)
+12. [最新项目进展、验收边界与运行回退（2026-10-31）](docs/PROJECT_PROGRESS.md)
 
 ```mermaid
 flowchart LR
