@@ -1,0 +1,1 @@
+PASS TOUCH_EVENTS checks=768019 mapping/debounce/repeat/multitouch/release/timeout

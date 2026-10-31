@@ -1,6 +1,8 @@
 #include "pan_tilt_app.h"
 #include "pan_tilt_driver.h"
 #include "cap_runtime.h"
+#include "../touch/touch_driver.h"
+extern unsigned int lcd_id;
 #include "xparameters.h"
 #include "xtime_l.h"
 #include "xuartps.h"
@@ -199,9 +201,11 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
     log_text("VISUAL_PID v1 defaults controller=p Ki=0 Kd=0.03 tau100ms; controller p/pd/pid | pid | kp/ki/kd/dtau/imax/dlimit yaw/pitch <value>\r\n");
     if(!control.dimensions_ok)log_text("AUTO DISABLED: camera/display/tracker mismatch display=%ux%u tracker=%ux%u camera_ok=%d\r\n",width,height,dimensions&65535,dimensions>>16,camera_ok);
     last_tick=last_log=now_us();
+    touch_init(lcd_id,width,height);
     app_state();
     for(;;){
         service_uart();service_mailbox();now=now_us();
+        touch_service(now);
         cap_runtime_service(pt_base,now);
         if(now-last_tick>=20000){last_tick=now;cap_runtime_target(pt_base,now,&target);
             if(pt_control_update(&control,&target,now))pt_driver_commit(pt_base,&control);

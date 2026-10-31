@@ -18,6 +18,7 @@
 10. [平滑跟随：加减速限制、死区滞回与回退入口](docs/SMOOTH_TRACKING.md) / [平滑控制测试](docs/evidence/smooth_tracker/BUILD_REPORT.md) / [现场验证](docs/evidence/smooth_tracker/BOARD_VALIDATION.md)
 11. [视觉PD/PID：滤波微分、积分抗饱和与原P对照](docs/VISUAL_PID.md)
 12. [最新项目进展、验收边界与运行回退（2026-10-31）](docs/PROJECT_PROGRESS.md)
+13. [触摸选目标分阶段开发与lost固定回退入口](docs/TOUCH_TARGET_SELECTION.md)
 
 ```mermaid
 flowchart LR

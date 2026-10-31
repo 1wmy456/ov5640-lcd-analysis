@@ -1,0 +1,28 @@
+{
+  "stage": "A",
+  "project": "build/touch_stage_a_v4",
+  "workspace": "build/touch_stage_a_v4_sw",
+  "application": "app_gt1158",
+  "compiled_sources": [
+    "clk_wiz/clk_wiz.c",
+    "display_ctrl/display_ctrl.c",
+    "emio_sccb_cfg/emio_sccb_cfg.c",
+    "main.c",
+    "ov5640/ov5640_init.c",
+    "pan_tilt/cap_components.c",
+    "pan_tilt/cap_runtime.c",
+    "pan_tilt/pan_tilt_app.c",
+    "pan_tilt/pan_tilt_driver.c",
+    "pan_tilt/tracking_control.c",
+    "touch/touch_driver.c",
+    "touch/touch_events.c",
+    "vdma_api/vdma_api.c"
+  ],
+  "end_address": "0x13cd70",
+  "files": {
+    "build/touch_stage_a_v4/system_wrapper.xsa": "4d506b32d3a772861bc7d4597a59f1e98577f12de3423a649366b57d18a15e52",
+    "build/touch_stage_a_v4/ov5640_lcd.runs/impl_1/system_wrapper.bit": "6fea5a3a6cd4e28c90f65b007b2a622d501d0c46cdeac37803246448f704446e",
+    "build/touch_stage_a_v4_sw/app_gt1158/ov5640_lcd.elf": "6ac9e7753c1113938b605761786764edcdad851ed6e335ec25d97760168f8381"
+  },
+  "physical_touch_validation": "see BOARD_VALIDATION.md"
+}

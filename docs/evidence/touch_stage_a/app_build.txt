@@ -1,0 +1,8 @@
+In file included from D:\2026.test\ov5640_lcd\build\touch_stage_a_v4_sw\app_gt1158\src\pan_tilt\pan_tilt_app.c:7:
+D:\2026.test\ov5640_lcd\build\touch_stage_a_v4_sw\board_platform\ps7_cortexa9_0\standalone_domain\bsp\ps7_cortexa9_0\include/xtime_l.h:65:9: note: #pragma message: For the sleep routines, Global timer is being used
+   65 | #pragma message ("For the sleep routines, Global timer is being used")
+      |         ^~~~~~~
+   text	   data	    bss	    dec	    hex	filename
+ 144852	   2857	  85328	 233037	  38e4d	D:\2026.test\ov5640_lcd\build\touch_stage_a_v4_sw\app_gt1158\ov5640_lcd.elf
+BOARD_APP: PASS application and linker script compiled: D:\2026.test\ov5640_lcd\build\touch_stage_a_v4_sw\app_gt1158\ov5640_lcd.elf
+BOARD_APP: compiled 13 C sources; _end= 0x13cd70 below framebuffer 0x01100000
