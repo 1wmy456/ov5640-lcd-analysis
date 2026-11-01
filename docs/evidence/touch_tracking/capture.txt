@@ -1,0 +1,1 @@
+PASS CAPTURE_STABILITY checks=1810 30 identical raw frames, stable raw dimensions/center, no overlay filter involved

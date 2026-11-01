@@ -1,5 +1,9 @@
 # 触摸选择与在线外观跟踪
 
+白盖修正版`app_neutral_luma`：根据点击样本的低饱和特性选择曝光归一化亮度/饱和度直方图（16×4），彩色目标保留原8×8色度表征；不是白色专用RGB阈值。初始化用局部亮度离散度确定容差，并对低饱和掩码作5×5开运算，分离盖子与手指间细桥。白盖实拍回放已通过，实时白盖仍待现场确认。开运算可能删除很小的低饱和目标；相似亮度、相接区域、白盖贴白背景仍有限制。全帧均值归一化也可能受大面积背景变化影响，不能宣称全场景稳定或黑盖已验收。
+
+私有失败现场复现：`./scripts/test_appearance.ps1 -CapturedFrame build/touch_white_scene.bin -CapturedX 548 -CapturedY 290`。图像只保留在忽略的build目录；测试包括实际点击初始化和30帧原图重复匹配，不代替实时移动验收。旧版回退：`./scripts/download_touch_tracking.ps1 -Application app_touch_timebase`，验收标签`touch-responsive-validated`保留。
+
 2026-11-01本轮蓝色上板已确认：Responsive配置下约1～2秒回中，移动跟随与停稳正常，失目标保持、重新点击恢复正常。代码及使用入口见下文；红色、白色和多目标切换仍未现场验收。当前控制为Kp1.5、Kd0（P加运动限制），PD/PID实现及旧版均保留。
 
 当前快速回中配置：`./scripts/restore_touch_tracking.ps1 -Responsive`，两轴Kp1.5、Kd0、速率100us/s、加速500/减速800。用户已确认固定目标约1～2秒回中、速度及停稳合适；动态跟随及失目标复测另行记录。此配置依赖`app_touch_timebase`，实际为P控制加运动轨迹，保留PD/PID实现。脚本默认仍关闭PWM；显式`-EnableAuto`启用双轴自动。此前用户选择的500～2500实验范围需显式`-WideExperiment`，未当作全行程机械标定。

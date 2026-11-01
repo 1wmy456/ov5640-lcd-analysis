@@ -8,6 +8,18 @@ static ApColor color(uint32_t p){
  ApColor c={y,sum?b*255/sum-85:0,sum?r*255/sum-85:0};return c;
 }
 static int matches(ApColor a,ApColor b,unsigned radius){int dy=a.y-b.y,db=a.cb-b.cb,dr=a.cr-b.cr;return abs(dy)<=96&&(unsigned)(db*db+dr*dr)<=radius*radius;}
+static int neutral(ApColor c){return c.cb*c.cb+c.cr*c.cr<18*18;}
+static unsigned feature_bin(AppearanceWork *w,ApColor c){
+ ApColor reference=w->selecting?w->proposed:w->tracker->anchor;
+ if(neutral(reference)){
+  /* Achromatic objects need luminance, not a color-name threshold. Normalize
+     exposure with frame mean so common illumination scaling does not move bins. */
+  unsigned y=(unsigned)c.y*128/(w->global_luma?w->global_luma:1);
+  unsigned saturation=abs(c.cb)+abs(c.cr);if(y>255)y=255;if(saturation>63)saturation=63;
+  return (y>>4)*4+(saturation>>4);
+ }
+ return ((unsigned)(c.cb+85)>>5)*8+((unsigned)(c.cr+85)>>5);
+}
 static unsigned bit(const uint32_t *a,unsigned n){return (a[n>>5]>>(n&31))&1u;}
 static void set(uint32_t *a,unsigned n){a[n>>5]|=1u<<(n&31);}
 static void clear(uint32_t *a,unsigned n){a[n>>5]&=~(1u<<(n&31));}
@@ -58,11 +70,41 @@ void appearance_begin(AppearanceWork *w,AppearanceTracker *t,const uint32_t *rgb
  CapDetector *d=&w->detector;unsigned n;
  memset(w,0,sizeof(*w));w->rgb=rgb;w->tracker=t;w->frame_id=frame;w->selecting=!!selecting;w->click_x=x;w->click_y=y;
  if((selecting&&(x>=800||y>=480))||(!selecting&&!t->has_model))return;
+ /* The immutable frame is already owned by PS. One integer luminance pass. */
+ uint32_t total_y=0;
+ for(n=0;n<CAP_CELLS;n++){uint32_t p=rgb[n];total_y+=(((p>>16)&255)+2*((p>>8)&255)+(p&255))/4;}
+ w->global_luma=total_y/CAP_CELLS;if(!w->global_luma)w->global_luma=1;
  if(!selecting&&t->appearance_ready){search_begin(w);return;}
  cap_detector_init(d);w->chroma_radius=t->chroma_radius;
  w->proposed=selecting?seed(rgb,x/4,y/4,&w->chroma_radius):t->color;
- for(n=0;n<CAP_CELLS;n++)if(matches(color(rgb[n]),w->proposed,w->chroma_radius))set(d->raw,n);
+ unsigned luma_gate=96;
+ if(selecting&&neutral(w->proposed)){
+  int deviations[9];unsigned count=0;
+  for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++){
+   int xx=(int)x/4+dx,yy=(int)y/4+dy;
+   if(xx>=0&&xx<CAP_MASK_WIDTH&&yy>=0&&yy<CAP_MASK_HEIGHT)deviations[count++]=abs(color(rgb[yy*CAP_MASK_WIDTH+xx]).y-w->proposed.y);
+  }
+  luma_gate=32+3*median(deviations,count);if(luma_gate>64)luma_gate=64;
+ }
+ for(n=0;n<CAP_CELLS;n++){
+  ApColor c=color(rgb[n]);
+  if(matches(c,w->proposed,w->chroma_radius)&&(unsigned)abs(c.y-w->proposed.y)<=luma_gate)set(d->raw,n);
+ }
  if(selecting){
+  if(neutral(w->proposed)){
+   /* Opening removes narrow achromatic bridges (e.g. cap to fingertip).
+      Integral storage is scratch during SELECT, before any TRACK integral. */
+   uint32_t *eroded=w->integral,*opened=w->integral+CAP_WORDS;
+   memset(eroded,0,CAP_WORDS*8);
+   for(int yy=2;yy<CAP_MASK_HEIGHT-2;yy++)for(int xx=2;xx<CAP_MASK_WIDTH-2;xx++){
+    unsigned ok=1;
+    for(int dy=-2;dy<=2&&ok;dy++)for(int dx=-2;dx<=2;dx++)if(!bit(d->raw,(yy+dy)*CAP_MASK_WIDTH+xx+dx)){ok=0;break;}
+    if(ok)set(eroded,yy*CAP_MASK_WIDTH+xx);
+   }
+   for(int yy=2;yy<CAP_MASK_HEIGHT-2;yy++)for(int xx=2;xx<CAP_MASK_WIDTH-2;xx++)if(bit(eroded,yy*CAP_MASK_WIDTH+xx))
+    for(int dy=-2;dy<=2;dy++)for(int dx=-2;dx<=2;dx++)set(opened,(yy+dy)*CAP_MASK_WIDTH+xx+dx);
+   memcpy(d->raw,opened,CAP_WORDS*4);
+  }
   /* Keep only the clicked component. No fixed color table or central-object preference. */
   enqueue(d,(y/4)*CAP_MASK_WIDTH+x/4);
   while(d->head<d->tail){n=d->queue[d->head++];unsigned xx=n%CAP_MASK_WIDTH,yy=n/CAP_MASK_WIDTH;
@@ -84,20 +126,21 @@ void appearance_begin(AppearanceWork *w,AppearanceTracker *t,const uint32_t *rgb
  cap_detector_begin(d,frame);w->busy=1;
 }
 static unsigned histogram(AppearanceWork *w,CapBox b,uint16_t out[64],ApColor *mean){
+ unsigned nx=neutral(w->selecting?w->proposed:w->tracker->anchor)?4:8,ny=64/nx;
  uint32_t hist[64]={0},smooth[64]={0};int sy=0,scb=0,scr=0;unsigned x,y,n=0,i,total=0;
  for(y=b.ymin/4;y<=b.ymax/4&&y<CAP_MASK_HEIGHT;y++)for(x=b.xmin/4;x<=b.xmax/4&&x<CAP_MASK_WIDTH;x++){
   unsigned index=y*CAP_MASK_WIDTH+x;
   if(bit(w->detector.raw,index)){
-   uint32_t p=w->rgb[index];ApColor c=color(p);unsigned bin=((unsigned)(c.cb+85)>>5)*8+((unsigned)(c.cr+85)>>5);
+   uint32_t p=w->rgb[index];ApColor c=color(p);unsigned bin=feature_bin(w,c);
    hist[bin]++;n++;sy+=c.y;scb+=c.cb;scr+=c.cr;
   }
  }
  if(!n)return 0;
  /* Smooth neighboring chromaticity bins; avoid a hard-bin boundary causing LOST. */
- for(y=0;y<8;y++)for(x=0;x<8;x++)if(hist[y*8+x]){
+ for(y=0;y<ny;y++)for(x=0;x<nx;x++)if(hist[y*nx+x]){
   for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++){
    int xx=(int)x+dx,yy=(int)y+dy;unsigned weight=(dx?1u:2u)*(dy?1u:2u);
-   if(xx>=0&&xx<8&&yy>=0&&yy<8){smooth[yy*8+xx]+=hist[y*8+x]*weight;total+=hist[y*8+x]*weight;}
+   if(xx>=0&&xx<(int)nx&&yy>=0&&yy<(int)ny){smooth[yy*nx+xx]+=hist[y*nx+x]*weight;total+=hist[y*nx+x]*weight;}
   }
  }
  for(i=0;i<64;i++)out[i]=(uint16_t)((smooth[i]*4096u+total/2)/total);
@@ -105,14 +148,15 @@ static unsigned histogram(AppearanceWork *w,CapBox b,uint16_t out[64],ApColor *m
 }
 static unsigned intersection(const uint16_t *a,const uint16_t *b){unsigned i,v=0;for(i=0;i<64;i++)v+=a[i]<b[i]?a[i]:b[i];return v>4096?4096:v;}
 static void background_model(AppearanceWork *w,CapBox b,uint16_t out[64]){
+ unsigned nx=neutral(w->selecting?w->proposed:w->tracker->anchor)?4:8,ny=64/nx;
  uint32_t raw_hist[64]={0},smooth[64]={0};unsigned total=0;
  int lx=b.xmin/4,hx=b.xmax/4,ly=b.ymin/4,hy=b.ymax/4,mx=(hx-lx+1)/3+1,my=(hy-ly+1)/3+1;
  for(int y=ly-my;y<=hy+my;y++)for(int x=lx-mx;x<=hx+mx;x++){
   if(x<0||y<0||x>=CAP_MASK_WIDTH||y>=CAP_MASK_HEIGHT||(x>=lx&&x<=hx&&y>=ly&&y<=hy))continue;
-  ApColor c=color(w->rgb[y*CAP_MASK_WIDTH+x]);raw_hist[((c.cb+85)>>5)*8+((c.cr+85)>>5)]++;
+  ApColor c=color(w->rgb[y*CAP_MASK_WIDTH+x]);raw_hist[feature_bin(w,c)]++;
  }
- for(int y=0;y<8;y++)for(int x=0;x<8;x++)for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++){
-  int xx=x+dx,yy=y+dy;if(xx>=0&&xx<8&&yy>=0&&yy<8){unsigned v=raw_hist[y*8+x]*(dx?1u:2u)*(dy?1u:2u);smooth[yy*8+xx]+=v;total+=v;}
+ for(int y=0;y<(int)ny;y++)for(int x=0;x<(int)nx;x++)for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++){
+  int xx=x+dx,yy=y+dy;if(xx>=0&&xx<(int)nx&&yy>=0&&yy<(int)ny){unsigned v=raw_hist[y*nx+x]*(dx?1u:2u)*(dy?1u:2u);smooth[yy*nx+xx]+=v;total+=v;}
  }
  for(unsigned i=0;i<64;i++)out[i]=total?(uint16_t)((smooth[i]*4096u+total/2)/total):0;
 }
@@ -203,7 +247,7 @@ static int search_work(AppearanceWork *w,unsigned budget){
  while(budget--){
   if(w->search_stage==0){
    unsigned n=w->search_scan++,x=n%CAP_MASK_WIDTH,y=n/CAP_MASK_WIDTH;ApColor c=color(w->rgb[n]);
-   unsigned bin=((c.cb+85)>>5)*8+((c.cr+85)>>5),p=w->probability[bin];
+   unsigned bin=feature_bin(w,c),p=w->probability[bin];
    if(abs(c.y-t->anchor.y)>110)p=0;
    w->likelihood[n]=(uint16_t)p;if(p>=2000)set(w->detector.raw,n);
    w->integral[(y+1)*stride+x+1]=p+w->integral[(y+1)*stride+x]+w->integral[y*stride+x+1]-w->integral[y*stride+x];

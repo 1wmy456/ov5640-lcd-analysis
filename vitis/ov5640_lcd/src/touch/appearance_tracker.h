@@ -28,6 +28,7 @@ typedef struct {
     int search_x,search_y,search_lx,search_hx,search_ly,search_hy,pred_x,pred_y;
     int search_best_score,search_best_x,search_best_y,search_best_w,search_best_h;
     unsigned fast;
+    unsigned global_luma;
 } AppearanceWork;
 void appearance_init(AppearanceTracker *t);
 void appearance_begin(AppearanceWork *w,AppearanceTracker *t,const uint32_t *rgb,

@@ -67,5 +67,14 @@ int main(void){
   for(int y=50;y<54;y++)for(int x=cx;x<cx+7;x++)image[y*CAP_MASK_WIDTH+x]=0x305020;
   process(0,0,0);CHECK(t.valid);CHECK(abs((int)t.box.cx-cx*4)<20);
  }
- printf("PASS APPEARANCE checks=%u red/blue/white click/motion/reselect/background-preserve/loss/recovery/immutable-anchor/flat-background\n",checks);return 0;
+ /* Neutral cap on gray background with a thin low-saturation fingertip bridge. */
+ appearance_init(&t);
+ for(unsigned step=0;step<9;step++){
+  for(unsigned i=0;i<CAP_CELLS;i++)image[i]=0xa0a0a0;
+  int cx=100+step;disk(cx,60,12,9,0xc1c1c1);
+  for(int yy=57;yy<61;yy++)for(int xx=cx+10;xx<cx+45;xx++)image[yy*CAP_MASK_WIDTH+xx]=0xaaaaaa;
+  process(step==0,cx*4,240);CHECK(t.valid);
+  CHECK(t.box.xmax<t.box.xmin+120);CHECK(fabs(t.box.cx-cx*4)<12);
+ }
+ printf("PASS APPEARANCE checks=%u red/blue/white click/motion/reselect/background-preserve/loss/recovery/immutable-anchor/flat-background/neutral-bridge\n",checks);return 0;
 }

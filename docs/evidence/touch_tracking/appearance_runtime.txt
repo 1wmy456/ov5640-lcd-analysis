@@ -1,4 +1,4 @@
-TOUCH_CAPTURE ready DMA=43c40000 buffer=54bd79c0 bytes=1536000; tap to select, vision blue fallback; raw buffer ownership single-shot
+TOUCH_CAPTURE ready DMA=43c40000 buffer=cf4279c0 bytes=1536000; tap to select, vision blue fallback; raw buffer ownership single-shot
 
 SELECT accepted x=400 y=240 frame=11 latency_us=8400 generation=1 bbox=360,439,212,267 reason=0
 
