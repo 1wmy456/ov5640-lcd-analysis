@@ -19,6 +19,7 @@ typedef struct {
     int automatic,dimensions_ok,enabled,verified[2],tracking,seen;
     int ex,ey,hold_reason;
     uint32_t last_frame;
+    unsigned sample_gap_us; /* default 50ms; bounded raw-frame pipeline may use 150ms */
     uint64_t last_new_us,last_update_us;
 } PtControl;
 enum { PT_CONTROL_P,PT_CONTROL_PD,PT_CONTROL_PID };
@@ -27,6 +28,7 @@ void pt_control_init(PtControl *c,int dimensions_ok);
 void pt_control_manual(PtControl *c);
 void pt_control_smooth(PtControl *c,int enabled);
 int pt_control_controller(PtControl *c,int mode);
+int pt_control_sample_gap(PtControl *c,unsigned gap_us);
 /* Checked setters reset motion/history without changing pulse or enables. */
 int pt_control_pid_gains(PtControl *c,int axis,double ki,double kd);
 int pt_control_pid_filter(PtControl *c,int axis,double tau_ms,double derivative_limit,double integral_limit);

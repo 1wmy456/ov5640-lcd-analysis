@@ -1,0 +1,91 @@
+PASS CAP_COMPONENTS checks=12348 frames=34 host_ms=6.00 circle/ellipse/multiple/background/lock/loss/recovery/edge/duplicate/wrap
+PASS CAP_RUNTIME checks=7267 reads=6750 commits=9 coherent-mask/error-epoch/loss/stale/version
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/axis_blue_tracker.v" into library work
+INFO: [VRFC 10-311] analyzing module axis_blue_tracker
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_bbox_stats.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_bbox_stats
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_frame_stats.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_frame_stats
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_mask_sampler.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_mask_sampler
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/blue_pixel_detect.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_pixel_detect
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/blue_tracker/video_box_overlay.v" into library work
+INFO: [VRFC 10-311] analyzing module video_box_overlay
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/blue_mask_store.v" into library work
+INFO: [VRFC 10-311] analyzing module blue_mask_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/dual_servo_pwm.v" into library work
+INFO: [VRFC 10-311] analyzing module dual_servo_pwm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/pan_tilt_ctrl.v" into library work
+INFO: [VRFC 10-311] analyzing module pan_tilt_ctrl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/rtl/pan_tilt/pwm_wave_monitor.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_wave_monitor
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_component_video.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_component_video
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_component_video -s component_video -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'servo_yaw_pwm' remains unconnected for this instance [D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_component_video.sv:18]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_pixel_detect
+Compiling module work.blue_frame_stats(IMAGE_WIDTH=16,...
+Compiling module work.blue_mask_sampler(IMAGE_WIDTH=16...
+Compiling module work.video_box_overlay(IMAGE_WIDTH=16...
+Compiling module work.axis_blue_tracker(IMAGE_WIDTH=16...
+Compiling module work.pwm_wave_monitor
+Compiling module work.dual_servo_pwm(CLOCK_HZ=1000000)
+Compiling module work.blue_mask_store(IMAGE_WIDTH=16,I...
+Compiling module work.pan_tilt_ctrl(CLOCK_HZ=1000000,I...
+Compiling module work.tb_component_video
+Built simulation snapshot component_video
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/component_video/xsim_script.tcl
+# xsim {component_video} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS COMPONENT_VIDEO checks=4569 accepted=1730 outputs=1730 stalls=803 green=144 triple-bank/AXI/overlay/error/stale/last-pixel
+$finish called at time : 2552500 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_component_video.sv" Line 110
+exit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 10:04:48 2026...
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_mask_words.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_mask_words
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinxx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe tb_mask_words -s mask_words -timescale 1ns/1ps 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.blue_mask_sampler(IMAGE_WIDTH=40...
+Compiling module work.tb_mask_words
+Built simulation snapshot mask_words
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/mask_words/xsim_script.tcl
+# xsim {mask_words} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS MASK_WORDS checks=25 frames=4 multiple-words/partial-last/reset-cells/bubbles/final-pixel
+$finish called at time : 68470 ns : File "D:/2026.test/ov5640_lcd/sim/pan_tilt/tb_mask_words.sv" Line 34
+exit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 10:04:53 2026...

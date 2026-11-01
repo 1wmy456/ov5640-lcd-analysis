@@ -1,0 +1,4 @@
+touch_io_tri_io[0] pin=R19 standard=LVCMOS33 bank=34 pullup=1
+touch_io_tri_io[1] pin=P20 standard=LVCMOS33 bank=34 pullup=1
+touch_io_tri_io[2] pin=M19 standard=LVCMOS33 bank=35 pullup=1
+touch_io_tri_io[3] pin=U19 standard=LVCMOS33 bank=34 pullup=1

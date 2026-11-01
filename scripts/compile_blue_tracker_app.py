@@ -23,7 +23,7 @@ objects = []
 compiled_sources = []
 for source in sorted((out / "src").rglob("*.c")):
     obj = out / (source.relative_to(out / "src").as_posix().replace("/", "_") + ".o")
-    source_flags = [*flags, "-O2"] if source.name in {"cap_components.c", "cap_runtime.c"} else flags
+    source_flags = [*flags, "-O2"] if source.name in {"cap_components.c", "cap_runtime.c", "appearance_tracker.c", "appearance_runtime.c"} else flags
     subprocess.run([gcc, *source_flags, "-c", str(source), "-I" + str(bsp / "include"),
                     "-I" + str(out / "src"), "-o", str(obj)], check=True)
     objects.append(str(obj))

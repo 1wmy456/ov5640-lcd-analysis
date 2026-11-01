@@ -1,0 +1,15 @@
+
+****** xsim v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/raw_capture/xsim_script.tcl
+# xsim {raw_capture} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+PASS RAW_CAPTURE checks=653 main=384 raw=100 stalls=160 independent handshakes/one-shot/metadata/malformed-EOL
+$finish called at time : 11340 ns : File "D:/2026.test/ov5640_lcd/sim/touch/tb_raw_capture.sv" Line 45
+exit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 09:44:24 2026...

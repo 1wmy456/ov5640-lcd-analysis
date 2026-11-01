@@ -4,12 +4,23 @@
 #include "sleep.h"
 #include <stdio.h>
 #include <string.h>
+static TouchHandler handler;
+void touch_set_handler(TouchHandler fn){handler=fn;}
 #ifdef XPAR_TOUCH_GPIO_BASEADDR
 static XGpio io;
 static unsigned tri=15,latch,addr,enabled;
 static TouchMap map;
 static TouchEvents events;
 static uint64_t last_poll,last_print;
+static uint32_t capture_bits,marker_bits,status_bits;
+void touch_display_state(unsigned state){
+ uint32_t value=0x10000000u|((state&3)<<20);
+ if(value!=status_bits){status_bits=value;XGpio_DiscreteWrite(&io,2,capture_bits|marker_bits|status_bits);}
+}
+void touch_capture_control(unsigned flags){
+ capture_bits=((flags&1)?0x40000000u:0)|((flags&2)?0x20000000u:0);
+ XGpio_DiscreteWrite(&io,2,capture_bits|marker_bits|status_bits);
+}
 /* Bits SCL/SDA/RST/INT. I2C lines only drive zero; high means release. */
 static void pin(unsigned bit,int value){
  unsigned mask=1u<<bit;
@@ -61,7 +72,8 @@ void touch_service(uint64_t now){
   if(!clear_status())ok=0;
  }
  event=touch_event(&events,ok,count,x,y,now);
- if(event==TOUCH_DOWN||event==TOUCH_MOVE)XGpio_DiscreteWrite(&io,2,0x80000000u|(events.y<<10)|events.x);
+ if(event==TOUCH_DOWN||event==TOUCH_MOVE){marker_bits=0x80000000u|(events.y<<10)|events.x;XGpio_DiscreteWrite(&io,2,capture_bits|marker_bits|status_bits);}
+ if(handler&&event)handler(event,events.x,events.y,now);
  if(event==TOUCH_DOWN||event==TOUCH_UP||event==TOUCH_CANCEL||(event==TOUCH_MOVE&&now-last_print>200000)){
   last_print=now;printf("TOUCH %s x=%u y=%u time_us=%llu\r\n",event==TOUCH_DOWN?"DOWN":event==TOUCH_UP?"UP":event==TOUCH_CANCEL?"CANCEL":"MOVE",events.x,events.y,(unsigned long long)now);
  }
@@ -69,4 +81,6 @@ void touch_service(uint64_t now){
 #else
 int touch_init(unsigned id,unsigned w,unsigned h){(void)id;(void)w;(void)h;return 0;}
 void touch_service(uint64_t now){(void)now;}
+void touch_capture_control(unsigned flags){(void)flags;}
+void touch_display_state(unsigned state){(void)state;}
 #endif

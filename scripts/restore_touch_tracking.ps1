@@ -1,0 +1,19 @@
+param([string]$Workspace='build/touch_capture_v3_sw',[switch]$EnableAuto,[switch]$WideExperiment,
+ [string]$Xsct='C:/Xilinxx/Vitis/2020.2/bin/xsct.bat')
+$ErrorActionPreference='Stop'
+$repo=Split-Path $PSScriptRoot -Parent
+$header=Join-Path $repo "$Workspace/board_platform/ps7_cortexa9_0/standalone_domain/bsp/ps7_cortexa9_0/include/xparameters.h"
+$base=[regex]::Match((Get-Content -Raw $header),'(?m)^#define XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR (0x[0-9a-fA-F]+)')
+if(-not $base.Success){throw 'Fresh BSP peripheral macro missing'}
+$commands=@('manual','disable','dir yaw -1','dir pitch 1')
+if($WideExperiment){$commands+=@('limits yaw 500 2500','limits pitch 500 2500')}else{$commands+=@('limits yaw 1100 1650','limits pitch 1240 1800')}
+$commands+=@('center yaw 1500','center pitch 1520','smooth on','deadband 15 22','accel yaw 400','accel pitch 400',
+ 'decel yaw 600','decel pitch 600','rate yaw 75','rate pitch 75','kp yaw 0.7','kp pitch 0.7','ki yaw 0','ki pitch 0',
+ 'kd yaw 0.03','kd pitch 0.03','dtau yaw 100','dtau pitch 100','controller pd')
+# No center/yaw/pitch motion command: keep actual current pulse values.
+if($EnableAuto){$commands+=@('enable both','verify yaw','verify pitch','auto')}
+$commands+=@('pid','appearance','status')
+$file=Join-Path $repo build/restore_touch_commands.txt
+[IO.File]::WriteAllLines($file,$commands,[Text.Encoding]::ASCII)
+& $Xsct "$PSScriptRoot/pan_tilt_jtag_batch.tcl" $base.Groups[1].Value $file
+if($LASTEXITCODE){throw 'Touch PD profile restore failed'}

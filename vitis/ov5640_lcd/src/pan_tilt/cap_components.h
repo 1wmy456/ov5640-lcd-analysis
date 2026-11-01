@@ -32,6 +32,8 @@ typedef struct {
     unsigned seen;
     uint32_t previous_frame;
     CapResult result;
+    /* Optional association bounds; zero keeps the accepted blue-tracker defaults. */
+    double association_min_area,association_max_area,association_gate;
 } CapDetector;
 void cap_detector_init(CapDetector *d);
 /* raw[] must contain the immutable, coherent PL snapshot before begin(). */

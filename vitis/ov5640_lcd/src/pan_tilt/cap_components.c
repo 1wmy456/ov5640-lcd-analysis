@@ -6,11 +6,11 @@ static void setbit(uint32_t *p,unsigned n){p[n>>5]|=1u<<(n&31);}
 static void clearbit(uint32_t *p,unsigned n){p[n>>5]&=~(1u<<(n&31));}
 static double side(const CapBox *b){double w=b->xmax-b->xmin+1,h=b->ymax-b->ymin+1;return w>h?w:h;}
 static double distance2(const CapBox *a,const CapBox *b){double x=a->cx-b->cx,y=a->cy-b->cy;return x*x+y*y;}
-static int matches(const CapBox *a,const CapBox *b){
-    double gate=side(b)*0.75,ratio=(double)a->area/b->area;
+static int matches(const CapBox *a,const CapBox *b,const CapDetector *d){
+    double gate=d->association_gate>0?d->association_gate:side(b)*0.75,ratio=(double)a->area/b->area;
     if(gate<32)gate=32;
-    if(gate>120)gate=120;
-    return ratio>=0.5&&ratio<=2.0&&distance2(a,b)<=gate*gate;
+    if(gate>(d->association_gate>0?160:120))gate=d->association_gate>0?160:120;
+    return ratio>=(d->association_min_area>0?d->association_min_area:0.5)&&ratio<=(d->association_max_area>0?d->association_max_area:2.0)&&distance2(a,b)<=gate*gate;
 }
 void cap_detector_init(CapDetector *d){memset(d,0,sizeof(*d));d->result.reason=CAP_NO_CANDIDATE;}
 void cap_detector_invalidate(CapDetector *d,unsigned reason){
@@ -55,7 +55,7 @@ static void consider(CapDetector *d){
     c->cx=(d->mx+0.5)*CAP_MASK_BLOCK;c->cy=(d->my+0.5)*CAP_MASK_BLOCK;
     c->quality=1.0-d->shape_error/d->boundary;
     if(d->locked){
-        if(!matches(c,&d->locked_box))return;
+        if(!matches(c,&d->locked_box,d))return;
         score=distance2(c,&d->locked_box)+(1-c->quality)*1024;
         best_score=distance2(&d->best,&d->locked_box)+(1-d->best.quality)*1024;
     }else{
@@ -74,7 +74,7 @@ static void finish(CapDetector *d){
         if(!d->locked)d->confirm=0;
     }else{
         if(!d->locked){
-            if(d->confirm&&matches(&d->best,&d->pending_box))d->confirm++;else d->confirm=1;
+            if(d->confirm&&matches(&d->best,&d->pending_box,d))d->confirm++;else d->confirm=1;
             d->pending_box=d->best;
             if(d->confirm>=2){d->locked=1;d->locked_box=d->best;}
         }

@@ -1,6 +1,6 @@
 module pan_tilt_ctrl #(
     parameter integer CLOCK_HZ=100000000,IMAGE_WIDTH=800,IMAGE_HEIGHT=480,
-    parameter integer C_S_AXI_ADDR_WIDTH=12,COMPONENT_MODE=0,MASK_BLOCK=4,
+    parameter integer C_S_AXI_ADDR_WIDTH=12,COMPONENT_MODE=0,MASK_BLOCK=4,TOUCH_MODE=0,
     parameter [31:0] C_S_AXI_BASEADDR=0,C_S_AXI_HIGHADDR=4095
 )(
     (* X_INTERFACE_INFO="xilinx.com:signal:clock:1.0 s_axi_aclk CLK", X_INTERFACE_PARAMETER="ASSOCIATED_BUSIF S_AXI, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 100000000" *) input s_axi_aclk,
@@ -19,7 +19,8 @@ module pan_tilt_ctrl #(
     input [9:0] mask_word_address,input [31:0] mask_word_data,
     output display_bbox_valid,
     output [15:0] display_xmin,display_xmax,display_ymin,display_ymax,
-    output servo_yaw_pwm,servo_pitch_pwm
+    output servo_yaw_pwm,servo_pitch_pwm,
+    input [31:0] raw_result_frame,input raw_result_valid,raw_result_pulse
 );
     localparam integer TICKS_PER_US=CLOCK_HZ/1000000;
     localparam integer US_WIDTH=TICKS_PER_US<2?1:$clog2(TICKS_PER_US);
@@ -86,6 +87,8 @@ module pan_tilt_ctrl #(
     reg [31:0] cpu_shadow_x,cpu_shadow_y,cpu_shadow_count,cpu_shadow_frame,cpu_shadow_flags;
     reg [31:0] cpu_active_x,cpu_active_y,cpu_active_frame,cpu_age,cpu_processing_us,cpu_detector_status;
     reg cpu_valid;
+    reg [31:0] raw_snapshot_frame,raw_snapshot_age,raw_snapshot_errors;
+    reg raw_snapshot_valid;
     assign display_bbox_valid=COMPONENT_MODE&&cpu_valid&&cpu_age<=250000&&!frame_error&&!mask_live_error;
     assign display_xmin=cpu_active_x[15:0];assign display_xmax=cpu_active_x[31:16];
     assign display_ymin=cpu_active_y[15:0];assign display_ymax=cpu_active_y[31:16];
@@ -108,8 +111,18 @@ module pan_tilt_ctrl #(
             cpu_shadow_x<=0;cpu_shadow_y<=0;cpu_shadow_count<=0;cpu_shadow_frame<=0;cpu_shadow_flags<=0;
             cpu_active_x<=0;cpu_active_y<=0;cpu_active_frame<=0;cpu_age<=32'hffffffff;cpu_valid<=0;
             cpu_processing_us<=0;cpu_detector_status<=0;
+            raw_snapshot_frame<=0;raw_snapshot_age<=32'hffffffff;raw_snapshot_errors<=0;raw_snapshot_valid<=0;
             for(ci=0;ci<8;ci=ci+1)command_words[ci]<=0;
         end else begin
+            if(TOUCH_MODE)begin
+                if(us_div==TICKS_PER_US-1&&raw_snapshot_age!=32'hffffffff)raw_snapshot_age<=raw_snapshot_age+1'b1;
+                if(frame_error)raw_snapshot_valid<=0;
+                // Registered raw completion is consumed after its frame ID/data update.
+                if(raw_result_pulse)begin
+                    raw_snapshot_frame<=raw_result_frame;raw_snapshot_age<=0;
+                    raw_snapshot_errors<=error_count;raw_snapshot_valid<=raw_result_valid&&!frame_error;
+                end
+            end
             commit<=0;mask_acquire<=0;mask_release<=0;
             if(us_div==TICKS_PER_US-1) begin
                 us_div<=0;if(age_us!=32'hffffffff)age_us<=age_us+1'b1;
@@ -174,11 +187,13 @@ module pan_tilt_ctrl #(
                     'h114:if(COMPONENT_MODE)begin
                         if(w_strobes[0]&&w_data[0])begin
                             cpu_active_x<=cpu_shadow_x;cpu_active_y<=cpu_shadow_y;cpu_active_frame<=cpu_shadow_frame;
-                            cpu_age<=mask_snapshot_current_age;
+                            cpu_age<=TOUCH_MODE&&cpu_shadow_flags[1]?raw_snapshot_age:mask_snapshot_current_age;
                             // Error races invalidate rather than faulting the CPU's MMIO store.
-                            cpu_valid<=cpu_shadow_flags[0]&&mask_snap_flags==5&&
-                                cpu_shadow_frame==mask_snap_frame&&mask_errors==mask_snap_errors&&
-                                !frame_error&&!mask_live_error&&mask_snapshot_current_age<=250000&&
+                            cpu_valid<=cpu_shadow_flags[0]&&
+                                ((TOUCH_MODE&&cpu_shadow_flags[1])?
+                                  (raw_snapshot_valid&&cpu_shadow_frame==raw_snapshot_frame&&raw_snapshot_errors==error_count&&raw_snapshot_age<=250000):
+                                  (mask_snap_flags==5&&cpu_shadow_frame==mask_snap_frame&&mask_errors==mask_snap_errors&&mask_snapshot_current_age<=250000))&&
+                                !frame_error&&!mask_live_error&&
                                 cpu_shadow_x[15:0]<=cpu_shadow_x[31:16]&&cpu_shadow_x[31:16]<IMAGE_WIDTH&&
                                 cpu_shadow_y[15:0]<=cpu_shadow_y[31:16]&&cpu_shadow_y[31:16]<IMAGE_HEIGHT;
                         end
@@ -232,6 +247,9 @@ module pan_tilt_ctrl #(
                   'h118:s_axi_rdata<=display_bbox_valid;'h11c:s_axi_rdata<=cpu_processing_us;
                   'h120:s_axi_rdata<=cpu_detector_status;
                   'h124:s_axi_rdata<=mask_snap_errors;
+                  'h128:s_axi_rdata<=TOUCH_MODE?raw_snapshot_frame:0;
+                  'h12c:s_axi_rdata<=TOUCH_MODE?{31'd0,raw_snapshot_valid}:0;
+                  'h130:s_axi_rdata<=TOUCH_MODE?raw_snapshot_age:32'hffffffff;
                   default:begin
                       if(mask_read_access)begin s_axi_rvalid<=0;mask_read_pending<=1;end
                       else if(s_axi_araddr>='h80&&s_axi_araddr<='h9c&&s_axi_araddr[1:0]==0)s_axi_rdata<=command_words[s_axi_araddr[4:2]];

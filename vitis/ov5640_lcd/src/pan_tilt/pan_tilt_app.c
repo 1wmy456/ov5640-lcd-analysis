@@ -2,6 +2,7 @@
 #include "pan_tilt_driver.h"
 #include "cap_runtime.h"
 #include "../touch/touch_driver.h"
+#include "../touch/appearance_runtime.h"
 extern unsigned int lcd_id;
 #include "xparameters.h"
 #include "xtime_l.h"
@@ -38,6 +39,7 @@ static void show_pid(void){
         (int)(control.derivative_tau[0]*1000),(int)(control.derivative_tau[1]*1000),
         (int)(control.integral_limit[0]*1000),(int)(control.integral_limit[1]*1000),
         (int)control.derivative_limit[0],(int)control.derivative_limit[1]);
+    log_text("PID_CADENCE sample_gap_us=%u motion_dt_cap_us=50000\r\n",control.sample_gap_us);
     log_text("PID_TERMS p_milli=%d,%d i_milli=%d,%d d_milli=%d,%d requested_milli=%d,%d us/s; D filtered px/s=%d,%d\r\n",
         (int)(control.p_term[0]*1000),(int)(control.p_term[1]*1000),
         (int)(control.integral[0]*1000),(int)(control.integral[1]*1000),
@@ -53,13 +55,21 @@ static void show_status(void){
       control.automatic?"auto":"manual",(unsigned long)target.frame_id,target.flags&1,(target.flags>>1)&1,
       (unsigned long)target.age_us,target.xmin,target.xmax,target.ymin,target.ymax,control.ex,control.ey,
       (unsigned long)yaw,(unsigned long)pitch,control.enabled,control.hold_reason,limit,
-      cap_reason_name(cap_runtime_result()->reason),dropped,control.smooth_enabled,control.deadband,control.deadband_outer,
+      appearance_runtime_active()?"touch":cap_reason_name(cap_runtime_result()->reason),dropped,control.smooth_enabled,control.deadband,control.deadband_outer,
       (int)(control.velocity[0]*1000),(int)(control.velocity[1]*1000),control.motion_active[0],control.motion_active[1],controller_name());
 }
 static void command(char *s){
     char *w[5],*p;int n=0,a;double v,lo,hi;command_result=0;
     for(p=strtok(s," \t");p&&n<5;p=strtok(NULL," \t"))w[n++]=p;
     if(!n)return;
+    if(n==1&&!strcmp(w[0],"appearance")){appearance_runtime_status();return;}
+    if(n==2&&!strcmp(w[0],"vision")&&!strcmp(w[1],"blue")){
+        appearance_runtime_blue(pt_base);cap_runtime_init(pt_base);pt_control_sample_gap(&control,50000);control.seen=0;
+        log_text("vision=blue; position/enables retained, PID history reset\r\n");return;
+    }
+    if(n==3&&!strcmp(w[0],"select")&&number(w[1],&v)&&number(w[2],&lo)&&v>=0&&v<800&&lo>=0&&lo<480&&v==(int)v&&lo==(int)lo){
+        appearance_runtime_click((unsigned)v,(unsigned)lo,now_us());return;
+    }
     if(n==1&&!strcmp(w[0],"pid")){show_pid();return;}
     if(n==2&&!strcmp(w[0],"controller")){
         int mode=!strcmp(w[1],"p")?PT_CONTROL_P:(!strcmp(w[1],"pd")?PT_CONTROL_PD:(!strcmp(w[1],"pid")?PT_CONTROL_PID:-1));
@@ -201,13 +211,17 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
     log_text("VISUAL_PID v1 defaults controller=p Ki=0 Kd=0.03 tau100ms; controller p/pd/pid | pid | kp/ki/kd/dtau/imax/dlimit yaw/pitch <value>\r\n");
     if(!control.dimensions_ok)log_text("AUTO DISABLED: camera/display/tracker mismatch display=%ux%u tracker=%ux%u camera_ok=%d\r\n",width,height,dimensions&65535,dimensions>>16,camera_ok);
     last_tick=last_log=now_us();
-    touch_init(lcd_id,width,height);
+    if(touch_init(lcd_id,width,height))appearance_runtime_init(pt_base,now_us());
     app_state();
     for(;;){
         service_uart();service_mailbox();now=now_us();
         touch_service(now);
-        cap_runtime_service(pt_base,now);
-        if(now-last_tick>=20000){last_tick=now;cap_runtime_target(pt_base,now,&target);
+        appearance_runtime_service(pt_base,now);
+        if(!appearance_runtime_active())cap_runtime_service(pt_base,now);
+        if(appearance_runtime_switched()){cap_runtime_init(pt_base);pt_control_sample_gap(&control,150000);control.seen=0;}
+        if(now-last_tick>=20000){last_tick=now;
+            if(appearance_runtime_active())appearance_runtime_target(now,&target);else cap_runtime_target(pt_base,now,&target);
+            if(appearance_runtime_paused())target.flags&=~1u;
             if(pt_control_update(&control,&target,now))pt_driver_commit(pt_base,&control);
             app_state();}
         if(now-last_log>=500000){last_log=now;show_status();}

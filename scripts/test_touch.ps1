@@ -20,4 +20,11 @@ try{
  $result=& "$VivadoBin/xsim.bat" touch_cross -runall 2>&1
  $result | Tee-Object rtl.txt
  if($LASTEXITCODE -or -not($result -match '^PASS TOUCH_CROSS')){throw 'Touch RTL self-check failed'}
+ & "$VivadoBin/xvlog.bat" --sv "$repo/sim/touch/tb_touch_status.sv" *> status_compile.txt
+ if($LASTEXITCODE){throw 'Status test compile failed'}
+ & "$VivadoBin/xelab.bat" tb_touch_status -s touch_status -timescale 1ns/1ps *> status_elaborate.txt
+ if($LASTEXITCODE){throw 'Status test elaboration failed'}
+ $result=& "$VivadoBin/xsim.bat" touch_status -runall 2>&1
+ $result | Tee-Object status.txt
+ if($LASTEXITCODE -or -not($result -match '^PASS TOUCH_STATUS')){throw 'Status glyph/color test failed'}
 }finally{Pop-Location}

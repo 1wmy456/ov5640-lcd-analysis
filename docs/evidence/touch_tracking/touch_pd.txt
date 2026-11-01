@@ -1,0 +1,1 @@
+PASS TOUCH_PD checks=12 75ms-sampling/D-active/duplicate/loss/recovery/position-preserved/legacy-50ms

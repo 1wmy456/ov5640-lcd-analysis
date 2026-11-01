@@ -15,6 +15,7 @@ static void stop_motion(PtControl *c){
 void pt_control_init(PtControl *c,int dimensions_ok){
     int i;memset(c,0,sizeof(*c));c->dimensions_ok=dimensions_ok;c->deadband=15;
     c->deadband_outer=22;c->smooth_enabled=1;
+    c->sample_gap_us=50000;
     for(i=0;i<2;i++){c->position[i]=1500;c->center[i]=1500;c->minimum[i]=1400;c->maximum[i]=1600;
         c->gain[i]=0.1;c->rate[i]=25;c->direction[i]=1;
         c->acceleration[i]=200;c->deceleration[i]=400;
@@ -28,6 +29,10 @@ void pt_control_smooth(PtControl *c,int enabled){
 int pt_control_controller(PtControl *c,int mode){
     if(mode<PT_CONTROL_P||mode>PT_CONTROL_PID)return 0;
     c->controller=mode;if(mode!=PT_CONTROL_P)c->smooth_enabled=1;stop_motion(c);return 1;
+}
+int pt_control_sample_gap(PtControl *c,unsigned gap_us){
+    if(gap_us<50000||gap_us>200000)return 0;
+    c->sample_gap_us=gap_us;stop_motion(c);return 1;
 }
 int pt_control_pid_gains(PtControl *c,int a,double ki,double kd){
     if(a<0||a>1||!isfinite(ki)||!isfinite(kd)||ki<0||ki>0.5||kd<0||kd>1)return 0;
@@ -51,14 +56,15 @@ static double pid_goal(PtControl *c,int a,int e,double dt,double actual_dt){
     double drive=c->direction[a]*e;
     /* Use actual sample time for D; cap dt only for motion/integration.
        Rebase after gaps instead of interpreting reacquisition as velocity. */
-    if(c->derivative_ready[a]&&actual_dt<=0.05){
+    double gap=(c->sample_gap_us?c->sample_gap_us:50000)/1000000.0;
+    if(c->derivative_ready[a]&&actual_dt<=gap){
         double slope=bounded((e-c->previous_error[a])/actual_dt,
                             -c->derivative_limit[a],c->derivative_limit[a]);
         double alpha=actual_dt/(c->derivative_tau[a]+actual_dt);
         c->derivative[a]+=alpha*(slope-c->derivative[a]);
     }else{
         c->derivative[a]=0;
-        if(actual_dt>0.05)old_i=0;
+        if(actual_dt>gap)old_i=0;
     }
     c->previous_error[a]=e;c->derivative_ready[a]=1;
     c->p_term[a]=c->gain[a]*drive;
