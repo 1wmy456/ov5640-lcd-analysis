@@ -33,6 +33,8 @@ SELECT/TRACK/LOST文字在LCD左上角显示黄/绿/红；紫色十字标记点�
 
 残余抖动的临时低增益对照可使用`./scripts/restore_touch_tracking.ps1 -Conservative`：Kp0.25、Kd0、速率25us/s、加速100/减速200us/s²，保持manual/PWM关闭；不是已验收默认值。需要之前选择的宽范围实验时显式增加`-WideExperiment`。默认恢复脚本仍保留原0.7/0.03/75/400/600配置。现场低增益收敛测试尚未完成前，不声称这一配置解决了抖动。
 
+低增益固定目标测试已记录到收敛，用户确认平稳但偏慢；随后临时中档`-Moderate`采用Kp0.4、Kd0、速率45、加速200/减速400，尚待现场速度与停稳确认。两种对照都在PD控制框架下将Kd置0，实际为P控制加运动限制，并非正在使用非零微分项。参数选项不修改既有恢复配置，也不自动启用PWM或auto（需显式`-EnableAuto`）。
+
 ## 外设增量
 
 新BSP宏给出`XPAR_TOUCH_GPIO_BASEADDR=0x43C30000`和`XPAR_RAW_CAPTURE_DMA_BASEADDR=0x43C40000`，代码不猜测地址。触摸GPIO CH2保留原十字编码，bit30发起一次抓帧，bit29取消分支；bit28启用状态文字，bits21:20为状态。
