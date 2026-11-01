@@ -5,10 +5,10 @@ static double clamp(double v,double lo,double hi){return v<lo?lo:(v>hi?hi:v);}
 void pt_trajectory_reset(PtTrajectory *p,double yaw,double pitch,uint64_t now){
  memset(p,0,sizeof(*p));p->output[0]=p->start[0]=p->goal[0]=yaw;
  p->output[1]=p->start[1]=p->goal[1]=pitch;p->started=p->last_tick=now;
- for(unsigned a=0;a<2;a++){p->rate[a]=75;p->acceleration[a]=400;p->deceleration[a]=600;}
+ for(unsigned a=0;a<2;a++){p->rate[a]=75;p->acceleration[a]=400;p->deceleration[a]=600;p->minimum[a]=500;p->maximum[a]=2500;}
 }
-void pt_trajectory_limits(PtTrajectory *p,const double rate[2],const double acceleration[2],const double deceleration[2]){
- for(unsigned a=0;a<2;a++){p->rate[a]=rate[a];p->acceleration[a]=acceleration[a];p->deceleration[a]=deceleration[a];}
+void pt_trajectory_limits(PtTrajectory *p,const double rate[2],const double acceleration[2],const double deceleration[2],const int minimum[2],const int maximum[2]){
+ for(unsigned a=0;a<2;a++){p->rate[a]=rate[a];p->acceleration[a]=acceleration[a];p->deceleration[a]=deceleration[a];p->minimum[a]=minimum[a];p->maximum[a]=maximum[a];}
 }
 void pt_trajectory_tick(PtTrajectory *p,uint64_t now){
  if(now<=p->last_tick)return;
@@ -28,6 +28,10 @@ void pt_trajectory_tick(PtTrajectory *p,uint64_t now){
   double delta=(old+velocity)*0.5*dt;
   if((distance>=0&&delta>=distance)||(distance<=0&&delta<=distance)){p->output[a]=p->goal[a];p->velocity[a]=0;}
   else{p->output[a]+=delta;p->velocity[a]=velocity;}
+  /* A reversal may carry momentum away from its new endpoint: mechanical
+     bounds apply to intermediate output as well as to the planned endpoint. */
+  if(p->output[a]<p->minimum[a]){p->output[a]=p->minimum[a];p->velocity[a]=0;}
+  if(p->output[a]>p->maximum[a]){p->output[a]=p->maximum[a];p->velocity[a]=0;}
  }
 }
 void pt_trajectory_plan(PtTrajectory *p,const double goal[2],uint32_t frame,uint64_t now){
@@ -36,6 +40,6 @@ void pt_trajectory_plan(PtTrajectory *p,const double goal[2],uint32_t frame,uint
  uint64_t interval=p->seen&&now>p->last_sample?now-p->last_sample:20000;
  if(interval<20000)interval=20000;
  if(interval>100000)interval=100000;
- for(unsigned a=0;a<2;a++){p->start[a]=p->output[a];p->goal[a]=goal[a];}
+ for(unsigned a=0;a<2;a++){p->start[a]=p->output[a];p->goal[a]=clamp(goal[a],p->minimum[a],p->maximum[a]);}
  p->started=p->last_sample=now;p->duration=interval;p->frame=frame;p->seen=1;
 }

@@ -15,6 +15,7 @@ static uint32_t small[CAP_CELLS] __attribute__((aligned(64)));
 static AppearanceTracker tracker;static AppearanceWork work;
 static BoxShapeFilter shape;static CapBox display_box;
 static unsigned available,active,phase,down,pending,click_x,click_y,click_token,request_token;
+static unsigned blue_fallback;
 static unsigned selecting,switched,errors,rejections,accepted,frames,processing_us,last_status,raw_rows,cpu_us,dma_us;
 static uint32_t source_error,last_frame;static uint64_t deadline,issued,published,next_capture,clicked,cpu_started;
 static UINTPTR base;
@@ -29,21 +30,23 @@ static void publish_box(UINTPTR b,int valid){
  pt_reg_write(b,0x110,2u|!!valid);pt_reg_write(b,0x11c,processing_us);pt_reg_write(b,0x114,1);
 }
 static void touch(unsigned event,unsigned x,unsigned y,uint64_t now){
- if(event==TOUCH_DOWN){click_token++;down=1;pending=0;click_x=x;click_y=y;}
+ if(event==TOUCH_DOWN){blue_fallback=0;click_token++;down=1;pending=0;click_x=x;click_y=y;}
  if(event==TOUCH_MOVE&&down){click_x=x;click_y=y;}
  if(event==TOUCH_UP&&down){down=0;pending=1;clicked=now;click_x=x;click_y=y;}
  if(event==TOUCH_CANCEL){down=pending=0;click_token++;}
 }
 int appearance_runtime_init(UINTPTR b,uint64_t now){
- appearance_init(&tracker);box_shape_init(&shape);base=b;available=1;active=phase=down=pending=0;last_frame=0;
+ appearance_init(&tracker);box_shape_init(&shape);base=b;available=1;blue_fallback=0;active=phase=down=pending=0;last_frame=0;
  touch_capture_control(2);wr(DMA_CR,4);phase=4;deadline=now;touch_set_handler(touch);
  printf("TOUCH_CAPTURE ready DMA=%08lx buffer=%08lx bytes=%u; tap to select, vision blue fallback; raw buffer ownership single-shot\r\n",(unsigned long)XPAR_RAW_CAPTURE_DMA_BASEADDR,(unsigned long)(UINTPTR)raw,FRAME_BYTES);return 1;
 }
 int appearance_runtime_active(void){return active;}
+/* Source selection is explicit; a DMA fault must hold, not enable blue fallback. */
+int appearance_runtime_enabled(void){return !blue_fallback;}
 int appearance_runtime_paused(void){return down||pending;}
 int appearance_runtime_switched(void){int result=switched;switched=0;return result;}
-void appearance_runtime_blue(UINTPTR b){active=0;pending=down=0;click_token++;appearance_init(&tracker);box_shape_init(&shape);pt_reg_write(b,0xd0,0);}
-void appearance_runtime_click(unsigned x,unsigned y,uint64_t now){if(x<800&&y<480){click_token++;click_x=x;click_y=y;down=0;pending=1;clicked=now;}}
+void appearance_runtime_blue(UINTPTR b){blue_fallback=1;active=0;pending=down=0;click_token++;appearance_init(&tracker);box_shape_init(&shape);pt_reg_write(b,0xd0,0);}
+void appearance_runtime_click(unsigned x,unsigned y,uint64_t now){if(x<800&&y<480){blue_fallback=0;click_token++;click_x=x;click_y=y;down=0;pending=1;clicked=now;}}
 static void failed(UINTPTR b,uint64_t now){
  errors++;appearance_invalidate(&tracker,AP_BAD_FRAME);pending=0;
  if(active)publish_box(b,0);
@@ -123,6 +126,7 @@ void appearance_runtime_status(void){
 int appearance_runtime_init(UINTPTR b,uint64_t n){(void)b;(void)n;return 0;}
 void appearance_runtime_service(UINTPTR b,uint64_t n){(void)b;(void)n;}
 int appearance_runtime_active(void){return 0;}
+int appearance_runtime_enabled(void){return 0;}
 int appearance_runtime_paused(void){return 0;}
 int appearance_runtime_switched(void){return 0;}
 void appearance_runtime_target(uint64_t n,PtTarget *o){(void)n;memset(o,0,sizeof(*o));}

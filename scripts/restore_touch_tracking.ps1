@@ -1,4 +1,4 @@
-param([string]$Workspace='build/touch_capture_v3_sw',[switch]$EnableAuto,[switch]$WideExperiment,
+param([string]$Workspace='build/touch_capture_v3_sw',[switch]$EnableAuto,[switch]$WideExperiment,[switch]$Conservative,
  [string]$Xsct='C:/Xilinxx/Vitis/2020.2/bin/xsct.bat')
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
@@ -11,6 +11,8 @@ $commands+=@('center yaw 1500','center pitch 1520','smooth on','deadband 15 22',
  'decel yaw 600','decel pitch 600','rate yaw 75','rate pitch 75','kp yaw 0.7','kp pitch 0.7','ki yaw 0','ki pitch 0',
  'kd yaw 0.03','kd pitch 0.03','dtau yaw 100','dtau pitch 100','controller pd')
 # No center/yaw/pitch motion command: keep actual current pulse values.
+if($Conservative){$commands+=@('kp yaw 0.25','kp pitch 0.25','kd yaw 0','kd pitch 0','rate yaw 25','rate pitch 25',
+ 'accel yaw 100','accel pitch 100','decel yaw 200','decel pitch 200')}
 if($EnableAuto){$commands+=@('enable both','verify yaw','verify pitch','auto')}
 $commands+=@('pid','appearance','status')
 $file=Join-Path $repo build/restore_touch_commands.txt

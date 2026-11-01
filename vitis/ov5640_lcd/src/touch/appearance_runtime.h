@@ -4,6 +4,7 @@
 int appearance_runtime_init(UINTPTR base,uint64_t now);
 void appearance_runtime_service(UINTPTR base,uint64_t now);
 int appearance_runtime_active(void);
+int appearance_runtime_enabled(void);
 int appearance_runtime_paused(void);
 int appearance_runtime_switched(void);
 void appearance_runtime_target(uint64_t now,PtTarget *out);

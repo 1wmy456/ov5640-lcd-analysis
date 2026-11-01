@@ -64,7 +64,7 @@ static void show_status(void){
       control.automatic?"auto":"manual",(unsigned long)target.frame_id,target.flags&1,(target.flags>>1)&1,
       (unsigned long)target.age_us,target.xmin,target.xmax,target.ymin,target.ymax,control.ex,control.ey,
       (unsigned long)yaw,(unsigned long)pitch,control.enabled,control.hold_reason,limit,
-      appearance_runtime_active()?"touch":cap_reason_name(cap_runtime_result()->reason),dropped,control.smooth_enabled,control.deadband,control.deadband_outer,
+      appearance_runtime_enabled()?(appearance_runtime_active()?"touch":"select"):cap_reason_name(cap_runtime_result()->reason),dropped,control.smooth_enabled,control.deadband,control.deadband_outer,
       (int)(control.velocity[0]*1000),(int)(control.velocity[1]*1000),control.motion_active[0],control.motion_active[1],controller_name());
 }
 static void command(char *s){
@@ -227,17 +227,17 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
         service_uart();service_mailbox();now=now_us();
         touch_service(now);
         appearance_runtime_service(pt_base,now);
-        if(!appearance_runtime_active())cap_runtime_service(pt_base,now);
+        if(!appearance_runtime_enabled())cap_runtime_service(pt_base,now);
         if(appearance_runtime_switched()){if(trajectory_active)sync_actual_position();cap_runtime_init(pt_base);pt_control_sample_gap(&control,150000);control.seen=0;}
         if(now-last_tick>=20000){last_tick=now;
-            if(appearance_runtime_active())appearance_runtime_target(now,&target);else cap_runtime_target(pt_base,now,&target);
+            if(appearance_runtime_enabled())appearance_runtime_target(now,&target);else cap_runtime_target(pt_base,now,&target);
             if(appearance_runtime_paused())target.flags&=~1u;
             int changed=pt_control_update(&control,&target,now);
-            if(appearance_runtime_active()&&control.automatic){
+            if(appearance_runtime_enabled()&&control.automatic){
                 if(control.hold_reason==PT_HOLD_BASELINE&&control.tracking){
                     sync_actual_position();
                     pt_trajectory_reset(&trajectory,control.position[0],control.position[1],now);
-                    pt_trajectory_limits(&trajectory,control.rate,control.acceleration,control.deceleration);
+                    pt_trajectory_limits(&trajectory,control.rate,control.acceleration,control.deceleration,control.minimum,control.maximum);
                     pt_trajectory_plan(&trajectory,control.position,target.frame_id,now);trajectory_active=1;
                 }else if(control.hold_reason||!control.tracking){
                     /* Cancel all unplayed motion on invalid/stale/selection.
@@ -246,7 +246,7 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
                 }else{
                     if(!trajectory_active){
                         pt_trajectory_reset(&trajectory,pt_reg_read(pt_base,PT_YAW_ACTIVE),pt_reg_read(pt_base,PT_PITCH_ACTIVE),now);
-                        pt_trajectory_limits(&trajectory,control.rate,control.acceleration,control.deceleration);
+                        pt_trajectory_limits(&trajectory,control.rate,control.acceleration,control.deceleration,control.minimum,control.maximum);
                         trajectory_active=1;
                     }
                     pt_trajectory_plan(&trajectory,control.position,target.frame_id,now);

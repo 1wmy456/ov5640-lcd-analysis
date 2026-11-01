@@ -1,1 +1,1 @@
-PASS TRAJECTORY checks=1307 80ms-PD/20ms-output/finite-endpoint/duplicate/no-extrapolation/loss-cancel/variable-cadence/rate/reversal
+PASS TRAJECTORY checks=1309 80ms-PD/20ms-output/finite-endpoint/duplicate/no-extrapolation/loss-cancel/variable-cadence/rate/reversal

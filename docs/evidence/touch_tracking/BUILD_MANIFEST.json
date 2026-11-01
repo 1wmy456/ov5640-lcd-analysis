@@ -1,7 +1,7 @@
 {
   "project": "build/touch_capture_v3",
   "workspace": "build/touch_capture_v3_sw",
-  "application": "app_output_smooth",
+  "application": "app_output_select_guard_v2",
   "compiled_sources": [
     "clk_wiz/clk_wiz.c",
     "display_ctrl/display_ctrl.c",
@@ -25,7 +25,7 @@
   "files": {
     "build/touch_capture_v3/system_wrapper.xsa": "3da604888d1162f8f86146b05e2c0849e537fbad9be3079eb333416058f60405",
     "build/touch_capture_v3/ov5640_lcd.runs/impl_1/system_wrapper.bit": "688ab472141de3f26a484ed4a3256bae5d92141a39bba25f0d72fce6f9813cee",
-    "build/touch_capture_v3_sw/app_output_smooth/ov5640_lcd.elf": "1c1f09d90313bae1dfec6a6da63610d281ec559e85cd9d5ff8697452581a44d3"
+    "build/touch_capture_v3_sw/app_output_select_guard_v2/ov5640_lcd.elf": "0413de4633b8aad0bc7b0484685dc25f58b6af4d4b58d3e0b4185f86c84e4e0a"
   },
   "physical_acceptance": "See BOARD_VALIDATION.md; simulation is separate."
 }

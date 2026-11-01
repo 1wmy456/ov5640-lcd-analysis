@@ -40,7 +40,8 @@ int main(void){
  CHECK(!c.tracking);
  pt_trajectory_reset(&p,1500,1500,0);
  double rate[2]={20,30},accel[2]={100,120},decel[2]={200,240};
- pt_trajectory_limits(&p,rate,accel,decel);
+ int minimum[2]={1450,1450},maximum[2]={1550,1550};
+ pt_trajectory_limits(&p,rate,accel,decel,minimum,maximum);
  unsigned id=0;double last_x=1500,last_y=1500;
  for(unsigned i=1;i<=300;i++){
   if(i%2==0||i%5==0){id++;goal[0]=i%40<20?1550:1450;goal[1]=3000-goal[0];pt_trajectory_plan(&p,goal,id,i*20000);}
@@ -49,6 +50,11 @@ int main(void){
   CHECK(p.output[0]>=1450&&p.output[0]<=1550&&p.output[1]>=1450&&p.output[1]<=1550);
   last_x=p.output[0];last_y=p.output[1];pt_trajectory_tick(&p,i*20000);CHECK(last_x==p.output[0]&&last_y==p.output[1]);
  }
+ goal[0]=2500;goal[1]=500;pt_trajectory_plan(&p,goal,++id,6200000);
+ CHECK(p.goal[0]==1550&&p.goal[1]==1450);
+ p.output[0]=1549.9;p.velocity[0]=20;p.output[1]=1450.1;p.velocity[1]=-30;
+ goal[0]=1450;goal[1]=1550;pt_trajectory_plan(&p,goal,++id,6200000);
+ pt_trajectory_tick(&p,6220000);CHECK(p.output[0]<=1550&&p.output[1]>=1450);
  printf("PASS TRAJECTORY checks=%u 80ms-PD/20ms-output/finite-endpoint/duplicate/no-extrapolation/loss-cancel/variable-cadence/rate/reversal\n",checks);
  return 0;
 }

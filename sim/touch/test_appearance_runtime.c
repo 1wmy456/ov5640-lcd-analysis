@@ -26,6 +26,9 @@ static void finish_processing(void){unsigned n=0;while(phase==2||phase==3){servi
 static void request_next(void){service(clock_us+2000);CHECK(phase==1);}
 int main(void){
  PtTarget out;CHECK(appearance_runtime_init(0,0));service(1);CHECK(phase==0&&callback);
+ CHECK(appearance_runtime_enabled()&&!appearance_runtime_active());
+ appearance_runtime_target(1,&out);CHECK(!(out.flags&1));
+ available=0;CHECK(appearance_runtime_enabled());appearance_runtime_target(1,&out);CHECK((out.flags&7)==6);available=1;
  appearance_runtime_click(400,240,1000);service(80000);CHECK(!arms);service(82000);CHECK(arms==1&&phase==1&&flushes==1);
  service(83000);CHECK(!tracker.has_model&&!invalidates);complete(11,1);service(84000);CHECK(phase==2&&invalidates==1);finish_processing();
  CHECK(active&&tracker.valid&&tracker.generation==1&&accepted==1);CHECK(appearance_runtime_switched());CHECK(!appearance_runtime_switched());
@@ -52,6 +55,8 @@ int main(void){
  request_next();complete(16,1);regs[0xf8/4]++;service(clock_us+1000);CHECK(phase==4&&errors==3);service(clock_us+1);
  request_next();callback(TOUCH_DOWN,700,240,clock_us);CHECK(appearance_runtime_paused());complete(17,1);service(clock_us+1000);CHECK(phase==0&&tracker.generation==gen);
  callback(TOUCH_CANCEL,700,240,clock_us);CHECK(!appearance_runtime_paused());appearance_runtime_blue(0);CHECK(!active);
+ CHECK(!appearance_runtime_enabled());callback(TOUCH_DOWN,400,240,clock_us);
+ CHECK(appearance_runtime_enabled()&&appearance_runtime_paused());callback(TOUCH_CANCEL,400,240,clock_us);
  CHECK(!servo_writes&&commits>0&&arms==flushes);
  printf("PASS APPEARANCE_RUNTIME checks=%u ownership/IOC/cache/short-frame/error/timeout/age/background-preserve/touch-cancel/no-servo-writes\n",checks);return 0;
 }
