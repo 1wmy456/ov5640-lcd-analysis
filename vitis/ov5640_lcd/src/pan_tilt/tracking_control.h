@@ -19,6 +19,7 @@ typedef struct {
     int automatic,dimensions_ok,enabled,verified[2],tracking,seen;
     int ex,ey,hold_reason;
     uint32_t last_frame;
+    unsigned motion_dt_cap_us; /* 50ms legacy, 100ms touch; finite output trajectory */
     unsigned sample_gap_us; /* default 50ms; bounded raw-frame pipeline may use 150ms */
     uint64_t last_new_us,last_update_us;
 } PtControl;

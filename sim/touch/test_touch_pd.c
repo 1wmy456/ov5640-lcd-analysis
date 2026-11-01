@@ -17,5 +17,12 @@ int main(void){
  t.flags=4;pt_control_update(&raw,&t,420000);CHECK(raw.velocity[0]==0&&raw.d_term[0]==0&&raw.position[0]==pos);
  t.flags=5;t.frame_id++;pt_control_update(&raw,&t,440000);CHECK(raw.position[0]==pos&&raw.hold_reason==PT_HOLD_BASELINE);
  CHECK(pt_control_sample_gap(&raw,50000));CHECK(raw.position[0]==pos&&raw.enabled==3&&raw.automatic);
+
+ PtControl timed,legacy;init(&timed);init(&legacy);timed.motion_dt_cap_us=100000;
+ timed.smooth_enabled=legacy.smooth_enabled=0;t.flags=5;t.xmin=490;t.xmax=510;
+ t.frame_id=100;pt_control_update(&timed,&t,1000000);pt_control_update(&legacy,&t,1000000);
+ t.frame_id++;pt_control_update(&timed,&t,1100000);pt_control_update(&legacy,&t,1100000);
+ CHECK(timed.position[0]-1500>1.99*(legacy.position[0]-1500));
+ double held=timed.position[0];pt_control_update(&timed,&t,1120000);CHECK(timed.position[0]==held);
  printf("PASS TOUCH_PD checks=%u 75ms-sampling/D-active/duplicate/loss/recovery/position-preserved/legacy-50ms\n",checks);return 0;
 }

@@ -15,7 +15,7 @@ static void stop_motion(PtControl *c){
 void pt_control_init(PtControl *c,int dimensions_ok){
     int i;memset(c,0,sizeof(*c));c->dimensions_ok=dimensions_ok;c->deadband=15;
     c->deadband_outer=22;c->smooth_enabled=1;
-    c->sample_gap_us=50000;
+    c->sample_gap_us=50000;c->motion_dt_cap_us=50000;
     for(i=0;i<2;i++){c->position[i]=1500;c->center[i]=1500;c->minimum[i]=1400;c->maximum[i]=1600;
         c->gain[i]=0.1;c->rate[i]=25;c->direction[i]=1;
         c->acceleration[i]=200;c->deceleration[i]=400;
@@ -124,7 +124,8 @@ int pt_control_update(PtControl *c,const PtTarget *t,uint64_t now){
     {
         uint64_t elapsed=now-c->last_update_us;
         if(now<=c->last_update_us)return 0;
-        double dt=(double)(elapsed>50000?50000:elapsed)/1000000.0;
+        unsigned cap=c->motion_dt_cap_us==100000?100000:50000;
+        double dt=(double)(elapsed>cap?cap:elapsed)/1000000.0;
         c->last_update_us=now;e[0]=c->ex;e[1]=c->ey;
         for(a=0;a<2;a++){
             unsigned before=pt_control_pulse(c,a);

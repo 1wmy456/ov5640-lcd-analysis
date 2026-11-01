@@ -47,7 +47,7 @@ static void show_pid(void){
         (int)(control.derivative_tau[0]*1000),(int)(control.derivative_tau[1]*1000),
         (int)(control.integral_limit[0]*1000),(int)(control.integral_limit[1]*1000),
         (int)control.derivative_limit[0],(int)control.derivative_limit[1]);
-    log_text("PID_CADENCE sample_gap_us=%u motion_dt_cap_us=50000\r\n",control.sample_gap_us);
+    log_text("PID_CADENCE sample_gap_us=%u motion_dt_cap_us=%u\r\n",control.sample_gap_us,control.motion_dt_cap_us);
     log_text("OUTPUT_TRAJECTORY touch_only=1 tick_us=20000 active=%u finite_endpoint=1 plan_us=%u,%u\r\n",trajectory_active,pt_control_pulse(&control,0),pt_control_pulse(&control,1));
     log_text("PID_TERMS p_milli=%d,%d i_milli=%d,%d d_milli=%d,%d requested_milli=%d,%d us/s; D filtered px/s=%d,%d\r\n",
         (int)(control.p_term[0]*1000),(int)(control.p_term[1]*1000),
@@ -74,7 +74,7 @@ static void command(char *s){
     if(n==1&&!strcmp(w[0],"appearance")){appearance_runtime_status();return;}
     if(n==2&&!strcmp(w[0],"vision")&&!strcmp(w[1],"blue")){
         if(trajectory_active){sync_actual_position();pt_driver_commit(pt_base,&control);}
-        appearance_runtime_blue(pt_base);cap_runtime_init(pt_base);pt_control_sample_gap(&control,50000);control.seen=0;
+        appearance_runtime_blue(pt_base);cap_runtime_init(pt_base);pt_control_sample_gap(&control,50000);control.motion_dt_cap_us=50000;control.seen=0;
         log_text("vision=blue; position/enables retained, PID history reset\r\n");return;
     }
     if(n==3&&!strcmp(w[0],"select")&&number(w[1],&v)&&number(w[2],&lo)&&v>=0&&v<800&&lo>=0&&lo<480&&v==(int)v&&lo==(int)lo){
@@ -228,7 +228,7 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
         touch_service(now);
         appearance_runtime_service(pt_base,now);
         if(!appearance_runtime_enabled())cap_runtime_service(pt_base,now);
-        if(appearance_runtime_switched()){if(trajectory_active)sync_actual_position();cap_runtime_init(pt_base);pt_control_sample_gap(&control,150000);control.seen=0;}
+        if(appearance_runtime_switched()){if(trajectory_active)sync_actual_position();cap_runtime_init(pt_base);pt_control_sample_gap(&control,150000);control.motion_dt_cap_us=100000;control.seen=0;}
         if(now-last_tick>=20000){last_tick=now;
             if(appearance_runtime_enabled())appearance_runtime_target(now,&target);else cap_runtime_target(pt_base,now,&target);
             if(appearance_runtime_paused())target.flags&=~1u;
