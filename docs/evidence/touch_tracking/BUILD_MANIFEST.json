@@ -1,7 +1,7 @@
 {
   "project": "build/touch_capture_v3",
   "workspace": "build/touch_capture_v3_sw",
-  "application": "app_fast",
+  "application": "app_shape",
   "compiled_sources": [
     "clk_wiz/clk_wiz.c",
     "display_ctrl/display_ctrl.c",
@@ -15,15 +15,16 @@
     "pan_tilt/tracking_control.c",
     "touch/appearance_runtime.c",
     "touch/appearance_tracker.c",
+    "touch/box_shape_filter.c",
     "touch/touch_driver.c",
     "touch/touch_events.c",
     "vdma_api/vdma_api.c"
   ],
-  "end_address": "0x300510",
+  "end_address": "0x300590",
   "files": {
     "build/touch_capture_v3/system_wrapper.xsa": "3da604888d1162f8f86146b05e2c0849e537fbad9be3079eb333416058f60405",
     "build/touch_capture_v3/ov5640_lcd.runs/impl_1/system_wrapper.bit": "688ab472141de3f26a484ed4a3256bae5d92141a39bba25f0d72fce6f9813cee",
-    "build/touch_capture_v3_sw/app_fast/ov5640_lcd.elf": "4a8d984dbb7cbb089aef1f0a261a5c764c798e0960cbf0875a220eaefb49033a"
+    "build/touch_capture_v3_sw/app_shape/ov5640_lcd.elf": "a1ad16e6b3e741b149002985d5b77d7b14d317921908a1bbf50aa409baee7439"
   },
   "physical_acceptance": "See BOARD_VALIDATION.md; simulation is separate."
 }

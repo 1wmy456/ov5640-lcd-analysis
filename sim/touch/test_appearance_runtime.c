@@ -31,6 +31,17 @@ int main(void){
  CHECK(active&&tracker.valid&&tracker.generation==1&&accepted==1);CHECK(appearance_runtime_switched());CHECK(!appearance_runtime_switched());
  appearance_runtime_target(clock_us,&out);CHECK(out.flags==5&&out.frame_id==11);CHECK(!servo_writes);
  unsigned gen=tracker.generation;CapBox old=tracker.box;
+ /* Overlay sizes are stabilized; controller still receives the raw current box. */
+ for(unsigned i=0;i<20;i++){
+  tracker.frame_id=100+i;tracker.box=old;
+  tracker.box.xmax=old.xmin+(i%2?67:91);tracker.box.ymax=old.ymin+(i%2?63:47);
+  publish_box(0,1);appearance_runtime_target(clock_us,&out);
+  CHECK(out.xmin==tracker.box.xmin&&out.xmax==tracker.box.xmax);
+  CHECK(out.ymin==tracker.box.ymin&&out.ymax==tracker.box.ymax);
+  CHECK((regs[0x100/4]>>16)-(regs[0x100/4]&65535)==(unsigned)(old.xmax-old.xmin));
+  CHECK((regs[0x104/4]>>16)-(regs[0x104/4]&65535)==(unsigned)(old.ymax-old.ymin));
+ }
+ tracker.box=old;tracker.frame_id=11;box_shape_init(&shape);publish_box(0,1);
  appearance_runtime_click(8,8,clock_us);service(clock_us+81000);CHECK(phase==1);complete(12,1);service(clock_us+1000);finish_processing();
  CHECK(rejections==1&&tracker.generation==gen&&!memcmp(&old,&tracker.box,sizeof(old)));
  request_next();complete(13,0);service(clock_us+1000);finish_processing();CHECK(tracker.state==AP_LOST&&!tracker.valid);

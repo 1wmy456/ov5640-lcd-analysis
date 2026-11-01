@@ -16,10 +16,12 @@
 
 - SELECT：点击附近3×3小区域的稳健颜色统计初始化。颜色特征是归一化r/b色度与亮度，容差由局部离散程度估计，不预设红/蓝/白RGB阈值。
 - 用点击连通区域、面积、椭圆二阶矩与轮廓一致性筛除大块背景和细线。有效候选才提交新模型；失败选择保留原模型、目标和舵机位置。
-- TRACK：对学习颜色产生区域，再用位置/面积关联、平滑的8×8色度直方图与初始外观锚点核验。只有连续高置信度、形状合格的目标才小幅更新活动模型，初始锚点不更新。
+- TRACK：用学习的前景/背景颜色直方图、积分图和运动预测，在上一位置附近进行多尺度外观搜索，再以活动直方图及初始锚点核验。椭圆筛选用于初始化，避免移动时重新分割导致缩框或频繁丢失。只有连续高置信度才小幅更新活动直方图，初始锚点不更新。
 - LOST：检测/形状/外观失败，帧异常、过期或视频停止时目标无效，保留模型与最后安全脉宽，不搜索、不回中，不从背景更新模板。目标回到原位置邻域可恢复；较远移位需重新点击。
 
 SELECT/TRACK/LOST文字在LCD左上角显示黄/绿/红；紫色十字标记点击位置，绿色框来自当前锁定对象。叠加参数在SOF锁存，AXI输出背压期间数据及帧行标志保持稳定。
+
+`app_shape`增加仅用于LCD画框的宽高稳定器：忽略4像素或8%以内的小幅尺寸变化；超出时需连续3帧方向和测量一致，随后每帧最多变化约4%，逐步接近新尺寸。中心直接使用本帧检测框中心，PS跟踪、模型更新与PD仍读取原始检测框；不对中心增加平滑延迟。边缘裁剪不参与尺寸学习，重新选目标立即重建尺寸，失目标仍立即隐藏框。真实靠近/远离时画框尺寸会有数帧延迟，这是抑制尺寸跳变的代价。`appearance`命令额外打印原始与显示宽高。
 
 点击成功切换时清PD速度/I/D历史和新帧基准，保持当前脉宽、使能与manual/auto模式。控制服务仍20ms，重复帧不重复积分，运动dt上限50ms。旧蓝色路径保留原50ms微分重建间隔；原始帧路径的采样较慢，使用150ms间隔允许实际采样dt参与低通D，失目标/过期仍立即清历史。新增间隔只影响D重建，不扩大脉宽、速率或加速度限位。
 
@@ -56,6 +58,7 @@ vision blue
 ./scripts/build_touch_tracking.ps1 -Project build/touch_tracking_new -Workspace build/touch_tracking_new_sw
 ./scripts/download_pan_tilt.ps1 -Project build/touch_tracking_new -Workspace build/touch_tracking_new_sw
 # 固定回退
+./scripts/download_touch_tracking.ps1 -Application app_fast # 尺寸稳定前，tag touch-blue-pd
 ./scripts/download_touch_stage_a.ps1
 ./scripts/download_lost.ps1
 ```

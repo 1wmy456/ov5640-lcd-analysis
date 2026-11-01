@@ -1,6 +1,7 @@
 #include "appearance_runtime.h"
 #include "appearance_tracker.h"
 #include "touch_driver.h"
+#include "box_shape_filter.h"
 #include "xparameters.h"
 #include "xil_cache.h"
 #include "xil_io.h"
@@ -12,6 +13,7 @@ enum { DMA_CR=0x30,DMA_SR=0x34,DMA_ADDR=0x48,DMA_LENGTH=0x58,FRAME_BYTES=800*480
 static uint32_t raw[800*480] __attribute__((aligned(64)));
 static uint32_t small[CAP_CELLS] __attribute__((aligned(64)));
 static AppearanceTracker tracker;static AppearanceWork work;
+static BoxShapeFilter shape;static CapBox display_box;
 static unsigned available,active,phase,down,pending,click_x,click_y,click_token,request_token;
 static unsigned selecting,switched,errors,rejections,accepted,frames,processing_us,last_status,raw_rows,cpu_us,dma_us;
 static uint32_t source_error,last_frame;static uint64_t deadline,issued,published,next_capture,clicked,cpu_started;
@@ -20,8 +22,9 @@ static uint64_t ticks_us(void){XTime t;XTime_GetTime(&t);return t/COUNTS_PER_SEC
 static void wr(unsigned reg,uint32_t value){Xil_Out32(XPAR_RAW_CAPTURE_DMA_BASEADDR+reg,value);dmb();}
 static uint32_t rd(unsigned reg){return Xil_In32(XPAR_RAW_CAPTURE_DMA_BASEADDR+reg);}
 static void publish_box(UINTPTR b,int valid){
- pt_reg_write(b,0x100,((uint32_t)tracker.box.xmax<<16)|tracker.box.xmin);
- pt_reg_write(b,0x104,((uint32_t)tracker.box.ymax<<16)|tracker.box.ymin);
+ valid=box_shape_update(&shape,&tracker.box,tracker.frame_id,tracker.generation,valid,800,480,&display_box);
+ pt_reg_write(b,0x100,((uint32_t)display_box.xmax<<16)|display_box.xmin);
+ pt_reg_write(b,0x104,((uint32_t)display_box.ymax<<16)|display_box.ymin);
  pt_reg_write(b,0x108,tracker.box.area);pt_reg_write(b,0x10c,tracker.frame_id);
  pt_reg_write(b,0x110,2u|!!valid);pt_reg_write(b,0x11c,processing_us);pt_reg_write(b,0x114,1);
 }
@@ -32,14 +35,14 @@ static void touch(unsigned event,unsigned x,unsigned y,uint64_t now){
  if(event==TOUCH_CANCEL){down=pending=0;click_token++;}
 }
 int appearance_runtime_init(UINTPTR b,uint64_t now){
- appearance_init(&tracker);base=b;available=1;active=phase=down=pending=0;last_frame=0;
+ appearance_init(&tracker);box_shape_init(&shape);base=b;available=1;active=phase=down=pending=0;last_frame=0;
  touch_capture_control(2);wr(DMA_CR,4);phase=4;deadline=now;touch_set_handler(touch);
  printf("TOUCH_CAPTURE ready DMA=%08lx buffer=%08lx bytes=%u; tap to select, vision blue fallback; raw buffer ownership single-shot\r\n",(unsigned long)XPAR_RAW_CAPTURE_DMA_BASEADDR,(unsigned long)(UINTPTR)raw,FRAME_BYTES);return 1;
 }
 int appearance_runtime_active(void){return active;}
 int appearance_runtime_paused(void){return down||pending;}
 int appearance_runtime_switched(void){int result=switched;switched=0;return result;}
-void appearance_runtime_blue(UINTPTR b){active=0;pending=down=0;click_token++;appearance_init(&tracker);pt_reg_write(b,0xd0,0);}
+void appearance_runtime_blue(UINTPTR b){active=0;pending=down=0;click_token++;appearance_init(&tracker);box_shape_init(&shape);pt_reg_write(b,0xd0,0);}
 void appearance_runtime_click(unsigned x,unsigned y,uint64_t now){if(x<800&&y<480){click_token++;click_x=x;click_y=y;down=0;pending=1;clicked=now;}}
 static void failed(UINTPTR b,uint64_t now){
  errors++;appearance_invalidate(&tracker,AP_BAD_FRAME);pending=0;
@@ -114,6 +117,7 @@ void appearance_runtime_target(uint64_t now,PtTarget *out){
 void appearance_runtime_status(void){
  uint64_t now=ticks_us();unsigned valid=available&&tracker.valid&&!down&&!pending&&now-published<=250000;
  printf("APPEARANCE available=%u active=%u state=%s valid=%u reason=%u frame=%lu generation=%u similarity=%u/4096 phase=%u raw_frames=%u errors=%u accept=%u reject=%u process_us=%u cpu_us=%u dma_us=%u dma=%08x model=%d,%d,%d radius=%u ref_area=%lu\r\n",available,active,!active||down||pending?"SELECT":valid?"TRACK":"LOST",valid,tracker.reason,(unsigned long)tracker.frame_id,tracker.generation,tracker.similarity,phase,frames,errors,accepted,rejections,processing_us,cpu_us,dma_us,last_status,tracker.color.y,tracker.color.cb,tracker.color.cr,tracker.chroma_radius,(unsigned long)tracker.reference_box.area);
+ printf("BOX_SHAPE raw=%u,%u display=%u,%u size_stabilized=1 center_unfiltered=1\r\n",tracker.box.xmax-tracker.box.xmin+1,tracker.box.ymax-tracker.box.ymin+1,display_box.xmax-display_box.xmin+1,display_box.ymax-display_box.ymin+1);
 }
 #else
 int appearance_runtime_init(UINTPTR b,uint64_t n){(void)b;(void)n;return 0;}
