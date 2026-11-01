@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 static uint32_t image[CAP_CELLS];static AppearanceTracker t;static AppearanceWork w;static unsigned checks,frame;
 #define CHECK(v) do{checks++;if(!(v)){printf("FAIL line=%d reason=%u valid=%u state=%u frame=%u\n",__LINE__,t.reason,t.valid,t.state,frame);exit(1);}}while(0)
 static void disk(int cx,int cy,int rx,int ry,uint32_t c){for(int y=0;y<CAP_MASK_HEIGHT;y++)for(int x=0;x<CAP_MASK_WIDTH;x++){int dx=x-cx,dy=y-cy;if(dx*dx*ry*ry+dy*dy*rx*rx<=rx*rx*ry*ry)image[y*CAP_MASK_WIDTH+x]=c;}}
@@ -17,6 +18,14 @@ int main(void){
  for(int which=0;which<3;which++){
   scene(0,which);process(1,centers[which]*4,58*4);CHECK(w.selection_accepted&&t.valid&&t.generation==(unsigned)which+1);
   CHECK(abs((int)t.box.cx-centers[which]*4)<8);
+  /* Identical input must converge, rather than feeding scale/grid jitter back
+     into the next search and the controller. */
+  unsigned stable_w=0,stable_h=0;double stable_x=0,stable_y=0;
+  for(unsigned repeat=0;repeat<30;repeat++){
+   process(0,0,0);CHECK(t.valid);
+   if(repeat==5){stable_w=t.box.xmax-t.box.xmin;stable_h=t.box.ymax-t.box.ymin;stable_x=t.box.cx;stable_y=t.box.cy;}
+   if(repeat>5){CHECK(abs((int)(t.box.xmax-t.box.xmin)-(int)stable_w)<=4);CHECK(abs((int)(t.box.ymax-t.box.ymin)-(int)stable_h)<=4);CHECK(fabs(t.box.cx-stable_x)<=4&&fabs(t.box.cy-stable_y)<=4);}
+  }
   uint16_t anchor[64];memcpy(anchor,t.anchor_histogram,sizeof(anchor));
   for(int move=1;move<=8;move++){
    scene(move,which);

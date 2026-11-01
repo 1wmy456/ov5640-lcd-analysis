@@ -1,1 +1,1 @@
-PASS APPEARANCE checks=19625 red/blue/white click/motion/reselect/background-preserve/loss/recovery/immutable-anchor/flat-background
+PASS APPEARANCE checks=54878 red/blue/white click/motion/reselect/background-preserve/loss/recovery/immutable-anchor/flat-background

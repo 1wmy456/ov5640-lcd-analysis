@@ -226,13 +226,20 @@ static int search_work(AppearanceWork *w,unsigned budget){
    if(ia&&oa>ma){
     int im=inner/ia,om=(outer-main)/(oa-ma);
     int dx=x-w->pred_x,dy=y-w->pred_y,gate=w->search_hx-w->search_lx+1;
-    int score=im-om*3/5-(dx*dx+dy*dy)*1024/(gate*gate+1);
+    /* Compare appearance gain against a scale-change cost. Without this prior,
+       almost tied windows repeatedly multiply the previous width/height by
+       0.85/1.18, even when the identical RGB frame is replayed. */
+    int sw=(ww-bw)*1024/bw,sh=(hh-bh)*1024/bh;
+    int scale_cost=(abs(sw)+abs(sh))*600/1024+abs(sw-sh)*400/1024;
+    int score=im-om*3/5-(dx*dx+dy*dy)*1024/(gate*gate+1)-scale_cost;
     if(im>=2000&&im-om>=600&&score>w->search_best_score){
      w->search_best_score=score;w->search_best_x=x;w->search_best_y=y;w->search_best_w=ww;w->search_best_h=hh;
     }
    }
-   w->search_x+=2;
-   if(w->search_x>w->search_hx){w->search_x=w->search_lx;w->search_y+=2;}
+   /* One downsampled pixel (4 LCD pixels) avoids an alternating grid phase
+      that skipped the same center on successive predictions. Work stays bounded. */
+   w->search_x++;
+   if(w->search_x>w->search_hx){w->search_x=w->search_lx;w->search_y++;}
    if(w->search_y>w->search_hy){w->search_y=w->search_ly;if(++w->search_scale==9)return search_finish(w);}
   }
  }

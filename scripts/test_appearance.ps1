@@ -1,4 +1,4 @@
-param([string]$HostGcc='D:/msys64/ucrt64/bin/gcc.exe')
+param([string]$HostGcc='D:/msys64/ucrt64/bin/gcc.exe',[string]$CapturedFrame,[string]$CapturedModel)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 $out=Join-Path $repo build/appearance_sim
@@ -22,4 +22,11 @@ try{
  if($LASTEXITCODE){throw 'Box shape compile failed'}
  & "$out/box_shape.exe" | Tee-Object "$out/box_shape.txt"
  if($LASTEXITCODE){throw 'Box shape stabilization test failed'}
+ if($CapturedFrame -or $CapturedModel){
+  if(-not $CapturedFrame -or -not $CapturedModel){throw 'Both captured frame and matching model are required'}
+  & $HostGcc -std=c11 -O2 -Wall -Wextra -Werror "$repo/sim/touch/test_capture_stability.c" "$repo/vitis/ov5640_lcd/src/touch/appearance_tracker.c" "$repo/vitis/ov5640_lcd/src/pan_tilt/cap_components.c" -lm -o "$out/capture.exe"
+  if($LASTEXITCODE){throw 'Captured-frame test compile failed'}
+  & "$out/capture.exe" $CapturedFrame $CapturedModel | Tee-Object "$out/capture.txt"
+  if($LASTEXITCODE){throw 'Captured-frame stability failed'}
+ }
 }finally{$env:PATH=$oldPath}

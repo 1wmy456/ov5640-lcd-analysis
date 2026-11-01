@@ -21,6 +21,8 @@ for src,dst in [('build/raw_capture_sim/rtl.txt','raw_capture.txt'),('build/raw_
  if (root/src).exists():shutil.copy2(root/src,out/dst)
 files=[project/'system_wrapper.xsa',project/'ov5640_lcd.runs/impl_1/system_wrapper.bit',app/'ov5640_lcd.elf']
 if (root/'build/appearance_sim/box_shape.txt').exists():shutil.copy2(root/'build/appearance_sim/box_shape.txt',out/'box_shape.txt')
+for name in ['capture','capture_before']:
+ if (root/('build/appearance_sim/'+name+'.txt')).exists():shutil.copy2(root/('build/appearance_sim/'+name+'.txt'),out/(name+'.txt'))
 report={'project':a.project,'workspace':a.workspace,'application':a.application,'compiled_sources':manifest['compiled_sources'],'end_address':manifest['end_address'],'files':{f.relative_to(root).as_posix():hashlib.sha256(f.read_bytes()).hexdigest() for f in files},'physical_acceptance':'See BOARD_VALIDATION.md; simulation is separate.'}
 (out/'BUILD_MANIFEST.json').write_bytes((json.dumps(report,indent=2)+'\n').encode())
 print('TOUCH_TRACKING_RECORD PASS real compiled sources/raw hardware/new BSP/link boundary')
