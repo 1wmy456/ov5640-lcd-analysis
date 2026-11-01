@@ -8,7 +8,7 @@ params=(ws/'board_platform/ps7_cortexa9_0/standalone_domain/bsp/ps7_cortexa9_0/i
 for macro,address in [('XPAR_TOUCH_GPIO_BASEADDR','0x43C30000'),('XPAR_RAW_CAPTURE_DMA_BASEADDR','0x43C40000')]:
  assert re.search(r'#define '+macro+' '+address+r'\b',params),macro
 manifest=json.loads((app/'build_manifest.json').read_text());assert int(manifest['end_address'],16)<0x01100000
-for name in ['touch/appearance_runtime.c','touch/appearance_tracker.c','touch/box_shape_filter.c','touch/touch_driver.c','touch/touch_events.c','pan_tilt/pan_tilt_app.c','pan_tilt/tracking_control.c']:
+for name in ['touch/appearance_runtime.c','touch/appearance_tracker.c','touch/box_shape_filter.c','touch/touch_driver.c','touch/touch_events.c','pan_tilt/pan_tilt_app.c','pan_tilt/tracking_control.c','pan_tilt/position_trajectory.c']:
  assert name in manifest['compiled_sources']
  assert hashlib.sha256((root/'vitis/ov5640_lcd/src'/name).read_bytes()).hexdigest()==manifest['source_sha256'][name],name
 for name in ['axis_touch_cross.v','axis_raw_capture.v']:
@@ -21,7 +21,7 @@ for src,dst in [('build/raw_capture_sim/rtl.txt','raw_capture.txt'),('build/raw_
  if (root/src).exists():shutil.copy2(root/src,out/dst)
 files=[project/'system_wrapper.xsa',project/'ov5640_lcd.runs/impl_1/system_wrapper.bit',app/'ov5640_lcd.elf']
 if (root/'build/appearance_sim/box_shape.txt').exists():shutil.copy2(root/'build/appearance_sim/box_shape.txt',out/'box_shape.txt')
-for name in ['capture','capture_before']:
+for name in ['capture','capture_before','trajectory']:
  if (root/('build/appearance_sim/'+name+'.txt')).exists():shutil.copy2(root/('build/appearance_sim/'+name+'.txt'),out/(name+'.txt'))
 report={'project':a.project,'workspace':a.workspace,'application':a.application,'compiled_sources':manifest['compiled_sources'],'end_address':manifest['end_address'],'files':{f.relative_to(root).as_posix():hashlib.sha256(f.read_bytes()).hexdigest() for f in files},'physical_acceptance':'See BOARD_VALIDATION.md; simulation is separate.'}
 (out/'BUILD_MANIFEST.json').write_bytes((json.dumps(report,indent=2)+'\n').encode())

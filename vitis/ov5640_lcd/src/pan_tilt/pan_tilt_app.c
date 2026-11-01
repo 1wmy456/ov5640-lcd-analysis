@@ -1,5 +1,6 @@
 #include "pan_tilt_app.h"
 #include "pan_tilt_driver.h"
+#include "position_trajectory.h"
 #include "cap_runtime.h"
 #include "../touch/touch_driver.h"
 #include "../touch/appearance_runtime.h"
@@ -20,6 +21,13 @@ extern unsigned int lcd_id;
 static const UINTPTR pt_base=XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR;
 static PtControl control;
 static PtTarget target;
+static PtTrajectory trajectory;
+static unsigned trajectory_active;
+static void sync_actual_position(void){
+    control.position[0]=pt_reg_read(pt_base,PT_YAW_ACTIVE);
+    control.position[1]=pt_reg_read(pt_base,PT_PITCH_ACTIVE);
+    trajectory_active=0;
+}
 static int command_result;
 static char tx[4096],line[128];static unsigned tx_head,tx_tail,line_used,dropped;static int line_overflow;
 static void log_text(const char *fmt,...){
@@ -40,6 +48,7 @@ static void show_pid(void){
         (int)(control.integral_limit[0]*1000),(int)(control.integral_limit[1]*1000),
         (int)control.derivative_limit[0],(int)control.derivative_limit[1]);
     log_text("PID_CADENCE sample_gap_us=%u motion_dt_cap_us=50000\r\n",control.sample_gap_us);
+    log_text("OUTPUT_TRAJECTORY touch_only=1 tick_us=20000 active=%u finite_endpoint=1 plan_us=%u,%u\r\n",trajectory_active,pt_control_pulse(&control,0),pt_control_pulse(&control,1));
     log_text("PID_TERMS p_milli=%d,%d i_milli=%d,%d d_milli=%d,%d requested_milli=%d,%d us/s; D filtered px/s=%d,%d\r\n",
         (int)(control.p_term[0]*1000),(int)(control.p_term[1]*1000),
         (int)(control.integral[0]*1000),(int)(control.integral[1]*1000),
@@ -64,6 +73,7 @@ static void command(char *s){
     if(!n)return;
     if(n==1&&!strcmp(w[0],"appearance")){appearance_runtime_status();return;}
     if(n==2&&!strcmp(w[0],"vision")&&!strcmp(w[1],"blue")){
+        if(trajectory_active){sync_actual_position();pt_driver_commit(pt_base,&control);}
         appearance_runtime_blue(pt_base);cap_runtime_init(pt_base);pt_control_sample_gap(&control,50000);control.seen=0;
         log_text("vision=blue; position/enables retained, PID history reset\r\n");return;
     }
@@ -103,8 +113,8 @@ static void command(char *s){
             (unsigned long)pt_reg_read(pt_base,PT_PITCH_PERIOD_TICKS),(unsigned long)pt_reg_read(pt_base,PT_PITCH_RISES));return;
     }
     if(!strcmp(w[0],"status")){show_status();return;}
-    if(!strcmp(w[0],"manual")||!strcmp(w[0],"hold")){pt_control_manual(&control);log_text("manual/hold: PWM enable and position retained\r\n");return;}
-    if(!strcmp(w[0],"disable")){control.enabled=0;pt_control_manual(&control);pt_reg_write(pt_base,PT_ENABLE,0);log_text("PWM disabled; stored position retained\r\n");return;}
+    if(!strcmp(w[0],"manual")||!strcmp(w[0],"hold")){if(trajectory_active){sync_actual_position();pt_driver_commit(pt_base,&control);}pt_control_manual(&control);log_text("manual/hold: PWM enable and position retained\r\n");return;}
+    if(!strcmp(w[0],"disable")){if(trajectory_active){sync_actual_position();pt_driver_commit(pt_base,&control);}control.enabled=0;pt_control_manual(&control);pt_reg_write(pt_base,PT_ENABLE,0);log_text("PWM disabled; stored position retained\r\n");return;}
     if(n==2&&!strcmp(w[0],"enable")){
         int mask=!strcmp(w[1],"both")?3:(!strcmp(w[1],"yaw")?1:(!strcmp(w[1],"pitch")?2:0));
         if(!mask)goto bad;
@@ -218,11 +228,33 @@ void pan_tilt_run(unsigned width,unsigned height,int camera_ok){
         touch_service(now);
         appearance_runtime_service(pt_base,now);
         if(!appearance_runtime_active())cap_runtime_service(pt_base,now);
-        if(appearance_runtime_switched()){cap_runtime_init(pt_base);pt_control_sample_gap(&control,150000);control.seen=0;}
+        if(appearance_runtime_switched()){if(trajectory_active)sync_actual_position();cap_runtime_init(pt_base);pt_control_sample_gap(&control,150000);control.seen=0;}
         if(now-last_tick>=20000){last_tick=now;
             if(appearance_runtime_active())appearance_runtime_target(now,&target);else cap_runtime_target(pt_base,now,&target);
             if(appearance_runtime_paused())target.flags&=~1u;
-            if(pt_control_update(&control,&target,now))pt_driver_commit(pt_base,&control);
+            int changed=pt_control_update(&control,&target,now);
+            if(appearance_runtime_active()&&control.automatic){
+                if(control.hold_reason==PT_HOLD_BASELINE&&control.tracking){
+                    sync_actual_position();
+                    pt_trajectory_reset(&trajectory,control.position[0],control.position[1],now);
+                    pt_trajectory_limits(&trajectory,control.rate,control.acceleration,control.deceleration);
+                    pt_trajectory_plan(&trajectory,control.position,target.frame_id,now);trajectory_active=1;
+                }else if(control.hold_reason||!control.tracking){
+                    /* Cancel all unplayed motion on invalid/stale/selection.
+                       Resume from applied PWM, not an old planned endpoint. */
+                    if(trajectory_active){sync_actual_position();pt_driver_commit(pt_base,&control);}
+                }else{
+                    if(!trajectory_active){
+                        pt_trajectory_reset(&trajectory,pt_reg_read(pt_base,PT_YAW_ACTIVE),pt_reg_read(pt_base,PT_PITCH_ACTIVE),now);
+                        pt_trajectory_limits(&trajectory,control.rate,control.acceleration,control.deceleration);
+                        trajectory_active=1;
+                    }
+                    pt_trajectory_plan(&trajectory,control.position,target.frame_id,now);
+                    pt_trajectory_tick(&trajectory,now);
+                    PtControl output=control;output.position[0]=trajectory.output[0];output.position[1]=trajectory.output[1];
+                    if(pt_control_pulse(&output,0)!=pt_reg_read(pt_base,PT_YAW_ACTIVE)||pt_control_pulse(&output,1)!=pt_reg_read(pt_base,PT_PITCH_ACTIVE))pt_driver_commit(pt_base,&output);
+                }
+            }else{trajectory_active=0;if(changed)pt_driver_commit(pt_base,&control);}
             app_state();}
         if(now-last_log>=500000){last_log=now;show_status();}
     }

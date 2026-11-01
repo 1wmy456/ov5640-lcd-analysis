@@ -22,6 +22,10 @@ try{
  if($LASTEXITCODE){throw 'Box shape compile failed'}
  & "$out/box_shape.exe" | Tee-Object "$out/box_shape.txt"
  if($LASTEXITCODE){throw 'Box shape stabilization test failed'}
+ & $HostGcc -std=c11 -O2 -Wall -Wextra -Werror "$repo/sim/touch/test_position_trajectory.c" "$repo/vitis/ov5640_lcd/src/pan_tilt/position_trajectory.c" "$repo/vitis/ov5640_lcd/src/pan_tilt/tracking_control.c" -lm -o "$out/trajectory.exe"
+ if($LASTEXITCODE){throw 'Position trajectory compile failed'}
+ & "$out/trajectory.exe" | Tee-Object "$out/trajectory.txt"
+ if($LASTEXITCODE){throw 'Position trajectory test failed'}
  if($CapturedFrame -or $CapturedModel){
   if(-not $CapturedFrame -or -not $CapturedModel){throw 'Both captured frame and matching model are required'}
   & $HostGcc -std=c11 -O2 -Wall -Wextra -Werror "$repo/sim/touch/test_capture_stability.c" "$repo/vitis/ov5640_lcd/src/touch/appearance_tracker.c" "$repo/vitis/ov5640_lcd/src/pan_tilt/cap_components.c" -lm -o "$out/capture.exe"
