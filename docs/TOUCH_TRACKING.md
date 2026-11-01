@@ -1,5 +1,7 @@
 # 触摸选择与在线外观跟踪
 
+当前快速回中配置：`./scripts/restore_touch_tracking.ps1 -Responsive`，两轴Kp1.5、Kd0、速率100us/s、加速500/减速800。用户已确认固定目标约1～2秒回中、速度及停稳合适；动态跟随及失目标复测另行记录。此配置依赖`app_touch_timebase`，实际为P控制加运动轨迹，保留PD/PID实现。脚本默认仍关闭PWM；显式`-EnableAuto`启用双轴自动。此前用户选择的500～2500实验范围需显式`-WideExperiment`，未当作全行程机械标定。
+
 开发分支`codex/touch-target-selection`。固定回退`lost`（原视觉PD）与`touch-stage-a`（GT1158五点触摸已验收）。本版增加通用点击初始化和PS跟踪原型，现场进度以`docs/evidence/touch_tracking/BOARD_VALIDATION.md`为准，不以红/白合成测试代替上板验收。
 
 ## 图像与缓冲所有权

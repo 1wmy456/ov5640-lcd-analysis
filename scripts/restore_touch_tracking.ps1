@@ -1,7 +1,7 @@
-param([string]$Workspace='build/touch_capture_v3_sw',[switch]$EnableAuto,[switch]$WideExperiment,[switch]$Conservative,[switch]$Moderate,
+param([string]$Workspace='build/touch_capture_v3_sw',[switch]$EnableAuto,[switch]$WideExperiment,[switch]$Conservative,[switch]$Moderate,[switch]$Responsive,
  [string]$Xsct='C:/Xilinxx/Vitis/2020.2/bin/xsct.bat')
 $ErrorActionPreference='Stop'
-if($Conservative -and $Moderate){throw 'Choose one motion test profile'}
+if(([int]$Conservative.IsPresent+[int]$Moderate.IsPresent+[int]$Responsive.IsPresent) -gt 1){throw 'Choose one motion profile'}
 $repo=Split-Path $PSScriptRoot -Parent
 $header=Join-Path $repo "$Workspace/board_platform/ps7_cortexa9_0/standalone_domain/bsp/ps7_cortexa9_0/include/xparameters.h"
 $base=[regex]::Match((Get-Content -Raw $header),'(?m)^#define XPAR_PAN_TILT_CTRL_0_S_AXI_BASEADDR (0x[0-9a-fA-F]+)')
@@ -16,6 +16,8 @@ if($Conservative){$commands+=@('kp yaw 0.25','kp pitch 0.25','kd yaw 0','kd pitc
  'accel yaw 100','accel pitch 100','decel yaw 200','decel pitch 200')}
 if($Moderate){$commands+=@('kp yaw 0.4','kp pitch 0.4','kd yaw 0','kd pitch 0','rate yaw 45','rate pitch 45',
  'accel yaw 200','accel pitch 200','decel yaw 400','decel pitch 400')}
+if($Responsive){$commands+=@('kp yaw 1.5','kp pitch 1.5','kd yaw 0','kd pitch 0','rate yaw 100','rate pitch 100',
+ 'accel yaw 500','accel pitch 500','decel yaw 800','decel pitch 800')}
 if($EnableAuto){$commands+=@('enable both','verify yaw','verify pitch','auto')}
 $commands+=@('pid','appearance','status')
 $file=Join-Path $repo build/restore_touch_commands.txt
