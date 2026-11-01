@@ -76,5 +76,11 @@ int main(void){
   process(step==0,cx*4,240);CHECK(t.valid);
   CHECK(t.box.xmax<t.box.xmin+120);CHECK(fabs(t.box.cx-cx*4)<12);
  }
- printf("PASS APPEARANCE checks=%u red/blue/white click/motion/reselect/background-preserve/loss/recovery/immutable-anchor/flat-background/neutral-bridge\n",checks);return 0;
+ uint16_t neutral_anchor[64];memcpy(neutral_anchor,t.anchor_histogram,sizeof(neutral_anchor));
+ for(unsigned step=0;step<8;step++){
+  for(unsigned i=0;i<CAP_CELLS;i++)image[i]=0xa0a0a0;
+  for(int row=0;row<6;row++)for(int yy=49+row*4;yy<52+row*4;yy++)for(int xx=90;xx<132;xx++)image[yy*CAP_MASK_WIDTH+xx]=0xc1c1c1;
+  process(0,0,0);CHECK(!t.valid&&t.state==AP_LOST);CHECK(!memcmp(neutral_anchor,t.anchor_histogram,sizeof(neutral_anchor)));
+ }
+ printf("PASS APPEARANCE checks=%u red/blue/white click/motion/reselect/background-preserve/loss/recovery/immutable-anchor/flat-background/neutral-bridge/pen-background-rejection\n",checks);return 0;
 }

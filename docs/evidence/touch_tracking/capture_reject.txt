@@ -1,0 +1,1 @@
+PASS CAPTURE_STABILITY checks=2617 30 identical raw frames, background rejected, no overlay filter involved

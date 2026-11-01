@@ -48,6 +48,21 @@ static void search_begin(AppearanceWork *w){
  w->search_x=w->search_lx;w->search_y=w->search_ly;w->search_best_score=-100000;
  w->fast=1;w->busy=1;
 }
+static void neutral_open(AppearanceWork *w){
+ CapDetector *d=&w->detector;
+   /* Opening removes narrow achromatic bridges (e.g. cap to fingertip).
+      Integral storage is scratch during SELECT, before any TRACK integral. */
+   uint32_t *eroded=w->integral,*opened=w->integral+CAP_WORDS;
+   memset(eroded,0,CAP_WORDS*8);
+   for(int yy=2;yy<CAP_MASK_HEIGHT-2;yy++)for(int xx=2;xx<CAP_MASK_WIDTH-2;xx++){
+    unsigned ok=1;
+    for(int dy=-2;dy<=2&&ok;dy++)for(int dx=-2;dx<=2;dx++)if(!bit(d->raw,(yy+dy)*CAP_MASK_WIDTH+xx+dx)){ok=0;break;}
+    if(ok)set(eroded,yy*CAP_MASK_WIDTH+xx);
+   }
+   for(int yy=2;yy<CAP_MASK_HEIGHT-2;yy++)for(int xx=2;xx<CAP_MASK_WIDTH-2;xx++)if(bit(eroded,yy*CAP_MASK_WIDTH+xx))
+    for(int dy=-2;dy<=2;dy++)for(int dx=-2;dx<=2;dx++)set(opened,(yy+dy)*CAP_MASK_WIDTH+xx+dx);
+   memcpy(d->raw,opened,CAP_WORDS*4);
+}
 static int median(int a[9],unsigned n){unsigned i,j;for(i=1;i<n;i++){int v=a[i];for(j=i;j&&a[j-1]>v;j--)a[j]=a[j-1];a[j]=v;}return a[n/2];}
 static ApColor seed(const uint32_t *rgb,unsigned x,unsigned y,unsigned *radius){
  int yy[9],cb[9],cr[9],distance[9],dx,dy;unsigned n=0,k=0;ApColor c;
@@ -91,20 +106,7 @@ void appearance_begin(AppearanceWork *w,AppearanceTracker *t,const uint32_t *rgb
   if(matches(c,w->proposed,w->chroma_radius)&&(unsigned)abs(c.y-w->proposed.y)<=luma_gate)set(d->raw,n);
  }
  if(selecting){
-  if(neutral(w->proposed)){
-   /* Opening removes narrow achromatic bridges (e.g. cap to fingertip).
-      Integral storage is scratch during SELECT, before any TRACK integral. */
-   uint32_t *eroded=w->integral,*opened=w->integral+CAP_WORDS;
-   memset(eroded,0,CAP_WORDS*8);
-   for(int yy=2;yy<CAP_MASK_HEIGHT-2;yy++)for(int xx=2;xx<CAP_MASK_WIDTH-2;xx++){
-    unsigned ok=1;
-    for(int dy=-2;dy<=2&&ok;dy++)for(int dx=-2;dx<=2;dx++)if(!bit(d->raw,(yy+dy)*CAP_MASK_WIDTH+xx+dx)){ok=0;break;}
-    if(ok)set(eroded,yy*CAP_MASK_WIDTH+xx);
-   }
-   for(int yy=2;yy<CAP_MASK_HEIGHT-2;yy++)for(int xx=2;xx<CAP_MASK_WIDTH-2;xx++)if(bit(eroded,yy*CAP_MASK_WIDTH+xx))
-    for(int dy=-2;dy<=2;dy++)for(int dx=-2;dx<=2;dx++)set(opened,(yy+dy)*CAP_MASK_WIDTH+xx+dx);
-   memcpy(d->raw,opened,CAP_WORDS*4);
-  }
+  if(neutral(w->proposed))neutral_open(w);
   /* Keep only the clicked component. No fixed color table or central-object preference. */
   enqueue(d,(y/4)*CAP_MASK_WIDTH+x/4);
   while(d->head<d->tail){n=d->queue[d->head++];unsigned xx=n%CAP_MASK_WIDTH,yy=n/CAP_MASK_WIDTH;
@@ -220,6 +222,17 @@ static int search_finish(AppearanceWork *w){
  if(hy>=CAP_MASK_HEIGHT)hy=CAP_MASK_HEIGHT-1;
  memset(&b,0,sizeof(b));b.xmin=lx*4;b.xmax=(hx+1)*4-1;b.ymin=ly*4;b.ymax=(hy+1)*4-1;
  b.cx=(b.xmin+b.xmax)*0.5;b.cy=(b.ymin+b.ymax)*0.5;b.quality=w->search_best_score/4096.0;
+ if(neutral(t->anchor)){
+  /* Rectangular appearance proposals cannot establish presence by themselves.
+     Recheck a full component in a larger neighborhood, never a clipped ellipse. */
+  CapDetector *d=&w->detector;
+  int margin_x=(hx-lx+1)/2+2,margin_y=(hy-ly+1)/2+2;
+  for(int yy=0;yy<CAP_MASK_HEIGHT;yy++)for(int xx=0;xx<CAP_MASK_WIDTH;xx++)
+   if(xx<lx-margin_x||xx>hx+margin_x||yy<ly-margin_y||yy>hy+margin_y)clear(d->raw,yy*CAP_MASK_WIDTH+xx);
+  neutral_open(w);d->locked=1;d->locked_box=t->box;d->locked_box.area=t->reference_box.area;
+  d->association_min_area=0.5;d->association_max_area=2.5;d->association_gate=(t->reference_box.xmax-t->reference_box.xmin+1)*1.2;
+  w->fast=0;w->busy=1;cap_detector_begin(d,w->frame_id);return 0;
+ }
  unsigned n=histogram(w,b,hist,&mean);b.area=n*16;
  if(n<20||b.area<t->reference_box.area*0.35||b.area>t->reference_box.area*4.0)goto lost;
  score=intersection(t->histogram,hist);anchor_score=intersection(t->anchor_histogram,hist);t->similarity=score;

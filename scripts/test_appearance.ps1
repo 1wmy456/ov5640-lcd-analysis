@@ -1,4 +1,4 @@
-param([string]$HostGcc='D:/msys64/ucrt64/bin/gcc.exe',[string]$CapturedFrame,[string]$CapturedModel,[int]$CapturedX=-1,[int]$CapturedY=-1)
+param([string]$HostGcc='D:/msys64/ucrt64/bin/gcc.exe',[string]$CapturedFrame,[string]$CapturedModel,[int]$CapturedX=-1,[int]$CapturedY=-1,[switch]$RejectCaptured)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 $out=Join-Path $repo build/appearance_sim
@@ -31,7 +31,9 @@ try{
   if(-not $CapturedModel -and ($CapturedX -lt 0 -or $CapturedX -ge 800 -or $CapturedY -lt 0 -or $CapturedY -ge 480)){throw 'Supply a matching model or selection coordinates'}
   & $HostGcc -std=c11 -O2 -Wall -Wextra -Werror "$repo/sim/touch/test_capture_stability.c" "$repo/vitis/ov5640_lcd/src/touch/appearance_tracker.c" "$repo/vitis/ov5640_lcd/src/pan_tilt/cap_components.c" -lm -o "$out/capture.exe"
   if($LASTEXITCODE){throw 'Captured-frame test compile failed'}
-  if($CapturedModel){& "$out/capture.exe" $CapturedFrame $CapturedModel | Tee-Object "$out/capture.txt"}
+  if($RejectCaptured -and -not $CapturedModel){throw 'Background rejection requires the previously learned model'}
+  if($RejectCaptured){& "$out/capture.exe" $CapturedFrame $CapturedModel --reject | Tee-Object "$out/capture_reject.txt"}
+  elseif($CapturedModel){& "$out/capture.exe" $CapturedFrame $CapturedModel | Tee-Object "$out/capture.txt"}
   else{& "$out/capture.exe" $CapturedFrame --select $CapturedX $CapturedY | Tee-Object "$out/capture.txt"}
   if($LASTEXITCODE){throw 'Captured-frame stability failed'}
  }

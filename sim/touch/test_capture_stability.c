@@ -10,11 +10,11 @@ static AppearanceWork work;
 static unsigned checks;
 #define CHECK(v) do{checks++;if(!(v)){printf("FAIL CAPTURE_STABILITY line=%d frame=%u\n",__LINE__,tracker.frame_id);return 1;}}while(0)
 int main(int argc,char **argv){
- if(argc!=3&&argc!=5){fprintf(stderr,"Expected frame/model, or frame --select x y\n");return 2;}
+ if(argc!=3&&argc!=4&&argc!=5){fprintf(stderr,"Expected frame/model [--reject], or frame --select x y\n");return 2;}
  CHECK(sizeof(tracker)==552);
  FILE *f=fopen(argv[1],"rb");CHECK(f);CHECK(fread(raw,4,800*480,f)==800*480);fclose(f);
  CHECK(!(raw[800*480-1]>>24));
- if(argc==3){f=fopen(argv[2],"rb");CHECK(f);CHECK(fread(&tracker,1,sizeof(tracker),f)==sizeof(tracker));fclose(f);CHECK(tracker.has_model&&tracker.appearance_ready);}
+ if(argc==3||argc==4){f=fopen(argv[2],"rb");CHECK(f);CHECK(fread(&tracker,1,sizeof(tracker),f)==sizeof(tracker));fclose(f);CHECK(tracker.has_model&&tracker.appearance_ready);}
  else appearance_init(&tracker);
  for(unsigned y=0;y<120;y++)for(unsigned x=0;x<200;x++){
   unsigned r=0,g=0,b=0;
@@ -27,6 +27,7 @@ int main(int argc,char **argv){
  for(unsigned i=0;i<30;i++){
   appearance_begin(&work,&tracker,rgb,tracker.frame_id+2,argc==5&&i==0,argc==5?(unsigned)atoi(argv[3]):0,argc==5?(unsigned)atoi(argv[4]):0);
   unsigned n=0;while(!appearance_work(&work,1000))CHECK(++n<2000);
+  if(argc==4){CHECK(!tracker.valid&&tracker.state==AP_LOST);continue;}
   CHECK(tracker.valid);
   if(argc==5){CHECK(tracker.box.xmax-tracker.box.xmin<200);CHECK(tracker.box.ymax-tracker.box.ymin<180);}
   if(i==5)settled=tracker.box;
@@ -36,6 +37,6 @@ int main(int argc,char **argv){
    CHECK(fabs(tracker.box.cx-settled.cx)<=4&&fabs(tracker.box.cy-settled.cy)<=4);
   }
  }
- printf("PASS CAPTURE_STABILITY checks=%u 30 identical raw frames, stable raw dimensions/center, no overlay filter involved\n",checks);
+ printf("PASS CAPTURE_STABILITY checks=%u 30 identical raw frames, %s, no overlay filter involved\n",checks,argc==4?"background rejected":"stable raw dimensions/center");
  return 0;
 }
