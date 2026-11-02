@@ -159,7 +159,7 @@ static void command(char *s){
             if(control.controller!=PT_CONTROL_P)pt_control_controller(&control,control.controller);
             log_text("%s gain=%d milli-us/(pixel*s)\r\n",w[1],(int)(v*1000));return;
         }
-        if(!strcmp(w[0],"rate")&&v>0&&v<=100){control.rate[a]=v;log_text("%s rate=%d milli-us/s\r\n",w[1],(int)(v*1000));return;}
+        if(!strcmp(w[0],"rate")&&v>0&&v<=150){control.rate[a]=v;log_text("%s rate=%d milli-us/s\r\n",w[1],(int)(v*1000));return;}
         if(!strcmp(w[0],"center")&&v>=control.minimum[a]&&v<=control.maximum[a]&&v==(int)v){
             pt_control_manual(&control);control.center[a]=(int)v;control.verified[a]=0;pt_reg_write(pt_base,a?PT_PITCH_CENTER:PT_YAW_CENTER,(u32)v);log_text("%s center configured; use center to move\r\n",w[1]);return;}
     }

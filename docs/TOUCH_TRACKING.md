@@ -4,6 +4,8 @@
 
 ## 当前验收版本使用入口
 
+提速试验（尚待现场速度验收）：`app_speed150`仅把串口rate允许上限从100提高至150us/s，默认参数不变。下载时显式`./scripts/download_touch_tracking.ps1 -Application app_speed150`，再运行`./scripts/restore_touch_tracking.ps1 -Faster`；Faster为Kp2、Ki/Kd0、rate150、加速800/减速1200，仍需显式EnableAuto才使能。既有Responsive和app_neutral_shape保持不变；旧固件不支持rate150，会拒绝Faster并在启用前停止。宽范围仍需显式WideExperiment。此次未改RTL，不需要重建bit/XSA。新增150档轨迹测试、原PID及外观回归通过，不等同于实际提速停稳已通过。
+
 本地验收标签`touch-three-color-validated`，实际应用`app_neutral_shape`，硬件`touch_capture_v3`。原版`lost`及各阶段产物保留。重新上电后执行：
 
 ```powershell
